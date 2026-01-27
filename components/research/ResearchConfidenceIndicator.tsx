@@ -7,7 +7,9 @@ interface Props {
 }
 
 const ResearchConfidenceIndicator: React.FC<Props> = ({ confidence }) => {
-  const score = confidence.overall_score;
+  const score = confidence?.overall_score ?? 0;
+  const rawGaps = confidence?.gaps;
+  const gaps = Array.isArray(rawGaps) ? rawGaps : [];
   const percentage = (score / 5) * 100;
 
   const getScoreColor = (s: number) => {
@@ -39,14 +41,14 @@ const ResearchConfidenceIndicator: React.FC<Props> = ({ confidence }) => {
         />
       </div>
 
-      {confidence.gaps.length > 0 && (
+      {gaps.length > 0 && (
         <div className="mt-4">
           <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide flex items-center">
             <AlertCircle className="w-3 h-3 mr-1" />
             Research Gaps
           </span>
           <ul className="mt-2 space-y-1">
-            {confidence.gaps.map((gap, idx) => (
+            {gaps.map((gap, idx) => (
               <li key={idx} className="text-xs text-slate-600 flex items-start">
                 <span className="w-1 h-1 rounded-full bg-slate-400 mt-1.5 mr-2 flex-shrink-0" />
                 {gap}

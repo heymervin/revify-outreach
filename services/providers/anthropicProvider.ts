@@ -52,10 +52,36 @@ export class AnthropicProvider implements AIProviderInterface {
   }
 
   async generateResearch(prompt: string): Promise<ProviderResponse<ResearchResult>> {
-    // The prompt already contains schema instructions, so we just add a reminder
+    const schemaReminder = `
+CRITICAL JSON SCHEMA REQUIREMENTS:
+Your response MUST be valid JSON with these EXACT field types:
+
+{
+  "company_profile": { "confirmed_name": "string", "industry": "string", "sub_segment": "string", "estimated_revenue": "string", "employee_count": "string", "business_model": "string", "headquarters": "string", "market_position": "string" },
+  "recent_signals": [{ "signal_type": "string", "description": "string", "source": "string", "date": "string", "relevance_to_revology": "string", "source_url": "string", "date_precision": "string", "credibility_score": number }],
+  "pain_point_hypotheses": [{ "hypothesis": "string", "evidence": "string", "revology_solution_fit": "string" }],
+  "persona_angles": {
+    "cfo_finance": { "primary_hook": "string", "supporting_point": "string", "question_to_pose": "string" },
+    "pricing_rgm": { "primary_hook": "string", "supporting_point": "string", "question_to_pose": "string" },
+    "sales_commercial": { "primary_hook": "string", "supporting_point": "string", "question_to_pose": "string" },
+    "ceo_gm": { "primary_hook": "string", "supporting_point": "string", "question_to_pose": "string" },
+    "technology_analytics": { "primary_hook": "string", "supporting_point": "string", "question_to_pose": "string" }
+  },
+  "outreach_priority": { "recommended_personas": ["string"], "timing_notes": "string", "cautions": "string" },
+  "research_confidence": { "overall_score": number, "gaps": ["string"], "financial_confidence": number, "signal_freshness": number, "source_quality": number, "search_coverage": number }
+}
+
+IMPORTANT:
+- "recent_signals" MUST be an array (use [] if empty)
+- "pain_point_hypotheses" MUST be an array (use [] if empty)
+- "gaps" MUST be an array (use [] if empty)
+- "recommended_personas" MUST be an array (use [] if empty)
+- Do NOT use strings where arrays are expected
+- Respond ONLY with valid JSON, no markdown code blocks`;
+
     const enrichedPrompt = `${prompt}
 
-IMPORTANT: Respond ONLY with valid JSON matching the schema specified in the prompt above. Do not include any markdown code blocks, explanations, or text outside the JSON object.`;
+${schemaReminder}`;
 
     const result = await this.callAnthropic(enrichedPrompt);
     const parsed = JSON.parse(this.extractJSON(result.content));

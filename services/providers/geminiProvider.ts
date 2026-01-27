@@ -66,7 +66,11 @@ export class GeminiProvider implements AIProviderInterface {
                   description: { type: Type.STRING },
                   source: { type: Type.STRING },
                   date: { type: Type.STRING },
-                  relevance_to_revology: { type: Type.STRING }
+                  relevance_to_revology: { type: Type.STRING },
+                  // Enhanced fields (optional)
+                  source_url: { type: Type.STRING },
+                  date_precision: { type: Type.STRING }, // 'exact' | 'month' | 'quarter' | 'year' | 'unknown'
+                  credibility_score: { type: Type.NUMBER } // 0-1 scale
                 },
                 required: ["signal_type", "description", "source", "date", "relevance_to_revology"]
               }
@@ -107,7 +111,12 @@ export class GeminiProvider implements AIProviderInterface {
               type: Type.OBJECT,
               properties: {
                 overall_score: { type: Type.NUMBER },
-                gaps: { type: Type.ARRAY, items: { type: Type.STRING } }
+                gaps: { type: Type.ARRAY, items: { type: Type.STRING } },
+                // Enhanced metrics (optional)
+                financial_confidence: { type: Type.NUMBER }, // 0-1 scale
+                signal_freshness: { type: Type.NUMBER }, // 0-1 scale
+                source_quality: { type: Type.NUMBER }, // 0-1 scale
+                search_coverage: { type: Type.NUMBER } // 0-1 scale
               },
               required: ["overall_score", "gaps"]
             }

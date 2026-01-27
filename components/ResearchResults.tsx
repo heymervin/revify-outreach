@@ -10,7 +10,9 @@ import {
   PersonaAnglesSection,
   OutreachPriorityCard,
   ResearchConfidenceIndicator,
+  ResearchResultsV3,
 } from './research';
+import ResearchResultsV2 from './ResearchResultsV2';
 
 const ResearchResults: React.FC = () => {
   const { currentSessionId, getSessionById } = useApp();
@@ -27,6 +29,16 @@ const ResearchResults: React.FC = () => {
         <p className="text-slate-500 max-w-sm mx-auto mt-2">Start a new research session above to see AI-generated insights here.</p>
       </div>
     );
+  }
+
+  // V3 Strict format - delegate to V3 component
+  if (session.format === 'v3' && session.v3Data) {
+    return <ResearchResultsV3 output={session.v3Data} />;
+  }
+
+  // V2 Rich format - delegate to V2 component
+  if (session.format === 'rich_v2' && session.richData) {
+    return <ResearchResultsV2 />;
   }
 
   // Rich format display
@@ -51,7 +63,9 @@ const ResearchResults: React.FC = () => {
             <RecentSignalsSection signals={richData.recent_signals} />
           </div>
           <div className="lg:col-span-1">
-            <OutreachPriorityCard priority={richData.outreach_priority} />
+            {richData.outreach_priority && (
+              <OutreachPriorityCard priority={richData.outreach_priority} />
+            )}
           </div>
         </div>
 
@@ -61,7 +75,7 @@ const ResearchResults: React.FC = () => {
         {/* Row 4: Persona Angles */}
         <PersonaAnglesSection
           angles={richData.persona_angles}
-          recommendedPersonas={richData.outreach_priority.recommended_personas}
+          recommendedPersonas={richData.outreach_priority?.recommended_personas || []}
         />
 
         {/* Raw JSON Toggle */}

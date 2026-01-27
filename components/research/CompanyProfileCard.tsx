@@ -7,12 +7,13 @@ interface Props {
 }
 
 const CompanyProfileCard: React.FC<Props> = ({ profile }) => {
+  const safeProfile = profile || {} as CompanyProfile;
   const items = [
-    { icon: Building2, label: 'Industry', value: `${profile.industry} / ${profile.sub_segment}` },
-    { icon: DollarSign, label: 'Est. Revenue', value: profile.estimated_revenue },
-    { icon: Users, label: 'Employees', value: profile.employee_count },
-    { icon: Briefcase, label: 'Business Model', value: profile.business_model },
-    { icon: MapPin, label: 'Headquarters', value: profile.headquarters },
+    { icon: Building2, label: 'Industry', value: `${safeProfile.industry || 'Unknown'} / ${safeProfile.sub_segment || 'Unknown'}` },
+    { icon: DollarSign, label: 'Est. Revenue', value: safeProfile.estimated_revenue || 'Not available' },
+    { icon: Users, label: 'Employees', value: safeProfile.employee_count || 'Not available' },
+    { icon: Briefcase, label: 'Business Model', value: safeProfile.business_model || 'Not available' },
+    { icon: MapPin, label: 'Headquarters', value: safeProfile.headquarters || 'Not available' },
   ];
 
   return (
@@ -21,9 +22,9 @@ const CompanyProfileCard: React.FC<Props> = ({ profile }) => {
         <div>
           <h3 className="text-lg font-bold text-slate-900 flex items-center">
             <Building2 className="w-5 h-5 text-brand-600 mr-2" />
-            {profile.confirmed_name}
+            {safeProfile.confirmed_name || 'Unknown Company'}
           </h3>
-          <p className="text-sm text-slate-500 mt-1">{profile.market_position}</p>
+          <p className="text-sm text-slate-500 mt-1">{safeProfile.market_position || ''}</p>
         </div>
       </div>
 

@@ -33,7 +33,7 @@ Analytics framework, transferring sustainable capabilities to clients.
 </context>
 
 <task>
-Research the target company below and produce a structured intelligence brief
+Synthesize the research data below into a structured intelligence brief
 that will enable personalized, insight-led outreach emails.
 
 TARGET COMPANY:
@@ -45,24 +45,36 @@ If any input is marked as "Not provided", use available inputs to research
 and infer the missing information.
 </task>
 
+{{research_data}}
+
+<search_queries_used>
+{{search_queries}}
+</search_queries_used>
+
 <research_instructions>
-1. COMPANY PROFILE (infer if not directly provided)
+1. COMPANY PROFILE (extract from research data above)
    - Confirm/determine industry vertical and sub-segment
-   - Estimate company size (revenue range, employee count)
+   - Estimate company size (revenue range, employee count) - cite source if found
    - Identify business model (B2B, B2C, hybrid, distribution model)
    - Note geographic footprint and market position
 
-2. RECENT SIGNALS (last 6-12 months) - Search for:
-   - Financial performance (earnings, revenue trends, margin pressure)
-   - Strategic moves (acquisitions, divestitures, new markets, product launches)
-   - Pricing-related news (price increases, competitive pressure, promotions)
-   - Leadership changes (new CFO, CEO, VP Sales, or analytics hires)
-   - Technology investments (ERP, analytics tools, AI initiatives)
-   - Industry headwinds or tailwinds affecting the company
+2. RECENT SIGNALS (extract from research data above)
+   For each signal you include:
+   - signal_type: One of 'financial', 'strategic', 'pricing', 'leadership', 'technology', 'industry'
+   - description: Specific, detailed description of the signal
+   - source: Name of the source publication/site
+   - source_url: MUST include the URL from the research data (not just domain)
+   - date: Use the specific date from the research data (e.g., "February 2025", not just "2025")
+   - date_precision: 'exact' if full date, 'month' if month/year, 'quarter' if Q1/Q2/etc, 'year' if only year
+   - credibility_score: Use the credibility percentage from the research data (convert to 0-1 scale)
+   - relevance_to_revology: How this signal relates to pricing/analytics opportunities
+
+   IMPORTANT: Only include signals from the last 12 months. Reject anything older.
 
 3. PAIN POINT HYPOTHESIS
    Based on signals and industry context, hypothesize 2-3 specific pricing
-   or margin challenges the company likely faces. Be specific and actionable.
+   or margin challenges the company likely faces. Each hypothesis must
+   reference at least one specific signal as evidence.
 
 4. PERSONA-SPECIFIC ANGLES
    For each target persona, identify the specific hook that would resonate:
@@ -71,14 +83,24 @@ and infer the missing information.
    - Sales/Commercial Leader: Sales productivity, customer profitability, quota
    - CEO/GM: Strategic growth, competitive positioning, transformation
    - Technology/Analytics: Data infrastructure, AI/ML capabilities, integration
+
+5. RESEARCH CONFIDENCE
+   - overall_score (1-5): Based on data completeness and source quality
+   - gaps: List specific information that could not be found
+   - financial_confidence (0-1): Confidence in financial data (high if revenue/size found)
+   - signal_freshness (0-1): How recent the signals are (1 = all within 3 months)
+   - source_quality (0-1): Average credibility of sources used
+   - search_coverage (0-1): How comprehensively topics were covered
 </research_instructions>
 
 <quality_standards>
-- Every signal must be specific and verifiable (no generic statements)
+- Every signal MUST have a source_url (not just domain name) from the research data
+- Signal dates MUST be specific (month/year minimum) - no "2023" or "recent"
+- If revenue/employee data found, cite the specific source
+- If financial data not found, explicitly state "Not available from public sources"
 - Hypotheses must be actionable (something Revology can help with)
 - Persona hooks must be distinct (don't repeat the same angle)
-- Include at least 3 recent signals if publicly traded, 2 if private
-- Confidence score reflects research quality, not company fit
+- Confidence scores must accurately reflect actual data quality
 </quality_standards>`;
 
 const DEFAULT_EMAIL_PROMPT = `You are an expert SDR. Write a cold email to the {{persona}} of {{company}}.
@@ -138,7 +160,7 @@ function initializeDefaults(): SettingsState {
         name: 'Default Research Prompt',
         type: 'research',
         content: DEFAULT_RESEARCH_PROMPT,
-        variables: ['company', 'industry', 'website'],
+        variables: ['company', 'industry', 'website', 'research_data', 'search_queries'],
         isDefault: true,
         createdAt: Date.now(),
         updatedAt: Date.now(),

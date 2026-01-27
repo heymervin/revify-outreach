@@ -7,6 +7,8 @@ interface Props {
 }
 
 const PainPointHypothesesSection: React.FC<Props> = ({ hypotheses }) => {
+  const items = Array.isArray(hypotheses) ? hypotheses : [];
+
   return (
     <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
       <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center">
@@ -14,8 +16,11 @@ const PainPointHypothesesSection: React.FC<Props> = ({ hypotheses }) => {
         Pain Point Hypotheses
       </h3>
 
+      {items.length === 0 ? (
+        <p className="text-sm text-slate-500 italic">No hypotheses generated</p>
+      ) : (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {hypotheses.map((item, idx) => (
+        {items.map((item, idx) => (
           <div key={idx} className="bg-slate-50 rounded-lg p-4 border border-slate-100">
             <div className="flex items-start space-x-3 mb-3">
               <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-xs font-bold">
@@ -44,6 +49,7 @@ const PainPointHypothesesSection: React.FC<Props> = ({ hypotheses }) => {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 };

@@ -1,3 +1,9 @@
+// ===== V2 Type Re-exports =====
+export * from './types/researchV2Types';
+
+// Note: V3 types are NOT re-exported here to avoid type conflicts.
+// Import V3 types directly from './types/researchTypesV3' where needed.
+
 // ===== Rich Research Output Types =====
 
 export interface CompanyProfile {
@@ -17,6 +23,10 @@ export interface RecentSignal {
   source: string;
   date: string;
   relevance_to_revology: string;
+  // Enhanced fields (optional for backward compatibility)
+  source_url?: string;
+  date_precision?: 'exact' | 'month' | 'quarter' | 'year' | 'unknown';
+  credibility_score?: number; // 0-1 scale
 }
 
 export interface PainPointHypothesis {
@@ -48,6 +58,11 @@ export interface OutreachPriority {
 export interface ResearchConfidence {
   overall_score: number; // 1-5
   gaps: string[];
+  // Enhanced metrics (optional for backward compatibility)
+  financial_confidence?: number; // 0-1 confidence in financial data
+  signal_freshness?: number; // 0-1 based on how recent signals are
+  source_quality?: number; // 0-1 average credibility of sources
+  search_coverage?: number; // 0-1 based on stages completed
 }
 
 export interface RichResearchOutput {
@@ -57,6 +72,54 @@ export interface RichResearchOutput {
   persona_angles: PersonaAngles;
   outreach_priority: OutreachPriority;
   research_confidence: ResearchConfidence;
+  metadata?: ResearchMetadata; // Optional pipeline metadata
+}
+
+// ===== Research Pipeline Types =====
+
+export type ResearchStageName =
+  | 'website_content'
+  | 'company_basics'
+  | 'recent_signals'
+  | 'financial_activity'
+  | 'technology_signals'
+  | 'competitive_context';
+
+export interface SourceReference {
+  url: string;
+  title: string;
+  domain: string;
+  credibility_score: number; // 0-1 scale
+  publication_date?: string;
+  date_precision: 'exact' | 'month' | 'quarter' | 'year' | 'unknown';
+  snippet: string;
+  relevance_score: number; // Tavily's relevance score
+}
+
+export interface StageResult {
+  stage: ResearchStageName;
+  queries_executed: string[];
+  sources: SourceReference[];
+  raw_content: string; // Aggregated content for this stage
+  execution_time_ms: number;
+  success: boolean;
+  error?: string;
+}
+
+export interface ResearchMetadata {
+  pipeline_version: string; // e.g., "1.0.0"
+  total_tavily_calls: number;
+  total_sources_found: number;
+  stages_completed: ResearchStageName[];
+  stages_failed: ResearchStageName[];
+  total_execution_time_ms: number;
+  search_queries: string[]; // All queries executed
+  timestamp: number;
+}
+
+export interface PipelineResult {
+  stageResults: StageResult[];
+  metadata: Omit<ResearchMetadata, 'timestamp'>;
 }
 
 // ===== Research Session (supports both legacy and rich formats) =====
@@ -68,14 +131,19 @@ export interface ResearchSession {
   website: string;
   industry: string;
   // Format discriminator
-  format?: 'legacy' | 'rich';
+  format?: 'legacy' | 'rich' | 'rich_v2' | 'v3';
   // Legacy format fields
   brief?: string;
   hypotheses?: string[];
   sentimentScore?: number; // 0-100
   keyTrends?: { name: string; value: number }[];
-  // Rich format data
-  richData?: RichResearchOutput;
+  // Rich format data (supports V1 and V2)
+  richData?: RichResearchOutput | import('./types/researchV2Types').RichResearchOutputV2;
+  // V3 format uses separate field to avoid type conflicts
+  v3Data?: import('./types/researchTypesV3').ResearchOutputV3;
+  // V2 additions
+  researchAngle?: import('./types/researchV2Types').ResearchAngleId;
+  researchDepth?: import('./types/researchV2Types').ResearchDepth;
 }
 
 export interface GeneratedEmail {

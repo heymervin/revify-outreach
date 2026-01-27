@@ -25,16 +25,21 @@ const SIGNAL_COLORS: Record<string, string> = {
 };
 
 const RecentSignalsSection: React.FC<Props> = ({ signals }) => {
+  const items = Array.isArray(signals) ? signals : [];
+
   return (
     <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
       <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center">
         <Radio className="w-5 h-5 text-brand-600 mr-2" />
         Recent Signals
-        <span className="ml-2 text-sm font-normal text-slate-400">({signals.length})</span>
+        <span className="ml-2 text-sm font-normal text-slate-400">({items.length})</span>
       </h3>
 
+      {items.length === 0 ? (
+        <p className="text-sm text-slate-500 italic">No signals found</p>
+      ) : (
       <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
-        {signals.map((signal, idx) => {
+        {items.map((signal, idx) => {
           const Icon = SIGNAL_ICONS[signal.signal_type] || AlertCircle;
           const colorClass = SIGNAL_COLORS[signal.signal_type] || SIGNAL_COLORS.industry;
 
@@ -58,6 +63,7 @@ const RecentSignalsSection: React.FC<Props> = ({ signals }) => {
           );
         })}
       </div>
+      )}
     </div>
   );
 };

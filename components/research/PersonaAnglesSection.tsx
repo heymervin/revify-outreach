@@ -8,11 +8,14 @@ interface Props {
 }
 
 const PersonaAnglesSection: React.FC<Props> = ({ angles, recommendedPersonas = [] }) => {
+  const safeAngles = angles || {} as PersonaAngles;
   const [activeTab, setActiveTab] = useState<RichPersonaKey>(
     (recommendedPersonas[0] as RichPersonaKey) || RICH_PERSONA_KEYS[0]
   );
 
-  const activeAngle: PersonaAngle = angles[activeTab];
+  const activeAngle: PersonaAngle | undefined = safeAngles[activeTab];
+  const defaultAngle: PersonaAngle = { primary_hook: 'Not available', supporting_point: 'Not available', question_to_pose: 'Not available' };
+  const displayAngle = activeAngle || defaultAngle;
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
@@ -60,7 +63,7 @@ const PersonaAnglesSection: React.FC<Props> = ({ angles, recommendedPersonas = [
               <MessageSquare className="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5" />
               <div>
                 <span className="text-xs font-semibold text-brand-700 uppercase tracking-wide">Primary Hook</span>
-                <p className="text-sm text-slate-700 mt-1">{activeAngle.primary_hook}</p>
+                <p className="text-sm text-slate-700 mt-1">{displayAngle.primary_hook}</p>
               </div>
             </div>
           </div>
@@ -70,7 +73,7 @@ const PersonaAnglesSection: React.FC<Props> = ({ angles, recommendedPersonas = [
               <MessageSquare className="w-5 h-5 text-slate-500 flex-shrink-0 mt-0.5" />
               <div>
                 <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Supporting Point</span>
-                <p className="text-sm text-slate-700 mt-1">{activeAngle.supporting_point}</p>
+                <p className="text-sm text-slate-700 mt-1">{displayAngle.supporting_point}</p>
               </div>
             </div>
           </div>
@@ -80,7 +83,7 @@ const PersonaAnglesSection: React.FC<Props> = ({ angles, recommendedPersonas = [
               <HelpCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
               <div>
                 <span className="text-xs font-semibold text-amber-700 uppercase tracking-wide">Question to Pose</span>
-                <p className="text-sm text-slate-700 mt-1 italic">"{activeAngle.question_to_pose}"</p>
+                <p className="text-sm text-slate-700 mt-1 italic">"{displayAngle.question_to_pose}"</p>
               </div>
             </div>
           </div>
