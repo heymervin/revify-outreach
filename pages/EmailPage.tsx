@@ -1,37 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
-import { PersonaType } from '../types';
-import { generateEmail } from '../services/geminiService';
-import { Send, Copy, RefreshCw, Check, Loader2, ArrowLeft } from 'lucide-react';
+import { useSettings } from '../context/SettingsContext';
+import { PersonaType, RICH_PERSONA_KEYS, PERSONA_DISPLAY_NAMES, RichPersonaKey } from '../types';
+import { generateEmail } from '../services/aiService';
+import { Send, Copy, RefreshCw, Check, Loader2, ArrowLeft, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 const EmailPage: React.FC = () => {
   const { currentSessionId, getSessionById, addEmail } = useApp();
+  const { addUsageRecord, ...settings } = useSettings();
   const session = currentSessionId ? getSessionById(currentSessionId) : null;
-  
-  const [selectedPersona, setSelectedPersona] = useState<PersonaType>(PersonaType.CEO);
+
+  // Determine if we're using rich format
+  const isRichFormat = session?.format === 'rich' && session?.richData;
+  const recommendedPersonas = isRichFormat ? session.richData?.outreach_priority.recommended_personas || [] : [];
+
+  // Get default persona based on format
+  const getDefaultPersona = (): PersonaType | RichPersonaKey => {
+    if (isRichFormat && recommendedPersonas.length > 0) {
+      return recommendedPersonas[0] as RichPersonaKey;
+    }
+    return isRichFormat ? 'cfo_finance' : PersonaType.CEO;
+  };
+
+  const [selectedPersona, setSelectedPersona] = useState<PersonaType | RichPersonaKey>(getDefaultPersona());
   const [loading, setLoading] = useState(false);
   const [generatedEmail, setGeneratedEmail] = useState<{ subject: string; body: string } | null>(null);
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Update selected persona when session changes
+  useEffect(() => {
+    setSelectedPersona(getDefaultPersona());
+    setGeneratedEmail(null);
+  }, [currentSessionId]);
 
   const handleGenerate = async () => {
     if (!session) return;
     setLoading(true);
     setCopied(false);
+    setError(null);
     try {
-      const email = await generateEmail(session, selectedPersona);
-      setGeneratedEmail(email);
+      const result = await generateEmail(session, selectedPersona, settings);
+      setGeneratedEmail(result.data);
       addEmail({
         id: uuidv4(),
         sessionId: session.id,
-        persona: selectedPersona,
-        subject: email.subject,
-        body: email.body,
+        persona: selectedPersona as PersonaType,
+        subject: result.data.subject,
+        body: result.data.body,
         timestamp: Date.now()
       });
-    } catch (error) {
-      console.error("Failed to generate email", error);
+
+      // Record token usage
+      addUsageRecord({
+        provider: result.provider,
+        model: result.model,
+        taskType: 'email',
+        usage: result.usage,
+      });
+    } catch (err) {
+      console.error("Failed to generate email", err);
+      const errorMessage = err instanceof Error ? err.message : 'Failed to generate email. Please check your API key in Settings.';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -76,23 +108,55 @@ const EmailPage: React.FC = () => {
           <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
             <h3 className="text-sm font-semibold text-slate-900 mb-4 uppercase tracking-wide">Target Persona</h3>
             <div className="space-y-2">
-              {Object.values(PersonaType).map((persona) => (
-                <button
-                  key={persona}
-                  onClick={() => setSelectedPersona(persona)}
-                  className={`w-full text-left px-4 py-3 rounded-lg text-sm transition-all ${
-                    selectedPersona === persona
-                      ? 'bg-brand-50 text-brand-700 font-medium border border-brand-200 shadow-sm'
-                      : 'text-slate-600 hover:bg-slate-50 border border-transparent'
-                  }`}
-                >
-                  {persona.replace('_', ' ')}
-                </button>
-              ))}
+              {isRichFormat ? (
+                // Rich format personas
+                RICH_PERSONA_KEYS.map((persona) => {
+                  const isRecommended = recommendedPersonas.includes(persona);
+                  return (
+                    <button
+                      key={persona}
+                      onClick={() => setSelectedPersona(persona)}
+                      className={`w-full text-left px-4 py-3 rounded-lg text-sm transition-all ${
+                        selectedPersona === persona
+                          ? 'bg-brand-50 text-brand-700 font-medium border border-brand-200 shadow-sm'
+                          : 'text-slate-600 hover:bg-slate-50 border border-transparent'
+                      }`}
+                    >
+                      <span className="flex items-center justify-between">
+                        {PERSONA_DISPLAY_NAMES[persona]}
+                        {isRecommended && (
+                          <span className="inline-flex items-center text-xs text-green-600 font-medium">
+                            <Sparkles className="w-3 h-3 mr-1" />
+                            Recommended
+                          </span>
+                        )}
+                      </span>
+                    </button>
+                  );
+                })
+              ) : (
+                // Legacy format personas
+                Object.values(PersonaType).map((persona) => (
+                  <button
+                    key={persona}
+                    onClick={() => setSelectedPersona(persona)}
+                    className={`w-full text-left px-4 py-3 rounded-lg text-sm transition-all ${
+                      selectedPersona === persona
+                        ? 'bg-brand-50 text-brand-700 font-medium border border-brand-200 shadow-sm'
+                        : 'text-slate-600 hover:bg-slate-50 border border-transparent'
+                    }`}
+                  >
+                    {persona.replace('_', ' ')}
+                  </button>
+                ))
+              )}
             </div>
             
-            <div className="mt-8">
-               <button
+            <div className="mt-8 space-y-3">
+              {error && (
+                <p className="text-red-500 text-sm bg-red-50 p-3 rounded-lg">{error}</p>
+              )}
+              <button
                 onClick={handleGenerate}
                 disabled={loading}
                 className="w-full flex items-center justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 disabled:opacity-50 transition-colors"
@@ -115,12 +179,24 @@ const EmailPage: React.FC = () => {
           <div className="bg-blue-50 border border-blue-100 rounded-xl p-5">
             <h4 className="text-blue-900 font-medium text-sm mb-2">Pro Tip</h4>
             <p className="text-blue-800 text-xs leading-relaxed">
-              Emails to {selectedPersona.replace('_', ' ')}s should focus on {
-                selectedPersona === 'CEO' ? 'strategic growth and vision' :
-                selectedPersona === 'CFO' ? 'ROI and cost efficiency' :
-                selectedPersona === 'VP_SALES' ? 'pipeline velocity and close rates' :
-                'technical scalability and security'
-              }.
+              {isRichFormat ? (
+                <>
+                  Emails to {PERSONA_DISPLAY_NAMES[selectedPersona]}s should focus on{' '}
+                  {selectedPersona === 'cfo_finance' ? 'ROI, cost efficiency, and financial metrics' :
+                   selectedPersona === 'pricing_rgm' ? 'pricing optimization and margin improvement' :
+                   selectedPersona === 'sales_commercial' ? 'sales productivity and customer profitability' :
+                   selectedPersona === 'ceo_gm' ? 'strategic growth and competitive positioning' :
+                   'data infrastructure and analytics capabilities'}.
+                </>
+              ) : (
+                <>
+                  Emails to {String(selectedPersona).replace('_', ' ')}s should focus on{' '}
+                  {selectedPersona === 'CEO' ? 'strategic growth and vision' :
+                   selectedPersona === 'CFO' ? 'ROI and cost efficiency' :
+                   selectedPersona === 'VP_SALES' ? 'pipeline velocity and close rates' :
+                   'technical scalability and security'}.
+                </>
+              )}
             </p>
           </div>
         </div>

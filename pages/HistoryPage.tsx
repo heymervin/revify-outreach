@@ -48,12 +48,25 @@ const HistoryPage: React.FC = () => {
                     
                     <div className="flex items-center space-x-6">
                       <div className="text-right hidden sm:block">
-                        <span className="block text-xs text-slate-400 uppercase tracking-wide">Sentiment</span>
-                        <span className={`text-sm font-bold ${
-                          session.sentimentScore > 70 ? 'text-green-600' : 'text-slate-700'
-                        }`}>
-                          {session.sentimentScore}/100
-                        </span>
+                        {session.format === 'rich' && session.richData ? (
+                          <>
+                            <span className="block text-xs text-slate-400 uppercase tracking-wide">Confidence</span>
+                            <span className={`text-sm font-bold ${
+                              session.richData.research_confidence.overall_score >= 4 ? 'text-green-600' : 'text-slate-700'
+                            }`}>
+                              {session.richData.research_confidence.overall_score}/5
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="block text-xs text-slate-400 uppercase tracking-wide">Sentiment</span>
+                            <span className={`text-sm font-bold ${
+                              (session.sentimentScore || 0) > 70 ? 'text-green-600' : 'text-slate-700'
+                            }`}>
+                              {session.sentimentScore || 0}/100
+                            </span>
+                          </>
+                        )}
                       </div>
                       <ChevronRight className="w-5 h-5 text-slate-300" />
                     </div>

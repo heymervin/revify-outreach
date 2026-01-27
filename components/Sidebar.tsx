@@ -7,6 +7,7 @@ const Sidebar: React.FC = () => {
     { icon: LayoutDashboard, label: 'Research', path: '/research' },
     { icon: Mail, label: 'Email Outreach', path: '/email' },
     { icon: History, label: 'History', path: '/history' },
+    { icon: Settings, label: 'Settings', path: '/settings' },
   ];
 
   return (

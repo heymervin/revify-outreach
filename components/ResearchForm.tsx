@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Search, Loader2 } from 'lucide-react';
-import { generateResearch } from '../services/geminiService';
+import { generateResearch } from '../services/aiService';
 import { useApp } from '../context/AppContext';
+import { useSettings } from '../context/SettingsContext';
 import { v4 as uuidv4 } from 'uuid';
 
 const ResearchForm: React.FC = () => {
   const { addSession } = useApp();
+  const { addUsageRecord, ...settings } = useSettings();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  
+
   const [formData, setFormData] = useState({
     companyName: '',
     website: '',
@@ -21,24 +23,32 @@ const ResearchForm: React.FC = () => {
       setError('Company name and Industry are required');
       return;
     }
-    
+
     setError('');
     setLoading(true);
 
     try {
-      const result = await generateResearch(formData.companyName, formData.industry, formData.website);
-      
+      const result = await generateResearch(formData.companyName, formData.industry, formData.website, settings);
+
       addSession({
         id: uuidv4(),
         timestamp: Date.now(),
-        ...result
+        ...result.data
       });
-      
-      // Reset form (optional, depending on UX preference)
+
+      // Record token usage
+      addUsageRecord({
+        provider: result.provider,
+        model: result.model,
+        taskType: 'research',
+        usage: result.usage,
+      });
+
       setFormData({ companyName: '', website: '', industry: '' });
     } catch (err) {
       console.error(err);
-      setError('Failed to generate research. Please check your API key or try again.');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to generate research. Please check your API key in Settings.';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }

@@ -1,11 +1,13 @@
 import React from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
+import { SettingsProvider } from './context/SettingsContext';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './pages/Dashboard';
 import EmailPage from './pages/EmailPage';
 import HistoryPage from './pages/HistoryPage';
+import SettingsPage from './pages/SettingsPage';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -23,18 +25,21 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
 const App = () => {
   return (
-    <AppProvider>
-      <HashRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Navigate to="/research" replace />} />
-            <Route path="/research" element={<Dashboard />} />
-            <Route path="/email" element={<EmailPage />} />
-            <Route path="/history" element={<HistoryPage />} />
-          </Routes>
-        </Layout>
-      </HashRouter>
-    </AppProvider>
+    <SettingsProvider>
+      <AppProvider>
+        <HashRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Navigate to="/research" replace />} />
+              <Route path="/research" element={<Dashboard />} />
+              <Route path="/email" element={<EmailPage />} />
+              <Route path="/history" element={<HistoryPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
+            </Routes>
+          </Layout>
+        </HashRouter>
+      </AppProvider>
+    </SettingsProvider>
   );
 };
 
