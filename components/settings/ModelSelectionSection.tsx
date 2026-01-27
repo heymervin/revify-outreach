@@ -12,8 +12,19 @@ const ModelSelectionSection: React.FC = () => {
 
   const availableProviders = getAvailableProviders();
 
-  // Auto-correct model if it doesn't match the selected provider
+  // Auto-correct provider and model if they don't match available options
   React.useEffect(() => {
+    if (availableProviders.length === 0) return;
+
+    // Fix research provider if it's not available
+    if (!availableProviders.includes(modelSelection.researchProvider)) {
+      const newProvider = availableProviders[0];
+      const newModel = AVAILABLE_MODELS[newProvider].find(m => m.capabilities.includes('research'))?.id || AVAILABLE_MODELS[newProvider][0].id;
+      updateModelSelection({ researchProvider: newProvider, researchModel: newModel });
+      return;
+    }
+
+    // Fix research model if it doesn't match provider
     const researchModels = AVAILABLE_MODELS[modelSelection.researchProvider];
     const isValidResearchModel = researchModels.some(m => m.id === modelSelection.researchModel);
     if (!isValidResearchModel && researchModels.length > 0) {
@@ -21,13 +32,22 @@ const ModelSelectionSection: React.FC = () => {
       updateModelSelection({ researchModel: defaultModel });
     }
 
+    // Fix email provider if it's not available
+    if (!availableProviders.includes(modelSelection.emailProvider)) {
+      const newProvider = availableProviders[0];
+      const newModel = AVAILABLE_MODELS[newProvider].find(m => m.capabilities.includes('email'))?.id || AVAILABLE_MODELS[newProvider][0].id;
+      updateModelSelection({ emailProvider: newProvider, emailModel: newModel });
+      return;
+    }
+
+    // Fix email model if it doesn't match provider
     const emailModels = AVAILABLE_MODELS[modelSelection.emailProvider];
     const isValidEmailModel = emailModels.some(m => m.id === modelSelection.emailModel);
     if (!isValidEmailModel && emailModels.length > 0) {
       const defaultModel = emailModels.find(m => m.capabilities.includes('email'))?.id || emailModels[0].id;
       updateModelSelection({ emailModel: defaultModel });
     }
-  }, [modelSelection.researchProvider, modelSelection.emailProvider, modelSelection.researchModel, modelSelection.emailModel, updateModelSelection]);
+  }, [availableProviders, modelSelection.researchProvider, modelSelection.emailProvider, modelSelection.researchModel, modelSelection.emailModel, updateModelSelection]);
 
   const providerDisplayNames: Record<AIProvider, string> = {
     gemini: 'Google Gemini',
