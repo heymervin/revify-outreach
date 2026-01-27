@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Building2, Radio, Lightbulb, Users, ExternalLink, AlertTriangle,
-  ChevronDown, ChevronUp, CheckCircle, Clock, FileText, HelpCircle, Target
+  ChevronDown, ChevronUp, CheckCircle, Clock, FileText, HelpCircle, Target, Code
 } from 'lucide-react';
 import {
   ResearchOutputV3,
@@ -18,6 +18,7 @@ const ResearchResultsV3: React.FC<Props> = ({ output }) => {
   const [activePersona, setActivePersona] = useState<string>('cfo_finance');
   const [showSources, setShowSources] = useState(false);
   const [showValidationLog, setShowValidationLog] = useState(false);
+  const [showRawJson, setShowRawJson] = useState(false);
 
   const personaKeys = Object.keys(output.persona_angles);
   const recommendedPersonas = output.outreach_priority.recommended_personas;
@@ -267,6 +268,27 @@ const ResearchResultsV3: React.FC<Props> = ({ output }) => {
           <pre className="mt-2 p-2 bg-slate-100 rounded text-xs text-slate-600 max-h-48 overflow-auto">
             {output.metadata.validation_log.join('\n')}
           </pre>
+        )}
+      </div>
+
+      {/* Raw JSON Toggle */}
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <button
+          onClick={() => setShowRawJson(!showRawJson)}
+          className="w-full flex items-center justify-between p-4 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors"
+        >
+          <span className="flex items-center">
+            <Code className="w-4 h-4 mr-2" />
+            View Raw JSON Response
+          </span>
+          {showRawJson ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </button>
+        {showRawJson && (
+          <div className="border-t border-slate-200 p-4 bg-slate-50">
+            <pre className="text-xs text-slate-700 overflow-x-auto max-h-96 overflow-y-auto">
+              {JSON.stringify(output, null, 2)}
+            </pre>
+          </div>
         )}
       </div>
 
