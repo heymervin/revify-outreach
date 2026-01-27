@@ -12,6 +12,23 @@ const ModelSelectionSection: React.FC = () => {
 
   const availableProviders = getAvailableProviders();
 
+  // Auto-correct model if it doesn't match the selected provider
+  React.useEffect(() => {
+    const researchModels = AVAILABLE_MODELS[modelSelection.researchProvider];
+    const isValidResearchModel = researchModels.some(m => m.id === modelSelection.researchModel);
+    if (!isValidResearchModel && researchModels.length > 0) {
+      const defaultModel = researchModels.find(m => m.capabilities.includes('research'))?.id || researchModels[0].id;
+      updateModelSelection({ researchModel: defaultModel });
+    }
+
+    const emailModels = AVAILABLE_MODELS[modelSelection.emailProvider];
+    const isValidEmailModel = emailModels.some(m => m.id === modelSelection.emailModel);
+    if (!isValidEmailModel && emailModels.length > 0) {
+      const defaultModel = emailModels.find(m => m.capabilities.includes('email'))?.id || emailModels[0].id;
+      updateModelSelection({ emailModel: defaultModel });
+    }
+  }, [modelSelection.researchProvider, modelSelection.emailProvider, modelSelection.researchModel, modelSelection.emailModel, updateModelSelection]);
+
   const providerDisplayNames: Record<AIProvider, string> = {
     gemini: 'Google Gemini',
     openai: 'OpenAI',
