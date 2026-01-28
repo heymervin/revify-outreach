@@ -11,6 +11,7 @@ import {
   OutreachPriorityCard,
   ResearchConfidenceIndicator,
   ResearchResultsV3,
+  ResearchResultsV3_1,
 } from './research';
 import ResearchResultsV2 from './ResearchResultsV2';
 
@@ -29,6 +30,11 @@ const ResearchResults: React.FC = () => {
         <p className="text-slate-500 max-w-sm mx-auto mt-2">Start a new research session above to see AI-generated insights here.</p>
       </div>
     );
+  }
+
+  // V3.1 OpenAI Web Search format - delegate to V3.1 component
+  if (session.format === 'v3_1' && session.v3_1Data) {
+    return <ResearchResultsV3_1 output={session.v3_1Data} />;
   }
 
   // V3 Strict format - delegate to V3 component

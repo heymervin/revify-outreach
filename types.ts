@@ -131,7 +131,7 @@ export interface ResearchSession {
   website: string;
   industry: string;
   // Format discriminator
-  format?: 'legacy' | 'rich' | 'rich_v2' | 'v3';
+  format?: 'legacy' | 'rich' | 'rich_v2' | 'v3' | 'v3_1';
   // Legacy format fields
   brief?: string;
   hypotheses?: string[];
@@ -141,6 +141,8 @@ export interface ResearchSession {
   richData?: RichResearchOutput | import('./types/researchV2Types').RichResearchOutputV2;
   // V3 format uses separate field to avoid type conflicts
   v3Data?: import('./types/researchTypesV3').ResearchOutputV3;
+  // V3.1 format - OpenAI web search based
+  v3_1Data?: import('./types/researchTypesV3_1').ResearchOutputV3_1;
   // V2 additions
   researchAngle?: import('./types/researchV2Types').ResearchAngleId;
   researchDepth?: import('./types/researchV2Types').ResearchDepth;

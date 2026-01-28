@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResearchFormV3 } from '../components/research';
+import { ResearchFormV3_1 } from '../components/research';
 import ResearchResults from '../components/ResearchResults';
 
 const Dashboard: React.FC = () => {
@@ -10,7 +10,7 @@ const Dashboard: React.FC = () => {
         <p className="text-slate-500 mt-1">Generate deep insights on target accounts in seconds.</p>
       </div>
 
-      <ResearchFormV3 />
+      <ResearchFormV3_1 />
       <ResearchResults />
     </div>
   );
