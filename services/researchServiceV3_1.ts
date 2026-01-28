@@ -205,7 +205,7 @@ IMPORTANT:
 }
 
 /**
- * Execute research using OpenAI's Responses API with web search
+ * Execute research using OpenAI's web search capabilities
  */
 export async function executeResearchV3_1(
   input: ResearchInputV3_1,
@@ -219,22 +219,24 @@ export async function executeResearchV3_1(
 
   onProgress?.('Starting research with OpenAI web search...');
 
-  // Stage 1: Search phase with GPT-4o + web search
+  // Stage 1: Search phase with gpt-4o-search-preview (has built-in web search)
   onProgress?.('Stage 1: Executing web searches...');
 
   const searchPrompt = buildSearchPrompt(input);
 
-  const searchResponse = await fetch('https://api.openai.com/v1/responses', {
+  // Use the search-enabled model via Chat Completions API
+  const searchResponse = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: 'gpt-4o',
-      tools: [{ type: 'web_search_preview' }],
-      tool_choice: 'auto',
-      input: searchPrompt,
+      model: 'gpt-4o-search-preview',
+      messages: [{ role: 'user', content: searchPrompt }],
+      web_search_options: {
+        search_context_size: 'high',
+      },
     }),
   });
 
@@ -245,32 +247,17 @@ export async function executeResearchV3_1(
 
   const searchData = await searchResponse.json();
 
-  // Extract search results and count searches
-  let searchResultsText = '';
-  if (searchData.output) {
-    for (const item of searchData.output) {
-      if (item.type === 'message' && item.content) {
-        for (const content of item.content) {
-          if (content.type === 'text') {
-            searchResultsText += content.text + '\n';
-          }
-        }
-      }
-      if (item.type === 'web_search_call') {
-        searchesPerformed++;
-      }
-    }
-  }
+  // Extract search results from the response
+  let searchResultsText = searchData.choices?.[0]?.message?.content || '';
 
-  // Fallback if no structured output
-  if (!searchResultsText && searchData.output_text) {
-    searchResultsText = searchData.output_text;
-  }
+  // Count annotations/citations as proxy for searches performed
+  const annotations = searchData.choices?.[0]?.message?.annotations || [];
+  searchesPerformed = annotations.length > 0 ? Math.ceil(annotations.length / 3) : 5; // Estimate based on citations
 
-  totalInputTokens += searchData.usage?.input_tokens || 0;
-  totalOutputTokens += searchData.usage?.output_tokens || 0;
+  totalInputTokens += searchData.usage?.prompt_tokens || 0;
+  totalOutputTokens += searchData.usage?.completion_tokens || 0;
 
-  onProgress?.(`Completed ${searchesPerformed} web searches. Synthesizing...`);
+  onProgress?.(`Found ${annotations.length} sources. Synthesizing...`);
 
   // Stage 2: Synthesis phase
   onProgress?.(`Stage 2: Synthesizing with ${input.researchDepth === 'deep' ? 'o1' : 'gpt-4o'}...`);
@@ -329,10 +316,10 @@ export async function executeResearchV3_1(
 
   // Ensure all required fields exist
   result.metadata = {
-    searches_performed: searchesPerformed || 5, // Fallback estimate
+    searches_performed: searchesPerformed,
     sources_cited: result.company_profile?.citations?.length || 0,
     models_used: {
-      search: 'gpt-4o',
+      search: 'gpt-4o-search-preview',
       synthesis: synthesisModel,
     },
     execution_time_ms: executionTime,
