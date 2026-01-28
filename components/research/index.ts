@@ -19,3 +19,6 @@ export { default as ResearchResultsV3 } from './ResearchResultsV3';
 // V3.1 Components (OpenAI Web Search)
 export { default as ResearchFormV3_1 } from './ResearchFormV3_1';
 export { default as ResearchResultsV3_1 } from './ResearchResultsV3_1';
+
+// V3.2 Components (Hybrid: Tavily + OpenAI)
+export { default as ResearchFormV3_2 } from './ResearchFormV3_2';
