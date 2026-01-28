@@ -407,7 +407,41 @@ export const generateEmail = async (
   // Build context based on session format
   let templateVars: Record<string, string>;
 
-  if (session.format === 'rich' && session.richData) {
+  if (session.format === 'v3_1' && session.v3_1Data) {
+    // V3.1 format
+    const rd = session.v3_1Data;
+    const personaKey = persona as RichPersonaKey;
+    const angle = rd.persona_angles[personaKey];
+
+    templateVars = {
+      persona: PERSONA_DISPLAY_NAMES[persona] || String(persona).replace('_', ' '),
+      company: rd.company_profile.confirmed_name,
+      brief: `${rd.company_profile.business_model || 'B2B'}. ${rd.hypothesis?.primary_hypothesis || ''}`,
+      hypotheses: rd.hypothesis?.supporting_evidence?.map(h => `- ${h}`).join('\n') || '',
+      primary_hook: angle?.hook || '',
+      supporting_point: angle?.supporting_point || '',
+      question_to_pose: angle?.question || '',
+      timing_notes: rd.outreach_priority?.urgency_reason || '',
+      cautions: rd.outreach_priority?.cautions?.join(', ') || '',
+    };
+  } else if (session.format === 'v3' && session.v3Data) {
+    // V3 format
+    const rd = session.v3Data;
+    const personaKey = persona as RichPersonaKey;
+    const angle = rd.persona_angles[personaKey];
+
+    templateVars = {
+      persona: PERSONA_DISPLAY_NAMES[persona] || String(persona).replace('_', ' '),
+      company: rd.company_profile.confirmed_name,
+      brief: `${rd.company_profile.business_model || 'B2B'}. ${rd.hypothesis || ''}`,
+      hypotheses: '',
+      primary_hook: angle?.hook || '',
+      supporting_point: angle?.supporting_point || '',
+      question_to_pose: angle?.question || '',
+      timing_notes: rd.outreach_priority?.timing_notes || '',
+      cautions: rd.outreach_priority?.cautions || '',
+    };
+  } else if (session.format === 'rich' && session.richData) {
     const rd = session.richData;
     const personaKey = persona as RichPersonaKey;
     const angle = rd.persona_angles[personaKey];

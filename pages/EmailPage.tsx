@@ -12,16 +12,33 @@ const EmailPage: React.FC = () => {
   const { addUsageRecord, ...settings } = useSettings();
   const session = currentSessionId ? getSessionById(currentSessionId) : null;
 
-  // Determine if we're using rich format
+  // Determine format type
   const isRichFormat = session?.format === 'rich' && session?.richData;
-  const recommendedPersonas = isRichFormat ? session.richData?.outreach_priority.recommended_personas || [] : [];
+  const isV3Format = session?.format === 'v3' && session?.v3Data;
+  const isV3_1Format = session?.format === 'v3_1' && session?.v3_1Data;
+  const isModernFormat = isRichFormat || isV3Format || isV3_1Format;
+
+  // Get recommended personas based on format
+  const getRecommendedPersonas = (): string[] => {
+    if (isV3_1Format && session?.v3_1Data) {
+      return session.v3_1Data.outreach_priority?.recommended_personas || [];
+    }
+    if (isV3Format && session?.v3Data) {
+      return session.v3Data.outreach_priority?.recommended_personas || [];
+    }
+    if (isRichFormat && session?.richData) {
+      return session.richData.outreach_priority?.recommended_personas || [];
+    }
+    return [];
+  };
+  const recommendedPersonas = getRecommendedPersonas();
 
   // Get default persona based on format
   const getDefaultPersona = (): PersonaType | RichPersonaKey => {
-    if (isRichFormat && recommendedPersonas.length > 0) {
+    if (isModernFormat && recommendedPersonas.length > 0) {
       return recommendedPersonas[0] as RichPersonaKey;
     }
-    return isRichFormat ? 'cfo_finance' : PersonaType.CEO;
+    return isModernFormat ? 'cfo_finance' : PersonaType.CEO;
   };
 
   const [selectedPersona, setSelectedPersona] = useState<PersonaType | RichPersonaKey>(getDefaultPersona());
@@ -108,8 +125,8 @@ const EmailPage: React.FC = () => {
           <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
             <h3 className="text-sm font-semibold text-slate-900 mb-4 uppercase tracking-wide">Target Persona</h3>
             <div className="space-y-2">
-              {isRichFormat ? (
-                // Rich format personas
+              {isModernFormat ? (
+                // Modern format personas (rich, v3, v3.1)
                 RICH_PERSONA_KEYS.map((persona) => {
                   const isRecommended = recommendedPersonas.includes(persona);
                   return (
@@ -179,7 +196,7 @@ const EmailPage: React.FC = () => {
           <div className="bg-blue-50 border border-blue-100 rounded-xl p-5">
             <h4 className="text-blue-900 font-medium text-sm mb-2">Pro Tip</h4>
             <p className="text-blue-800 text-xs leading-relaxed">
-              {isRichFormat ? (
+              {isModernFormat ? (
                 <>
                   Emails to {PERSONA_DISPLAY_NAMES[selectedPersona]}s should focus on{' '}
                   {selectedPersona === 'cfo_finance' ? 'ROI, cost efficiency, and financial metrics' :
