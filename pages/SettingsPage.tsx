@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Settings, Key, Bot, FileText, Search, RotateCcw, BarChart3, Trash2 } from 'lucide-react';
+import { Settings, Key, Bot, FileText, Search, RotateCcw, BarChart3, Trash2, Database } from 'lucide-react';
 import { useSettings } from '../context/SettingsContext';
 import ApiKeysSection from '../components/settings/ApiKeysSection';
 import ModelSelectionSection from '../components/settings/ModelSelectionSection';
 import PromptTemplatesSection from '../components/settings/PromptTemplatesSection';
+import { GHLConfig } from '../types';
 
-type SettingsTab = 'api-keys' | 'models' | 'prompts' | 'tavily' | 'usage';
+type SettingsTab = 'api-keys' | 'models' | 'prompts' | 'tavily' | 'ghl' | 'usage';
 
 const SettingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<SettingsTab>('api-keys');
@@ -13,8 +14,10 @@ const SettingsPage: React.FC = () => {
     resetToDefaults,
     lastUpdated,
     tavily,
+    ghl,
     apiKeys,
     updateTavilyConfig,
+    updateGHLConfig,
     updateApiKey,
     usageRecords,
     getUsageStats,
@@ -26,6 +29,7 @@ const SettingsPage: React.FC = () => {
     { id: 'models' as const, label: 'Models', icon: Bot },
     { id: 'prompts' as const, label: 'Prompts', icon: FileText },
     { id: 'tavily' as const, label: 'Web Search', icon: Search },
+    { id: 'ghl' as const, label: 'GoHighLevel', icon: Database },
     { id: 'usage' as const, label: 'Usage', icon: BarChart3 },
   ];
 
@@ -88,6 +92,14 @@ const SettingsPage: React.FC = () => {
               tavily={tavily}
               apiKeys={apiKeys}
               updateTavilyConfig={updateTavilyConfig}
+              updateApiKey={updateApiKey}
+            />
+          )}
+          {activeTab === 'ghl' && (
+            <GHLSection
+              ghl={ghl}
+              apiKeys={apiKeys}
+              updateGHLConfig={updateGHLConfig}
               updateApiKey={updateApiKey}
             />
           )}
@@ -201,6 +213,92 @@ const TavilySection: React.FC<TavilySectionProps> = ({ tavily, apiKeys, updateTa
           </p>
         </div>
       )}
+    </div>
+  );
+};
+
+interface GHLSectionProps {
+  ghl: GHLConfig;
+  apiKeys: {
+    ghl?: string;
+  };
+  updateGHLConfig: (config: Partial<GHLConfig>) => void;
+  updateApiKey: (provider: 'ghl', key: string) => void;
+}
+
+const GHLSection: React.FC<GHLSectionProps> = ({ ghl, apiKeys, updateGHLConfig, updateApiKey }) => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-lg font-semibold text-slate-900 mb-2">GoHighLevel Integration</h3>
+        <p className="text-sm text-slate-500">
+          Connect to GoHighLevel to import contacts and companies directly into your research workflow.
+        </p>
+      </div>
+
+      {/* API Key */}
+      <div className="p-4 border border-slate-200 rounded-lg bg-white">
+        <label className="block text-sm font-medium text-slate-700 mb-2">
+          GHL API Key (Private Integration Token)
+        </label>
+        <input
+          type="password"
+          value={apiKeys.ghl || ''}
+          onChange={(e) => updateApiKey('ghl', e.target.value)}
+          placeholder="pit-..."
+          className="w-full rounded-lg border-slate-300 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm p-2.5 border"
+        />
+        <p className="mt-2 text-xs text-slate-500">
+          Get your Private Integration Token from your GHL sub-account settings under{' '}
+          <span className="font-medium">Settings → Integrations → Private Integration</span>
+        </p>
+      </div>
+
+      {/* Location ID */}
+      <div className="p-4 border border-slate-200 rounded-lg bg-white">
+        <label className="block text-sm font-medium text-slate-700 mb-2">
+          Location ID
+        </label>
+        <input
+          type="text"
+          value={ghl?.locationId || ''}
+          onChange={(e) => updateGHLConfig({ locationId: e.target.value })}
+          placeholder="e.g., abc123XYZ..."
+          className="w-full rounded-lg border-slate-300 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm p-2.5 border"
+        />
+        <p className="mt-2 text-xs text-slate-500">
+          Find your Location ID in GHL under{' '}
+          <span className="font-medium">Settings → Business Profile → Location ID</span>
+        </p>
+      </div>
+
+      {/* Status */}
+      {apiKeys.ghl && ghl?.locationId ? (
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+          <p className="text-sm text-green-800 flex items-center">
+            <span className="w-2 h-2 bg-green-500 rounded-full mr-2" />
+            GHL integration is configured. You can now select companies from GHL in the research form.
+          </p>
+        </div>
+      ) : (
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+          <p className="text-sm text-amber-800">
+            Add both your GHL API key and Location ID to enable the GHL company selector in research forms.
+          </p>
+        </div>
+      )}
+
+      {/* Help Text */}
+      <div className="bg-slate-50 border border-slate-200 rounded-lg p-4">
+        <h4 className="text-sm font-medium text-slate-800 mb-2">How to get your credentials:</h4>
+        <ol className="text-xs text-slate-600 space-y-2 list-decimal list-inside">
+          <li>Log into your GoHighLevel sub-account</li>
+          <li>Go to <span className="font-medium">Settings → Integrations</span></li>
+          <li>Click on <span className="font-medium">Private Integrations</span></li>
+          <li>Create a new integration or copy an existing token</li>
+          <li>For Location ID, go to <span className="font-medium">Settings → Business Profile</span></li>
+        </ol>
+      </div>
     </div>
   );
 };

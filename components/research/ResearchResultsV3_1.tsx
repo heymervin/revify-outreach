@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Building2, Radio, Lightbulb, Users, ExternalLink, AlertTriangle,
   ChevronDown, ChevronUp, CheckCircle, Clock, FileText, HelpCircle,
-  Target, Code, Zap, Star, DollarSign
+  Target, Code, Zap, Star, DollarSign, Save, Loader2, Database
 } from 'lucide-react';
 import {
   ResearchOutputV3_1,
@@ -12,15 +13,48 @@ import {
   RecentSignalV3_1,
   IntentSignalV3_1
 } from '../../types/researchTypesV3_1';
+import { useApp } from '../../context/AppContext';
+import { useSettings } from '../../context/SettingsContext';
+import { GHLService } from '../../services/ghlService';
 
 interface Props {
   output: ResearchOutputV3_1;
 }
 
 const ResearchResultsV3_1: React.FC<Props> = ({ output }) => {
+  const { currentSessionId, getSessionById } = useApp();
+  const { apiKeys, ghl } = useSettings();
+  const session = currentSessionId ? getSessionById(currentSessionId) : null;
+
   const [activePersona, setActivePersona] = useState<string>('cfo_finance');
   const [showSources, setShowSources] = useState(false);
   const [showRawJson, setShowRawJson] = useState(false);
+  const [savingToGHL, setSavingToGHL] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState<boolean | null>(null);
+  const [saveError, setSaveError] = useState<string | null>(null);
+
+  const canSaveToGHL = session?.ghlRecordId && apiKeys?.ghl && ghl?.locationId;
+
+  const handleSaveToGHL = async () => {
+    if (!session?.ghlRecordId || !apiKeys?.ghl || !ghl?.locationId) return;
+
+    setSavingToGHL(true);
+    setSaveSuccess(null);
+    setSaveError(null);
+
+    try {
+      const ghlService = new GHLService(apiKeys.ghl, ghl.locationId);
+      await ghlService.updateBusinessResearch(session.ghlRecordId, JSON.stringify(output));
+      setSaveSuccess(true);
+      console.log('Research saved to GHL successfully');
+    } catch (err) {
+      console.error('Failed to save research to GHL:', err);
+      setSaveError(err instanceof Error ? err.message : 'Failed to save to GHL');
+      setSaveSuccess(false);
+    } finally {
+      setSavingToGHL(false);
+    }
+  };
 
   const personaKeys = Object.keys(output.persona_angles);
   const recommendedPersonas = output.outreach_priority.recommended_personas;
@@ -419,11 +453,48 @@ const ResearchResultsV3_1: React.FC<Props> = ({ output }) => {
       </div>
 
       {/* CTA */}
-      <div className="flex justify-end">
-        <button className="inline-flex items-center bg-slate-900 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
+      <div className="flex items-center justify-end gap-3">
+        {/* Save to GHL Button */}
+        {canSaveToGHL && (
+          <div className="flex items-center gap-2">
+            {saveSuccess === true && (
+              <span className="text-sm text-green-600 flex items-center">
+                <CheckCircle className="w-4 h-4 mr-1" />
+                Saved to GHL
+              </span>
+            )}
+            {saveSuccess === false && saveError && (
+              <span className="text-sm text-red-600 flex items-center" title={saveError}>
+                <AlertTriangle className="w-4 h-4 mr-1" />
+                Failed
+              </span>
+            )}
+            <button
+              onClick={handleSaveToGHL}
+              disabled={savingToGHL}
+              className="inline-flex items-center bg-purple-600 text-white px-4 py-3 rounded-lg text-sm font-medium hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {savingToGHL ? (
+                <>
+                  <Loader2 className="animate-spin w-4 h-4 mr-2" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Database className="w-4 h-4 mr-2" />
+                  Save to GHL
+                </>
+              )}
+            </button>
+          </div>
+        )}
+        <Link
+          to="/email"
+          className="inline-flex items-center bg-slate-900 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors"
+        >
           Draft Outreach Email
           <ExternalLink className="w-4 h-4 ml-2" />
-        </button>
+        </Link>
       </div>
     </div>
   );

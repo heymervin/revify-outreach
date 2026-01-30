@@ -13,6 +13,17 @@ const personaAngleSchema = {
   additionalProperties: false
 };
 
+// JSON Schema for email output (OpenAI strict mode)
+const EMAIL_SCHEMA = {
+  type: 'object',
+  properties: {
+    subject: { type: 'string' },
+    body: { type: 'string' }
+  },
+  required: ['subject', 'body'],
+  additionalProperties: false
+};
+
 // JSON Schema for research output (OpenAI strict mode requires additionalProperties: false)
 const RESEARCH_SCHEMA = {
   type: 'object',
@@ -112,7 +123,7 @@ export class OpenAIProvider implements AIProviderInterface {
     this.model = config.model;
   }
 
-  private async callOpenAI(prompt: string, schema?: object): Promise<{ content: string; usage: TokenUsage }> {
+  private async callOpenAI(prompt: string, schema?: object, schemaName: string = 'output'): Promise<{ content: string; usage: TokenUsage }> {
     const body: Record<string, unknown> = {
       model: this.model,
       messages: [{ role: 'user', content: prompt }],
@@ -124,7 +135,7 @@ export class OpenAIProvider implements AIProviderInterface {
       body.response_format = {
         type: 'json_schema',
         json_schema: {
-          name: 'research_output',
+          name: schemaName,
           strict: true,
           schema: schema
         }
@@ -164,7 +175,7 @@ export class OpenAIProvider implements AIProviderInterface {
 
 IMPORTANT: Your response must be valid JSON matching the exact schema provided. All array fields (recent_signals, pain_point_hypotheses, gaps, recommended_personas) MUST be arrays, even if empty. Do not use strings where arrays are expected.`;
 
-    const result = await this.callOpenAI(enrichedPrompt, RESEARCH_SCHEMA);
+    const result = await this.callOpenAI(enrichedPrompt, RESEARCH_SCHEMA, 'research_output');
     const parsed = JSON.parse(result.content);
 
     return {
@@ -176,16 +187,23 @@ IMPORTANT: Your response must be valid JSON matching the exact schema provided. 
   async generateEmail(prompt: string): Promise<ProviderResponse<EmailResult>> {
     const enrichedPrompt = `${prompt}
 
-Respond with valid JSON matching this exact schema:
-{
-  "subject": "string - email subject line",
-  "body": "string - email body"
-}`;
+IMPORTANT: Respond with valid JSON containing exactly these two fields:
+- "subject": the email subject line (string)
+- "body": the email body content (string)
 
-    const result = await this.callOpenAI(enrichedPrompt);
+Do NOT include any other fields like "persona", "subject_line", "email_body", "follow_up", etc.`;
+
+    const result = await this.callOpenAI(enrichedPrompt, EMAIL_SCHEMA, 'email_output');
+    const parsed = JSON.parse(result.content);
+
+    // Normalize field names in case the model doesn't follow instructions
+    const normalizedData: EmailResult = {
+      subject: parsed.subject || parsed.subject_line || '',
+      body: parsed.body || parsed.email_body || '',
+    };
 
     return {
-      data: JSON.parse(result.content),
+      data: normalizedData,
       usage: result.usage,
     };
   }

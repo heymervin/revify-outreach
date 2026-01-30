@@ -9,12 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react-router-dom": "^7.13.0",
-    "react-dom": "^19.2.4",
-    "recharts": "^3.7.0",
     "@google/genai": "^1.38.0",
     "lucide-react": "^0.563.0",
     "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.13.0",
+    "recharts": "^3.7.0",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
@@ -22,5 +22,8 @@
     "@vitejs/plugin-react": "^5.0.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-arm64-gnu": "^4.57.1"
   }
 }

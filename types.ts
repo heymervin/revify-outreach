@@ -122,6 +122,19 @@ export interface PipelineResult {
   metadata: Omit<ResearchMetadata, 'timestamp'>;
 }
 
+// ===== GHL Contact (from GoHighLevel CRM) =====
+
+export interface GHLContactInfo {
+  id: string;
+  name: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  title?: string;
+  persona?: string; // GHL persona key: CEO, CFO, Pricing, Technology, Sales
+}
+
 // ===== Research Session (supports both legacy and rich formats) =====
 
 export interface ResearchSession {
@@ -146,6 +159,10 @@ export interface ResearchSession {
   // V2 additions
   researchAngle?: import('./types/researchV2Types').ResearchAngleId;
   researchDepth?: import('./types/researchV2Types').ResearchDepth;
+  // GHL integration - contacts associated with this company
+  ghlContacts?: GHLContactInfo[];
+  // GHL record ID for saving research back to GHL
+  ghlRecordId?: string;
 }
 
 export interface GeneratedEmail {
@@ -191,6 +208,15 @@ export const RICH_PERSONA_KEYS: RichPersonaKey[] = [
   'ceo_gm',
   'technology_analytics',
 ];
+
+// Mapping from GHL persona keys to app's RichPersonaKey
+export const GHL_PERSONA_TO_RICH_PERSONA: Record<string, RichPersonaKey> = {
+  'CEO': 'ceo_gm',
+  'CFO': 'cfo_finance',
+  'Pricing': 'pricing_rgm',
+  'Technology': 'technology_analytics',
+  'Sales': 'sales_commercial',
+};
 
 export interface ResearchInput {
   companyName: string;
@@ -240,6 +266,7 @@ export interface APIKeysConfig {
   openai?: string;
   anthropic?: string;
   tavily?: string;
+  ghl?: string;
 }
 
 // ===== Model Selection Configuration =====
@@ -272,6 +299,12 @@ export interface TavilyConfig {
   includeInResearch: boolean;
 }
 
+// ===== GoHighLevel Configuration =====
+
+export interface GHLConfig {
+  locationId?: string;
+}
+
 // ===== Complete Settings State =====
 
 export interface SettingsState {
@@ -279,6 +312,7 @@ export interface SettingsState {
   modelSelection: ModelSelectionConfig;
   promptTemplates: PromptTemplate[];
   tavily: TavilyConfig;
+  ghl: GHLConfig;
   lastUpdated: number;
 }
 
@@ -331,5 +365,6 @@ export const DEFAULT_SETTINGS: SettingsState = {
     searchDepth: 'basic',
     includeInResearch: true,
   },
+  ghl: {},
   lastUpdated: Date.now(),
 };

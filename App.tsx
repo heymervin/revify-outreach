@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import EmailPage from './pages/EmailPage';
 import HistoryPage from './pages/HistoryPage';
 import SettingsPage from './pages/SettingsPage';
+import BulkResearchPage from './pages/BulkResearchPage';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Navigate to="/research" replace />} />
               <Route path="/research" element={<Dashboard />} />
+              <Route path="/bulk" element={<BulkResearchPage />} />
               <Route path="/email" element={<EmailPage />} />
               <Route path="/history" element={<HistoryPage />} />
               <Route path="/settings" element={<SettingsPage />} />

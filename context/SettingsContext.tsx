@@ -5,6 +5,7 @@ import {
   ModelSelectionConfig,
   PromptTemplate,
   TavilyConfig,
+  GHLConfig,
   DEFAULT_SETTINGS,
   UsageRecord,
   UsageStats,
@@ -136,6 +137,7 @@ interface SettingsContextType extends SettingsState {
   getActiveTemplate: (type: 'research' | 'email') => PromptTemplate | undefined;
   setDefaultTemplate: (id: string) => void;
   updateTavilyConfig: (config: Partial<TavilyConfig>) => void;
+  updateGHLConfig: (config: Partial<GHLConfig>) => void;
   resetToDefaults: () => void;
   exportSettings: () => string;
   importSettings: (json: string) => boolean;
@@ -189,18 +191,25 @@ function calculateCost(provider: AIProvider, usage: TokenUsage): number {
 
 export const SettingsProvider = ({ children }: { children: React.ReactNode }) => {
   const [settings, setSettings] = useState<SettingsState>(() => {
+    const defaults = initializeDefaults();
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
         if (parsed.promptTemplates && parsed.promptTemplates.length > 0) {
-          return parsed;
+          // Merge with defaults to handle new properties
+          return {
+            ...defaults,
+            ...parsed,
+            ghl: { ...defaults.ghl, ...parsed.ghl },
+            tavily: { ...defaults.tavily, ...parsed.tavily },
+          };
         }
       } catch {
         // Fall through to defaults
       }
     }
-    return initializeDefaults();
+    return defaults;
   });
 
   const [usageRecords, setUsageRecords] = useState<UsageRecord[]>(() => {
@@ -313,6 +322,14 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
     }));
   }, []);
 
+  const updateGHLConfig = useCallback((config: Partial<GHLConfig>) => {
+    setSettings(prev => ({
+      ...prev,
+      ghl: { ...prev.ghl, ...config },
+      lastUpdated: Date.now(),
+    }));
+  }, []);
+
   const resetToDefaults = useCallback(() => {
     const currentApiKeys = settings.apiKeys;
     setSettings({
@@ -391,6 +408,7 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
       getActiveTemplate,
       setDefaultTemplate,
       updateTavilyConfig,
+      updateGHLConfig,
       resetToDefaults,
       exportSettings,
       importSettings,

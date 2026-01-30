@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Mail, History, Settings, BrainCircuit } from 'lucide-react';
+import { LayoutDashboard, Mail, History, Settings, BrainCircuit, Users } from 'lucide-react';
 
 const Sidebar: React.FC = () => {
   const navItems = [
     { icon: LayoutDashboard, label: 'Research', path: '/research' },
+    { icon: Users, label: 'Bulk Research', path: '/bulk' },
     { icon: Mail, label: 'Email Outreach', path: '/email' },
     { icon: History, label: 'History', path: '/history' },
     { icon: Settings, label: 'Settings', path: '/settings' },

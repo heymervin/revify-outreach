@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Building2, Radio, Lightbulb, Users, ExternalLink, AlertTriangle,
   ChevronDown, ChevronUp, CheckCircle, Clock, FileText, HelpCircle, Target, Code
@@ -294,10 +295,13 @@ const ResearchResultsV3: React.FC<Props> = ({ output }) => {
 
       {/* CTA */}
       <div className="flex justify-end">
-        <button className="inline-flex items-center bg-slate-900 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
+        <Link
+          to="/email"
+          className="inline-flex items-center bg-slate-900 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors"
+        >
           Draft Outreach Email
           <ExternalLink className="w-4 h-4 ml-2" />
-        </button>
+        </Link>
       </div>
     </div>
   );

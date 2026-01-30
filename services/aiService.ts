@@ -1,4 +1,4 @@
-import { AIProvider, ResearchSession, PersonaType, SettingsState, TokenUsage, PERSONA_DISPLAY_NAMES, RichPersonaKey, ResearchMetadata, ResearchConfidence, ResearchAngleId, ResearchDepth } from '../types';
+import { AIProvider, ResearchSession, PersonaType, SettingsState, TokenUsage, PERSONA_DISPLAY_NAMES, RichPersonaKey, ResearchMetadata, ResearchConfidence, ResearchAngleId, ResearchDepth, GHLContactInfo } from '../types';
 import { AIProviderInterface, ProviderConfig, RichResearchResult } from './providers';
 import { GeminiProvider } from './providers/geminiProvider';
 import { OpenAIProvider } from './providers/openaiProvider';
@@ -475,6 +475,140 @@ export const generateEmail = async (
   const prompt = interpolateTemplate(template.content, templateVars);
 
   console.log('Email generation - Template vars:', templateVars);
+  console.log('Email generation - Prompt:', prompt.substring(0, 500) + '...');
+
+  const result = await provider.generateEmail(prompt);
+
+  console.log('Email generation - Result:', result);
+
+  return {
+    data: result.data,
+    usage: result.usage,
+    provider: modelSelection.emailProvider,
+    model: modelSelection.emailModel,
+  };
+};
+
+/**
+ * Generate email for a specific GHL contact with personalization
+ */
+export const generateEmailForContact = async (
+  session: ResearchSession,
+  persona: PersonaType | RichPersonaKey,
+  contact: GHLContactInfo,
+  settings: SettingsState
+): Promise<EmailResponse> => {
+  const { modelSelection, apiKeys, promptTemplates } = settings;
+
+  const apiKey = apiKeys[modelSelection.emailProvider];
+  if (!apiKey) {
+    throw new Error(`No API key configured for ${modelSelection.emailProvider}. Please add your API key in Settings.`);
+  }
+
+  const provider = createProvider(modelSelection.emailProvider, {
+    apiKey,
+    model: modelSelection.emailModel,
+  });
+
+  const template = promptTemplates.find(t => t.type === 'email' && t.isDefault)
+    || promptTemplates.find(t => t.type === 'email');
+
+  if (!template) {
+    throw new Error('No email prompt template configured');
+  }
+
+  // Build context based on session format
+  let templateVars: Record<string, string>;
+
+  if (session.format === 'v3_1' && session.v3_1Data) {
+    const rd = session.v3_1Data;
+    const personaKey = persona as RichPersonaKey;
+    const angle = rd.persona_angles[personaKey];
+
+    templateVars = {
+      persona: PERSONA_DISPLAY_NAMES[persona] || String(persona).replace('_', ' '),
+      company: rd.company_profile.confirmed_name,
+      brief: `${rd.company_profile.business_model || 'B2B'}. ${rd.hypothesis?.primary_hypothesis || ''}`,
+      hypotheses: rd.hypothesis?.supporting_evidence?.map(h => `- ${h}`).join('\n') || '',
+      primary_hook: angle?.hook || '',
+      supporting_point: angle?.supporting_point || '',
+      question_to_pose: angle?.question || '',
+      timing_notes: rd.outreach_priority?.urgency_reason || '',
+      cautions: rd.outreach_priority?.cautions?.join(', ') || '',
+    };
+  } else if (session.format === 'v3' && session.v3Data) {
+    const rd = session.v3Data;
+    const personaKey = persona as RichPersonaKey;
+    const angle = rd.persona_angles[personaKey];
+
+    templateVars = {
+      persona: PERSONA_DISPLAY_NAMES[persona] || String(persona).replace('_', ' '),
+      company: rd.company_profile.confirmed_name,
+      brief: `${rd.company_profile.business_model || 'B2B'}. ${rd.hypothesis || ''}`,
+      hypotheses: '',
+      primary_hook: angle?.hook || '',
+      supporting_point: angle?.supporting_point || '',
+      question_to_pose: angle?.question || '',
+      timing_notes: rd.outreach_priority?.timing_notes || '',
+      cautions: rd.outreach_priority?.cautions || '',
+    };
+  } else if (session.format === 'rich' && session.richData) {
+    const rd = session.richData;
+    const personaKey = persona as RichPersonaKey;
+    const angle = rd.persona_angles[personaKey];
+
+    templateVars = {
+      persona: PERSONA_DISPLAY_NAMES[persona] || String(persona).replace('_', ' '),
+      company: rd.company_profile.confirmed_name,
+      brief: `${rd.company_profile.business_model}. ${rd.company_profile.market_position}`,
+      hypotheses: rd.pain_point_hypotheses.map(h => `- ${h.hypothesis}`).join('\n'),
+      primary_hook: angle?.primary_hook || '',
+      supporting_point: angle?.supporting_point || '',
+      question_to_pose: angle?.question_to_pose || '',
+      timing_notes: rd.outreach_priority.timing_notes || '',
+      cautions: rd.outreach_priority.cautions || '',
+    };
+  } else {
+    // Legacy format
+    templateVars = {
+      persona: PERSONA_DISPLAY_NAMES[persona] || String(persona).replace('_', ' '),
+      company: session.companyName,
+      brief: session.brief || '',
+      hypotheses: (session.hypotheses || []).map(h => `- ${h}`).join('\n'),
+      primary_hook: '',
+      supporting_point: '',
+      question_to_pose: '',
+      timing_notes: '',
+      cautions: '',
+    };
+  }
+
+  // Build base prompt with template variables
+  let prompt = interpolateTemplate(template.content, templateVars);
+
+  // Add contact personalization
+  const contactName = contact.firstName || contact.name.split(' ')[0] || contact.name;
+  const contactFullName = contact.name;
+  const contactTitle = contact.title || '';
+
+  // Add personalization instructions to the prompt
+  prompt += `
+
+=== CONTACT PERSONALIZATION ===
+This email is for a specific person at ${templateVars.company}:
+- Name: ${contactFullName}
+- First Name (for greeting): ${contactName}
+${contactTitle ? `- Title/Role: ${contactTitle}` : ''}
+${contact.email ? `- Email: ${contact.email}` : ''}
+
+IMPORTANT PERSONALIZATION REQUIREMENTS:
+1. Address the recipient by their first name (${contactName}) in the greeting
+2. ${contactTitle ? `Reference their role as ${contactTitle} where appropriate` : 'Write for the selected persona type'}
+3. Keep the email personal and direct - this is a real person, not a generic role
+4. Make sure the subject line feels personalized for ${contactName}
+`;
+
+  console.log('Email generation for contact:', contact.name);
   console.log('Email generation - Prompt:', prompt.substring(0, 500) + '...');
 
   const result = await provider.generateEmail(prompt);
