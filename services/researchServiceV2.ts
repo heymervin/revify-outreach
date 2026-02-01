@@ -58,11 +58,6 @@ export async function executeResearchV2(
   const angle = getResearchAngle(angleId);
   const searchThemes = angle?.search_themes || [];
 
-  console.log(`Executing V2 research for ${company}:`);
-  console.log(`  Angle: ${angleId} (${angle?.name})`);
-  console.log(`  Depth: ${depth} (${depthConfig.name})`);
-  console.log(`  Search themes: ${searchThemes.slice(0, 3).join(', ')}...`);
-
   // Run the pipeline with depth-specific configuration
   const pipelineResult = await runResearchPipeline(
     company,
@@ -100,12 +95,6 @@ export async function executeResearchV2(
     company,
     pipelineResult.stageResults
   );
-
-  console.log(`V2 research completed:`);
-  console.log(`  Sources found: ${allSources.length}`);
-  console.log(`  Hypotheses matched: ${matchedHypotheses.length}`);
-  console.log(`  Overall confidence: ${confidenceBreakdown.overall}`);
-  console.log(`  Research gaps: ${researchGaps.length}`);
 
   return {
     pipelineResult,
@@ -148,10 +137,6 @@ export async function executeResearchV2AllAngles(
     resultsPerQuery: depthConfig.results_per_query,
     searchDepth: depth === 'deep' ? 'advanced' as const : 'basic' as const,
   };
-
-  console.log(`Executing COMPREHENSIVE V2 research for ${company}:`);
-  console.log(`  Depth: ${depth} (${depthConfig.name})`);
-  console.log(`  Analyzing all 4 angles...`);
 
   // Run the pipeline once with comprehensive queries
   const pipelineResult = await runResearchPipeline(
@@ -200,15 +185,6 @@ export async function executeResearchV2AllAngles(
     company,
     pipelineResult.stageResults
   );
-
-  console.log(`Comprehensive V2 research completed:`);
-  console.log(`  Sources found: ${allSources.length}`);
-  console.log(`  Total hypotheses matched: ${uniqueHypotheses.length}`);
-  for (const angleId of ALL_ANGLE_IDS) {
-    const angle = getResearchAngle(angleId);
-    console.log(`    ${angle?.name}: ${angleResults[angleId].length} hypotheses`);
-  }
-  console.log(`  Overall confidence: ${confidenceBreakdown.overall}`);
 
   return {
     pipelineResult,

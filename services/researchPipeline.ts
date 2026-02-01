@@ -118,7 +118,6 @@ export async function runResearchPipeline(
 
   // ===== Stage 0: Website Scraping (if website provided) =====
   if (finalConfig.scrapeWebsite && website && website !== 'Not provided') {
-    console.log('Scraping company website:', website);
     const websiteStageStart = Date.now();
 
     try {
@@ -140,7 +139,6 @@ export async function runResearchPipeline(
         error: scrapeResult.pagesScraped === 0 ? 'No pages could be scraped' : undefined,
       });
 
-      console.log(`Website scraping completed: ${scrapeResult.pagesScraped} pages scraped`);
     } catch (error) {
       console.warn('Website scraping failed:', error);
       stageResults.push({

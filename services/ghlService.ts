@@ -5,9 +5,6 @@
 const GHL_BASE_URL = 'https://services.leadconnectorhq.com';
 const API_VERSION = '2021-07-28';
 
-// For debugging - log API calls
-const DEBUG = true;
-
 // GHL Business Record (from /objects/business/records/search endpoint)
 export interface GHLBusinessRecord {
   id: string;
@@ -146,11 +143,6 @@ export class GHLService {
       'Content-Type': 'application/json',
     };
 
-    if (DEBUG) {
-      console.log('[GHL API] Request:', url);
-      console.log('[GHL API] Method:', options.method || 'GET');
-    }
-
     const response = await fetch(url, {
       ...options,
       headers: {
@@ -211,17 +203,9 @@ export class GHLService {
     let page = 1;
     let hasMore = true;
 
-    if (DEBUG) {
-      console.log('[GHL API] Starting bulk fetch, maxRecords:', maxRecords);
-    }
-
     while (hasMore && allRecords.length < maxRecords) {
       const response = await this.searchBusinesses(query, page, pageLimit);
       const records = response.records || [];
-
-      if (DEBUG) {
-        console.log(`[GHL API] Page ${page}: fetched ${records.length} records, total so far: ${allRecords.length + records.length}`);
-      }
 
       if (records.length === 0) {
         hasMore = false;
@@ -240,10 +224,6 @@ export class GHLService {
 
         page++;
       }
-    }
-
-    if (DEBUG) {
-      console.log('[GHL API] Bulk fetch complete, total records:', allRecords.length);
     }
 
     return allRecords.slice(0, maxRecords);
@@ -314,12 +294,6 @@ export class GHLService {
       },
     };
 
-    if (DEBUG) {
-      console.log('[GHL API] Updating business record:', recordId);
-      console.log('[GHL API] PUT /objects/business/records/' + recordId + '?locationId=' + this.locationId);
-      console.log('[GHL API] Update body (truncated):', JSON.stringify(body).substring(0, 500) + '...');
-    }
-
     const result = await this.request<GHLBusinessRecord>(
       `/objects/business/records/${recordId}?locationId=${this.locationId}`,
       {
@@ -327,10 +301,6 @@ export class GHLService {
         body: JSON.stringify(body),
       }
     );
-
-    if (DEBUG) {
-      console.log('[GHL API] Update response:', JSON.stringify(result).substring(0, 500) + '...');
-    }
 
     return result;
   }
@@ -360,9 +330,6 @@ export class GHLService {
 
   // Update a contact with custom field data
   async updateContact(contactId: string, data: Record<string, unknown>): Promise<GHLContact> {
-    if (DEBUG) {
-      console.log('[GHL API] Updating contact:', contactId, data);
-    }
     return this.request<GHLContact>(
       `/contacts/${contactId}`,
       {
@@ -403,24 +370,18 @@ export class GHLService {
   // Get contacts associated with a specific business record
   async getContactsForBusiness(businessRecordId: string, companyName?: string): Promise<GHLAssociatedContact[]> {
     try {
-      console.log('[GHL] Fetching contacts for business:', businessRecordId, 'companyName:', companyName);
-
       // Search all contacts and filter by businessId
       const contactsResponse = await this.getContacts();
       const allContacts = contactsResponse.contacts || [];
-      console.log('[GHL] Total contacts fetched:', allContacts.length);
 
       // Filter contacts that have this businessId
       const matchingContacts = allContacts.filter(c => c.businessId === businessRecordId);
-      console.log('[GHL] Contacts matching businessId:', matchingContacts.length);
 
       // If no contacts found by businessId, try matching by company name
       if (matchingContacts.length === 0 && companyName) {
-        console.log('[GHL] No contacts found by businessId, trying company name match');
         const byName = allContacts.filter(
           c => c.companyName?.toLowerCase() === companyName.toLowerCase()
         );
-        console.log('[GHL] Contacts matching company name:', byName.length);
         matchingContacts.push(...byName);
       }
 
@@ -435,24 +396,13 @@ export class GHLService {
           // Fetch full contact data to get custom fields
           const fullContact = await this.getContact(basicContact.id);
 
-          // Log contact data to identify persona field
-          console.log('[GHL] Full contact data:', {
-            id: fullContact.id,
-            name: fullContact.name,
-            persona: fullContact.persona,
-            customFields: fullContact.customFields,
-          });
-
           // Extract persona - check direct field first, then custom fields
           let persona: string | undefined = fullContact.persona;
           if (!persona && fullContact.customFields) {
-            // Log all custom fields to find persona
-            console.log('[GHL] Custom fields for', fullContact.name, ':', fullContact.customFields);
             const personaField = fullContact.customFields.find(
               field => field.id.toLowerCase().includes('persona')
             );
             if (personaField) {
-              console.log('[GHL] Found persona field:', personaField);
               persona = personaField.value;
             }
           }
@@ -502,7 +452,6 @@ export class GHLService {
         }
       }
 
-      console.log('[GHL] Returning contacts:', contacts.length);
       return contacts;
     } catch (err) {
       console.error('[GHL] Error fetching contacts for business:', err);

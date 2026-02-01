@@ -266,15 +266,12 @@ export async function executeBulkResearch(
   const selectedCompanies = session.selectedCompanies.filter(c => c.selected);
   session.totalCount = selectedCompanies.length;
 
-  console.log(`[Bulk Research] Starting research for ${selectedCompanies.length} companies`);
-
   // Resume from where we left off
   const startIndex = session.currentCompanyIndex;
 
   for (let i = startIndex; i < selectedCompanies.length; i++) {
     // Check for pause request
     if (isPauseRequested(session.id)) {
-      console.log(`[Bulk Research] Pause requested at company ${i + 1}/${selectedCompanies.length}`);
       session.status = 'paused';
       session.pausedAt = Date.now();
       session.currentCompanyIndex = i;
@@ -287,8 +284,6 @@ export async function executeBulkResearch(
 
     const company = selectedCompanies[i];
     const companyStartTime = Date.now();
-
-    console.log(`[Bulk Research] Processing ${i + 1}/${selectedCompanies.length}: ${company.companyName}`);
 
     // Emit progress update
     const elapsedMs = session.totalElapsedMs + (Date.now() - startTime);
@@ -383,7 +378,6 @@ export async function executeBulkResearch(
           );
           bulkResult.savedToGhl = true;
           session.savedToGhlCount++;
-          console.log(`[Bulk Research] Saved research to GHL for ${company.companyName}`);
         } catch (ghlError) {
           console.warn(`[Bulk Research] Failed to save to GHL for ${company.companyName}:`, ghlError);
           // Don't fail the whole research, just log the error
@@ -397,8 +391,6 @@ export async function executeBulkResearch(
           });
         }
       }
-
-      console.log(`[Bulk Research] Completed ${company.companyName} in ${executionTimeMs}ms, cost: $${cost.toFixed(2)}`);
 
     } catch (error) {
       console.error(`[Bulk Research] Failed for ${company.companyName}:`, error);
@@ -444,11 +436,6 @@ export async function executeBulkResearch(
   session.completedAt = Date.now();
   session.totalElapsedMs += Date.now() - startTime;
 
-  console.log(`[Bulk Research] Completed all ${selectedCompanies.length} companies`);
-  console.log(`[Bulk Research] Success: ${session.successCount}, Failed: ${session.failureCount}`);
-  console.log(`[Bulk Research] Total cost: $${session.actualCost.toFixed(2)}`);
-  console.log(`[Bulk Research] Total time: ${formatDuration(session.totalElapsedMs)}`);
-
   onSessionUpdate(session);
   updateSessionInStorage(session);
 
@@ -475,8 +462,6 @@ export async function resumeBulkResearch(
   if (session.status !== 'paused') {
     throw new Error(`Session is not paused (status: ${session.status})`);
   }
-
-  console.log(`[Bulk Research] Resuming session from company ${session.currentCompanyIndex + 1}/${session.totalCount}`);
 
   return executeBulkResearch(session, settings, ghlService, onProgress, onSessionUpdate);
 }

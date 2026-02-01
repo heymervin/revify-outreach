@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Search, Layers } from 'lucide-react';
 import { ResearchFormV3_1, ResearchFormV3_2 } from '../components/research';
 import ResearchResults from '../components/ResearchResults';
 
 type ResearchMode = 'v3_1' | 'v3_2';
 
-const Dashboard: React.FC = () => {
+const Dashboard = () => {
   const [mode, setMode] = useState<ResearchMode>('v3_1');
 
   return (
@@ -16,9 +16,11 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Research Mode Tabs */}
-      <div className="flex space-x-2 mb-6">
+      <div className="flex space-x-2 mb-6" role="tablist" aria-label="Research mode">
         <button
           onClick={() => setMode('v3_1')}
+          role="tab"
+          aria-selected={mode === 'v3_1'}
           className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             mode === 'v3_1'
               ? 'bg-emerald-600 text-white'
@@ -31,6 +33,8 @@ const Dashboard: React.FC = () => {
         </button>
         <button
           onClick={() => setMode('v3_2')}
+          role="tab"
+          aria-selected={mode === 'v3_2'}
           className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             mode === 'v3_2'
               ? 'bg-purple-600 text-white'
@@ -52,7 +56,6 @@ const Dashboard: React.FC = () => {
         )}
       </div>
 
-      {/* Render the selected form */}
       {mode === 'v3_1' && <ResearchFormV3_1 />}
       {mode === 'v3_2' && <ResearchFormV3_2 />}
 

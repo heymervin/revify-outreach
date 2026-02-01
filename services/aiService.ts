@@ -85,7 +85,6 @@ export const generateResearch = async (
   if (shouldUsePipeline) {
     try {
       // Run the multi-stage research pipeline (including website scraping)
-      console.log('Running multi-stage research pipeline...');
       const { stageResults, metadata } = await runResearchPipeline(
         company,
         industry,
@@ -115,7 +114,6 @@ export const generateResearch = async (
         timestamp: Date.now(),
       };
 
-      console.log(`Pipeline completed: ${metadata.total_sources_found} sources from ${metadata.stages_completed.length} stages`);
     } catch (error) {
       console.warn('Research pipeline failed, falling back to single-shot:', error);
       // Fall back to legacy single-shot approach
@@ -245,10 +243,6 @@ export const generateResearchV2 = async (
   const singleAngle = isAllAngles ? 'margin_analytics' : angle;
   const angleInfo = getResearchAngle(singleAngle);
 
-  console.log(`Starting V2 research for ${company}:`);
-  console.log(`  Mode: ${isAllAngles ? 'ALL ANGLES (Comprehensive)' : angleInfo?.name || angle}`);
-  console.log(`  Depth: ${depth}`);
-
   // Execute V2 research pipeline
   let pipelineResult;
   let v2Result;
@@ -338,11 +332,6 @@ Please ensure your analysis:
     ...pipelineResult.metadata,
     timestamp: Date.now(),
   };
-
-  console.log(`V2 research completed for ${company}:`);
-  console.log(`  Sources: ${pipelineResult.metadata.total_sources_found}`);
-  console.log(`  Hypotheses: ${v2Result.matchedHypotheses.length}`);
-  console.log(`  Confidence: ${v2Result.confidenceBreakdown.overall.toFixed(2)}`);
 
   // For 'all' angles, store as undefined in the session (will display as "All Angles")
   const storedAngle = isAllAngles ? undefined : singleAngle;
@@ -474,12 +463,7 @@ export const generateEmail = async (
 
   const prompt = interpolateTemplate(template.content, templateVars);
 
-  console.log('Email generation - Template vars:', templateVars);
-  console.log('Email generation - Prompt:', prompt.substring(0, 500) + '...');
-
   const result = await provider.generateEmail(prompt);
-
-  console.log('Email generation - Result:', result);
 
   return {
     data: result.data,
@@ -608,12 +592,7 @@ IMPORTANT PERSONALIZATION REQUIREMENTS:
 4. Make sure the subject line feels personalized for ${contactName}
 `;
 
-  console.log('Email generation for contact:', contact.name);
-  console.log('Email generation - Prompt:', prompt.substring(0, 500) + '...');
-
   const result = await provider.generateEmail(prompt);
-
-  console.log('Email generation - Result:', result);
 
   return {
     data: result.data,

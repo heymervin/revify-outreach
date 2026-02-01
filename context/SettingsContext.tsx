@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useRef, useMemo, type ReactNode } from 'react';
 import {
   SettingsState,
   APIKeysConfig,
@@ -189,7 +189,7 @@ function calculateCost(provider: AIProvider, usage: TokenUsage): number {
   return inputCost + outputCost;
 }
 
-export const SettingsProvider = ({ children }: { children: React.ReactNode }) => {
+export const SettingsProvider = ({ children }: { children: ReactNode }) => {
   const [settings, setSettings] = useState<SettingsState>(() => {
     const defaults = initializeDefaults();
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -224,12 +224,23 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
     return [];
   });
 
+  const settingsTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const usageTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+    clearTimeout(settingsTimer.current);
+    settingsTimer.current = setTimeout(() => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+    }, 500);
+    return () => clearTimeout(settingsTimer.current);
   }, [settings]);
 
   useEffect(() => {
-    localStorage.setItem(USAGE_STORAGE_KEY, JSON.stringify(usageRecords));
+    clearTimeout(usageTimer.current);
+    usageTimer.current = setTimeout(() => {
+      localStorage.setItem(USAGE_STORAGE_KEY, JSON.stringify(usageRecords));
+    }, 500);
+    return () => clearTimeout(usageTimer.current);
   }, [usageRecords]);
 
   const updateApiKey = useCallback((provider: keyof APIKeysConfig, key: string) => {
@@ -372,7 +383,7 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
     setUsageRecords(prev => [newRecord, ...prev]);
   }, []);
 
-  const getUsageStats = useCallback((): UsageStats => {
+  const usageStats = useMemo((): UsageStats => {
     const stats: UsageStats = {
       records: usageRecords,
       totalInputTokens: 0,
@@ -390,6 +401,8 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
 
     return stats;
   }, [usageRecords]);
+
+  const getUsageStats = useCallback((): UsageStats => usageStats, [usageStats]);
 
   const clearUsageHistory = useCallback(() => {
     setUsageRecords([]);

@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  /* Revology brand: warm neutrals from revologyanalytics.com */
+  --color-brand-50: #f7f5f2;
+  --color-brand-100: #f2f0eb;
+  --color-brand-200: #e5e1d8;
+  --color-brand-300: #c9c3b5;
+  --color-brand-400: #a39d8f;
+  --color-brand-500: #7a7468;
+  --color-brand-600: #5c5649;
+  --color-brand-700: #3d3830;
+  --color-brand-800: #2a2520;
+  --color-brand-900: #1a1714;
+}

@@ -249,8 +249,6 @@ function normalizeResearchConfidence(data: unknown): ResearchConfidence {
 export function normalizeResearchOutput(data: unknown): Omit<RichResearchOutput, 'metadata'> {
   const d = isObject(data) ? data : {};
 
-  console.log('[Validator] Normalizing research output...');
-
   const normalized = {
     company_profile: normalizeCompanyProfile(d.company_profile),
     recent_signals: normalizeRecentSignals(d.recent_signals),
@@ -259,12 +257,6 @@ export function normalizeResearchOutput(data: unknown): Omit<RichResearchOutput,
     outreach_priority: normalizeOutreachPriority(d.outreach_priority),
     research_confidence: normalizeResearchConfidence(d.research_confidence),
   };
-
-  console.log('[Validator] Normalization complete:', {
-    signals: normalized.recent_signals.length,
-    hypotheses: normalized.pain_point_hypotheses.length,
-    gaps: normalized.research_confidence.gaps.length,
-  });
 
   return normalized;
 }
@@ -285,8 +277,6 @@ export function normalizeResearchOutputV2(
 ): Omit<RichResearchOutputV2, 'metadata'> {
   // First, normalize the base output
   const baseNormalized = normalizeResearchOutput(data);
-
-  console.log('[Validator] Enhancing with V2 data...');
 
   // Merge V2 confidence into research_confidence
   const enhancedConfidence: ResearchConfidence = {
@@ -326,14 +316,6 @@ export function normalizeResearchOutputV2(
     confidence_breakdown: v2Result.confidenceBreakdown,
     research_gaps_actionable: v2Result.researchGaps,
   };
-
-  console.log('[Validator] V2 normalization complete:', {
-    signals: v2Normalized.recent_signals.length,
-    aiHypotheses: baseNormalized.pain_point_hypotheses.length,
-    matchedHypotheses: v2Result.matchedHypotheses.length,
-    mergedHypotheses: v2Normalized.pain_point_hypotheses.length,
-    confidenceScore: enhancedConfidence.overall_score,
-  });
 
   return v2Normalized;
 }
