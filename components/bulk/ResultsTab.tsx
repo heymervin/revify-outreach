@@ -3,11 +3,41 @@ import {
   XCircle,
   DollarSign,
   Clock,
+  Download,
+  Cloud,
 } from 'lucide-react';
 import { BulkResearchSession, BulkResearchResult, formatDuration, formatCost } from '../../types/bulkResearchTypes';
 
 interface ResultsTabProps {
   session: BulkResearchSession | null;
+}
+
+function exportToCSV(session: BulkResearchSession) {
+  const results: BulkResearchResult[] = Object.values(session.results);
+
+  const headers = ['Company', 'Status', 'Cost', 'Time (s)', 'Saved to GHL', 'Industry', 'Priority', 'Sources'];
+  const rows = results.map(r => {
+    const output = r.researchOutput;
+    return [
+      `"${(r.companyName || '').replace(/"/g, '""')}"`,
+      r.success ? 'Success' : 'Failed',
+      r.cost.toFixed(2),
+      Math.round((r.executionTimeMs || 0) / 1000).toString(),
+      r.savedToGhl ? 'Yes' : 'No',
+      `"${(output?.company_profile?.industry || '').replace(/"/g, '""')}"`,
+      output?.outreach_priority?.urgency || '',
+      output?.metadata?.sources_cited?.toString() || '',
+    ];
+  });
+
+  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `bulk-research-${session.name.replace(/\s+/g, '-').toLowerCase()}-${new Date().toISOString().slice(0, 10)}.csv`;
+  link.click();
+  URL.revokeObjectURL(url);
 }
 
 const ResultsTab = ({ session }: ResultsTabProps) => {
@@ -27,8 +57,17 @@ const ResultsTab = ({ session }: ResultsTabProps) => {
     <div className="space-y-6">
       {/* Summary */}
       <div className="bg-white rounded-lg border border-slate-200 p-6">
-        <h3 className="text-lg font-semibold text-slate-900 mb-4">Results Summary</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold text-slate-900">Results Summary</h3>
+          <button
+            onClick={() => exportToCSV(session)}
+            className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 flex items-center text-sm font-medium"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Export CSV
+          </button>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           <div className="bg-green-50 rounded-lg p-4">
             <div className="flex items-center">
               <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
@@ -57,41 +96,50 @@ const ResultsTab = ({ session }: ResultsTabProps) => {
             </div>
             <div className="text-2xl font-bold text-slate-900 mt-1">{formatDuration(session.totalElapsedMs)}</div>
           </div>
+          <div className="bg-slate-50 rounded-lg p-4">
+            <div className="flex items-center">
+              <Cloud className="w-5 h-5 text-slate-600 mr-2" />
+              <span className="text-sm text-slate-700">Saved to GHL</span>
+            </div>
+            <div className="text-2xl font-bold text-slate-900 mt-1">{session.savedToGhlCount}</div>
+          </div>
         </div>
       </div>
 
       {/* Results List */}
       <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
-        <div className="max-h-96 overflow-y-auto">
+        <div className="max-h-[32rem] overflow-y-auto">
           <table className="w-full">
             <thead className="bg-slate-50 sticky top-0">
               <tr>
+                <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase">#</th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase">Company</th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase">Status</th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase">Cost</th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase">Time</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase">Saved to GHL</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase">GHL</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200">
-              {results.map(result => (
+              {results.map((result, idx) => (
                 <tr key={result.companyId} className="hover:bg-slate-50">
-                  <td className="px-4 py-3 font-medium text-slate-900">{result.companyName}</td>
+                  <td className="px-4 py-3 text-sm text-slate-400">{idx + 1}</td>
+                  <td className="px-4 py-3 font-medium text-slate-900 text-sm">{result.companyName}</td>
                   <td className="px-4 py-3">
                     {result.success ? (
-                      <span className="inline-flex items-center px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">
+                      <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium bg-green-100 text-green-700 rounded-full">
                         <CheckCircle className="w-3 h-3 mr-1" />
                         Success
                       </span>
                     ) : (
-                      <span className="inline-flex items-center px-2 py-1 text-xs font-medium bg-red-100 text-red-700 rounded-full">
+                      <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium bg-red-100 text-red-700 rounded-full">
                         <XCircle className="w-3 h-3 mr-1" />
                         Failed
                       </span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-slate-600">{formatCost(result.cost)}</td>
-                  <td className="px-4 py-3 text-slate-600">{formatDuration(result.executionTimeMs)}</td>
+                  <td className="px-4 py-3 text-sm text-slate-600">{formatCost(result.cost)}</td>
+                  <td className="px-4 py-3 text-sm text-slate-600">{formatDuration(result.executionTimeMs)}</td>
                   <td className="px-4 py-3">
                     {result.savedToGhl ? (
                       <CheckCircle className="w-4 h-4 text-green-500" aria-label="Saved" />

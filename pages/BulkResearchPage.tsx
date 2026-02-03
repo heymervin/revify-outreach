@@ -100,14 +100,18 @@ const BulkResearchPage = () => {
     }
   }, [hasGHLConfig, loadCompanies]);
 
-  useEffect(() => {
+  const buildFilters = useCallback((): BulkFilterConfig => {
     const filters: BulkFilterConfig = {};
     if (minScore && !isNaN(parseInt(minScore))) filters.minScore = parseInt(minScore);
     if (selectedIndustries.length > 0) filters.industries = selectedIndustries;
     if (hasWebsiteOnly) filters.hasWebsite = true;
     if (noExistingResearch) filters.hasExistingResearch = false;
-    setFilteredCompanies(filterCompanies(companies, filters));
-  }, [companies, minScore, selectedIndustries, hasWebsiteOnly, noExistingResearch]);
+    return filters;
+  }, [minScore, selectedIndustries, hasWebsiteOnly, noExistingResearch]);
+
+  useEffect(() => {
+    setFilteredCompanies(filterCompanies(companies, buildFilters()));
+  }, [companies, buildFilters]);
 
   const startResearch = async () => {
     if (!settings.apiKeys.openai || !settings.apiKeys.tavily) {
@@ -124,12 +128,7 @@ const BulkResearchPage = () => {
       return;
     }
 
-    const filters: BulkFilterConfig = {};
-    if (minScore && !isNaN(parseInt(minScore))) filters.minScore = parseInt(minScore);
-    if (selectedIndustries.length > 0) filters.industries = selectedIndustries;
-    if (hasWebsiteOnly) filters.hasWebsite = true;
-    if (noExistingResearch) filters.hasExistingResearch = false;
-
+    const filters = buildFilters();
     const costEstimate = calculateBulkCostEstimate(selected.length, researchDepth);
     const session = createEmptyBulkSession(`Bulk Research ${new Date().toLocaleDateString()}`);
     session.filters = filters;
@@ -184,7 +183,7 @@ const BulkResearchPage = () => {
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-slate-900">Bulk Research</h1>
-          <p className="text-slate-500 mt-1">Process 100-1,000 companies at once.</p>
+          <p className="text-slate-500 mt-1">Process companies in bulk with filtering, research, and email generation.</p>
         </div>
         <div className="bg-amber-50 border border-amber-200 rounded-lg p-6" role="alert">
           <div className="flex items-start">
@@ -205,7 +204,7 @@ const BulkResearchPage = () => {
     <div className="max-w-7xl mx-auto">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-slate-900">Bulk Research</h1>
-        <p className="text-slate-500 mt-1">Process 100-1,000 companies at once with filtering and selection.</p>
+        <p className="text-slate-500 mt-1">Process companies in bulk with filtering, research, and email generation.</p>
       </div>
 
       {/* Tabs */}

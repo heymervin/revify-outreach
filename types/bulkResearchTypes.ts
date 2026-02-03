@@ -1,5 +1,5 @@
 // Bulk Research Types
-// For processing 100-1,000 companies at a time
+// For processing companies in bulk with filtering, progress tracking, and pause/resume
 
 import { ResearchOutputV3_1 } from './researchTypesV3_1';
 import { GeneratedEmail, GHLContactInfo } from '../types';
@@ -12,9 +12,13 @@ export type BulkSelectionStrategy =
   | 'first_25'
   | 'first_50'
   | 'first_100'
+  | 'first_250'
+  | 'first_500'
+  | 'all_filtered'
   | 'top_10_by_score'
   | 'top_25_by_score'
   | 'top_50_by_score'
+  | 'top_100_by_score'
   | 'custom';
 
 // ===== Filter Configuration =====
@@ -192,14 +196,18 @@ export const BULK_FILTER_PRESETS: Record<string, BulkFilterConfig> = {
 // ===== Selection Strategy Labels =====
 
 export const SELECTION_STRATEGY_LABELS: Record<BulkSelectionStrategy, string> = {
-  'first_5': 'First 5 companies',
-  'first_10': 'First 10 companies',
-  'first_25': 'First 25 companies',
-  'first_50': 'First 50 companies',
-  'first_100': 'First 100 companies',
+  'first_5': 'First 5',
+  'first_10': 'First 10',
+  'first_25': 'First 25',
+  'first_50': 'First 50',
+  'first_100': 'First 100',
+  'first_250': 'First 250',
+  'first_500': 'First 500',
+  'all_filtered': 'All filtered',
   'top_10_by_score': 'Top 10 by score',
   'top_25_by_score': 'Top 25 by score',
   'top_50_by_score': 'Top 50 by score',
+  'top_100_by_score': 'Top 100 by score',
   'custom': 'Custom selection',
 };
 
