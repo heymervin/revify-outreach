@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(/tmp/gh/gh_2.63.2_macOS_arm64/bin/gh auth status:*)",
+      "Bash(ls:*)",
+      "Bash(wc:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm run build:*)",
+      "WebFetch(domain:www.revologyanalytics.com)",
+      "Bash(npx vite build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(vercel ls:*)",
+      "Bash(vercel --version)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(git -C /Users/mervindecastro/AG/revify-outreach log --oneline -20)",
+      "Bash(npx tsx:*)",
+      "mcp__ide__getDiagnostics"
+    ]
+  }
+}

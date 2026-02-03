@@ -1,0 +1,5862 @@
+[
+  {
+    "name": "DowDuPont",
+    "industry": "Manufacturing",
+    "website": "https://www.dupont.com"
+  },
+  {
+    "name": "Renault",
+    "industry": "Manufacturing",
+    "website": "https://www.renault.com"
+  },
+  {
+    "name": "United Technologies",
+    "industry": "Manufacturing",
+    "website": "https://www.utc.com"
+  },
+  {
+    "name": "Lockheed Martin",
+    "industry": "Manufacturing",
+    "website": "https://www.lockheedmartin.com"
+  },
+  {
+    "name": "Hewlett-Packard",
+    "industry": "Manufacturing",
+    "website": "https://www.hp.com"
+  },
+  {
+    "name": "Unilever",
+    "industry": "Manufacturing",
+    "website": "https://www.unilever.com"
+  },
+  {
+    "name": "China National Building Material Group",
+    "industry": "Manufacturing",
+    "website": "http://www.cnbm.com.cn"
+  },
+  {
+    "name": "POSCO",
+    "industry": "Manufacturing",
+    "website": "https://www.posco.com"
+  },
+  {
+    "name": "Nippon Steel",
+    "industry": "Manufacturing",
+    "website": "https://www.nipponsteel.com"
+  },
+  {
+    "name": "Caterpillar",
+    "industry": "Manufacturing",
+    "website": "https://www.caterpillar.com"
+  },
+  {
+    "name": "Anheuser-Busch InBev",
+    "industry": "Manufacturing",
+    "website": "https://www.ab-inbev.com"
+  },
+  {
+    "name": "Ford",
+    "industry": "Manufacturing",
+    "website": "https://www.ford.com"
+  },
+  {
+    "name": "Honda",
+    "industry": "Manufacturing",
+    "website": "https://www.honda.com"
+  },
+  {
+    "name": "General Motors",
+    "industry": "Manufacturing",
+    "website": "https://www.gm.com"
+  },
+  {
+    "name": "3M",
+    "industry": "Manufacturing",
+    "website": "https://www.3m.com"
+  },
+  {
+    "name": "Eastman Kodak Company",
+    "industry": "Manufacturing",
+    "website": "https://www.kodak.com"
+  },
+  {
+    "name": "Yamaha Motor Corporation, USA",
+    "industry": "Manufacturing",
+    "website": "https://www.yamahamotorsports.com"
+  },
+  {
+    "name": "Rust-Oleum Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.rustoleum.com"
+  },
+  {
+    "name": "Timex Group",
+    "industry": "Manufacturing",
+    "website": "https://www.timex.com"
+  },
+  {
+    "name": "Post Consumer Brands",
+    "industry": "Manufacturing",
+    "website": "https://www.postconsumerbrands.com"
+  },
+  {
+    "name": "Hill's Pet Nutrition",
+    "industry": "Manufacturing",
+    "website": "https://www.hillspet.com"
+  },
+  {
+    "name": "Juul Labs",
+    "industry": "Manufacturing",
+    "website": "https://www.juul.com"
+  },
+  {
+    "name": "BARK",
+    "industry": "Manufacturing",
+    "website": "https://www.barkbox.com"
+  },
+  {
+    "name": "SRAM",
+    "industry": "Manufacturing",
+    "website": "https://www.sram.com"
+  },
+  {
+    "name": "Reynolds American Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.reynoldsamerican.com"
+  },
+  {
+    "name": "Mack Molding",
+    "industry": "Manufacturing",
+    "website": "https://www.mackmolding.com"
+  },
+  {
+    "name": "General Electric",
+    "industry": "Manufacturing",
+    "website": "https://www.ge.com"
+  },
+  {
+    "name": "Caterpillar Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.caterpillar.com"
+  },
+  {
+    "name": "RTX Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.rtx.com"
+  },
+  {
+    "name": "The Boeing Company",
+    "industry": "Manufacturing",
+    "website": "https://www.boeing.com"
+  },
+  {
+    "name": "Honeywell International Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.honeywell.com"
+  },
+  {
+    "name": "Deere & Company",
+    "industry": "Manufacturing",
+    "website": "https://www.deere.com"
+  },
+  {
+    "name": "Illinois Tool Works",
+    "industry": "Manufacturing",
+    "website": "https://www.itw.com"
+  },
+  {
+    "name": "Emerson",
+    "industry": "Manufacturing",
+    "website": "https://www.emerson.com"
+  },
+  {
+    "name": "Cummins",
+    "industry": "Manufacturing",
+    "website": "https://www.cummins.com"
+  },
+  {
+    "name": "Atlas Copco",
+    "industry": "Manufacturing",
+    "website": "https://www.atlascopco.com"
+  },
+  {
+    "name": "General Dynamics",
+    "industry": "Manufacturing",
+    "website": "https://www.gd.com"
+  },
+  {
+    "name": "Parker-Hannifin",
+    "industry": "Manufacturing",
+    "website": "https://www.parker.com"
+  },
+  {
+    "name": "Alcoa",
+    "industry": "Manufacturing",
+    "website": "https://www.alcoa.com"
+  },
+  {
+    "name": "BorgWarner",
+    "industry": "Manufacturing",
+    "website": "https://www.borgwarner.com"
+  },
+  {
+    "name": "Ball Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.ball.com"
+  },
+  {
+    "name": "Steel Dynamics",
+    "industry": "Manufacturing",
+    "website": "https://www.steeldynamics.com"
+  },
+  {
+    "name": "Eastman Chemical Company",
+    "industry": "Manufacturing",
+    "website": "https://www.eastman.com"
+  },
+  {
+    "name": "Midea",
+    "industry": "Manufacturing",
+    "website": "http://www.midea.com"
+  },
+  {
+    "name": "Foxconn",
+    "industry": "Manufacturing",
+    "website": "https://www.foxconn.com"
+  },
+  {
+    "name": "Analog Devices",
+    "industry": "Manufacturing",
+    "website": "https://www.analog.com"
+  },
+  {
+    "name": "Lockheed Martin Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.lockheedmartin.com"
+  },
+  {
+    "name": "Rolls-Royce Holdings",
+    "industry": "Manufacturing",
+    "website": "https://www.rolls-royce.com"
+  },
+  {
+    "name": "Tesla, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.tesla.com"
+  },
+  {
+    "name": "Taiwan Semiconductor Manufacturing Company",
+    "industry": "Manufacturing",
+    "website": "https://www.tsmc.com"
+  },
+  {
+    "name": "Apple Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.apple.com"
+  },
+  {
+    "name": "Volkswagen Group",
+    "industry": "Manufacturing",
+    "website": "https://www.volkswagen.com"
+  },
+  {
+    "name": "Toyota Motor Corp.",
+    "industry": "Manufacturing",
+    "website": "https://www.toyota-global.com"
+  },
+  {
+    "name": "Hon Hai Precision Industry (Foxconn)",
+    "industry": "Manufacturing",
+    "website": "https://www.foxconn.com"
+  },
+  {
+    "name": "Samsung Electronics",
+    "industry": "Manufacturing",
+    "website": "https://www.samsung.com"
+  },
+  {
+    "name": "Ford Motor Company",
+    "industry": "Manufacturing",
+    "website": "https://www.ford.com"
+  },
+  {
+    "name": "Stellantis N.V.",
+    "industry": "Manufacturing",
+    "website": "https://www.stellantis.com"
+  },
+  {
+    "name": "Cargill, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.cargill.com"
+  },
+  {
+    "name": "Mercedes-Benz Group",
+    "industry": "Manufacturing",
+    "website": "https://www.mercedes-benz.com"
+  },
+  {
+    "name": "BMW Group",
+    "industry": "Manufacturing",
+    "website": "https://www.bmw.com"
+  },
+  {
+    "name": "Honda Motor Co.",
+    "industry": "Manufacturing",
+    "website": "https://www.honda.com"
+  },
+  {
+    "name": "Nvidia",
+    "industry": "Manufacturing",
+    "website": "https://www.nvidia.com"
+  },
+  {
+    "name": "Hyundai Motor Co.",
+    "industry": "Manufacturing",
+    "website": "https://www.hyundai.com"
+  },
+  {
+    "name": "Boeing",
+    "industry": "Manufacturing",
+    "website": "https://www.boeing.com"
+  },
+  {
+    "name": "Intel Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.intel.com"
+  },
+  {
+    "name": "GE Aerospace",
+    "industry": "Manufacturing",
+    "website": "https://www.ge.com/aerospace"
+  },
+  {
+    "name": "Toyota",
+    "industry": "Manufacturing",
+    "website": "https://www.toyota.com"
+  },
+  {
+    "name": "Volkswagen",
+    "industry": "Manufacturing",
+    "website": "https://www.volkswagen.com"
+  },
+  {
+    "name": "Eastman Kodak",
+    "industry": "Manufacturing",
+    "website": "https://www.kodak.com"
+  },
+  {
+    "name": "Yamaha Motor Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.yamahamotorsports.com"
+  },
+  {
+    "name": "Saudi Aramco",
+    "industry": "Manufacturing",
+    "website": "https://www.aramco.com"
+  },
+  {
+    "name": "Sinopec Group",
+    "industry": "Manufacturing",
+    "website": "http://www.sinopec.com"
+  },
+  {
+    "name": "China National Petroleum",
+    "industry": "Manufacturing",
+    "website": "http://www.cnpc.com.cn"
+  },
+  {
+    "name": "Lockheed Martin Aeronautics Co.",
+    "industry": "Manufacturing",
+    "website": "https://www.lockheedmartin.com"
+  },
+  {
+    "name": "Boeing Co.",
+    "industry": "Manufacturing",
+    "website": "https://www.boeing.com"
+  },
+  {
+    "name": "Intel Corp.",
+    "industry": "Manufacturing",
+    "website": "https://www.intel.com"
+  },
+  {
+    "name": "3M Co.",
+    "industry": "Manufacturing",
+    "website": "https://www.3m.com"
+  },
+  {
+    "name": "Siemens",
+    "industry": "Manufacturing",
+    "website": "https://www.siemens.com"
+  },
+  {
+    "name": "Honeywell",
+    "industry": "Manufacturing",
+    "website": "https://www.honeywell.com"
+  },
+  {
+    "name": "ABB",
+    "industry": "Manufacturing",
+    "website": "https://global.abb"
+  },
+  {
+    "name": "Bosch",
+    "industry": "Manufacturing",
+    "website": "https://www.bosch.com"
+  },
+  {
+    "name": "Johnson & Johnson",
+    "industry": "Manufacturing",
+    "website": "https://www.jnj.com"
+  },
+  {
+    "name": "Dell Technologies",
+    "industry": "Manufacturing",
+    "website": "https://www.dell.com"
+  },
+  {
+    "name": "Procter & Gamble",
+    "industry": "Manufacturing",
+    "website": "https://www.pg.com"
+  },
+  {
+    "name": "Tesla",
+    "industry": "Manufacturing",
+    "website": "https://www.tesla.com"
+  },
+  {
+    "name": "Hyundai Motor Company",
+    "industry": "Manufacturing",
+    "website": "https://www.hyundai.com"
+  },
+  {
+    "name": "Nissan Motor",
+    "industry": "Manufacturing",
+    "website": "https://www.nissan-global.com"
+  },
+  {
+    "name": "PepsiCo, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.pepsico.com"
+  },
+  {
+    "name": "Airbus",
+    "industry": "Manufacturing",
+    "website": "https://www.airbus.com"
+  },
+  {
+    "name": "Moog Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.moog.com"
+  },
+  {
+    "name": "BMW Manufacturing Co., LLC",
+    "industry": "Manufacturing",
+    "website": "https://www.bmwusfactory.com"
+  },
+  {
+    "name": "Eli Lilly & Co.",
+    "industry": "Manufacturing",
+    "website": "https://www.lilly.com"
+  },
+  {
+    "name": "Micron Technology, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.micron.com"
+  },
+  {
+    "name": "Northrop Grumman Aerospace International, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.northropgrumman.com"
+  },
+  {
+    "name": "Stellantis",
+    "industry": "Manufacturing",
+    "website": "https://www.stellantis.com"
+  },
+  {
+    "name": "Dell EMC",
+    "industry": "Manufacturing",
+    "website": "https://www.dell.com/en-us/dell-emc"
+  },
+  {
+    "name": "Stryker",
+    "industry": "Manufacturing",
+    "website": "https://www.stryker.com"
+  },
+  {
+    "name": "Graco Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.graco.com"
+  },
+  {
+    "name": "Western Global",
+    "industry": "Manufacturing",
+    "website": "https://www.westernglobal.com"
+  },
+  {
+    "name": "Vita Coco",
+    "industry": "Manufacturing",
+    "website": "https://www.thevitacoco.com"
+  },
+  {
+    "name": "W. L. Gore & Associates, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.gore.com"
+  },
+  {
+    "name": "K-Rain Manufacturing Corp.",
+    "industry": "Manufacturing",
+    "website": "https://www.krain.com"
+  },
+  {
+    "name": "Enovation Controls",
+    "industry": "Manufacturing",
+    "website": "https://www.enovationcontrols.com"
+  },
+  {
+    "name": "Nova Measuring Instruments",
+    "industry": "Manufacturing",
+    "website": "https://www.novameasuring.com"
+  },
+  {
+    "name": "American Omni Trading",
+    "industry": "Manufacturing",
+    "website": "https://www.aot.com"
+  },
+  {
+    "name": "MIRATECH",
+    "industry": "Manufacturing",
+    "website": "https://www.miratechcorp.com"
+  },
+  {
+    "name": "Arburg",
+    "industry": "Manufacturing",
+    "website": "https://www.arburg.com"
+  },
+  {
+    "name": "Mazak",
+    "industry": "Manufacturing",
+    "website": "https://www.mazakusa.com"
+  },
+  {
+    "name": "Markforged",
+    "industry": "Manufacturing",
+    "website": "https://markforged.com"
+  },
+  {
+    "name": "Biesse",
+    "industry": "Manufacturing",
+    "website": "https://www.biesse.com"
+  },
+  {
+    "name": "Grefortec",
+    "industry": "Manufacturing",
+    "website": "https://www.grefortec.com"
+  },
+  {
+    "name": "RoboJob USA",
+    "industry": "Manufacturing",
+    "website": "https://www.robojob.com"
+  },
+  {
+    "name": "FlyZipline",
+    "industry": "Manufacturing",
+    "website": "https://flyzipline.com"
+  },
+  {
+    "name": "Chroma USA",
+    "industry": "Manufacturing",
+    "website": "https://www.chromausa.com"
+  },
+  {
+    "name": "Axiom Space",
+    "industry": "Manufacturing",
+    "website": "https://axiomspace.com"
+  },
+  {
+    "name": "Rockwell Automation",
+    "industry": "Manufacturing",
+    "website": "https://www.rockwellautomation.com"
+  },
+  {
+    "name": "Hoyer Motors",
+    "industry": "Manufacturing",
+    "website": "https://www.hoyermotors.com"
+  },
+  {
+    "name": "Doosan Bobcat",
+    "industry": "Manufacturing",
+    "website": "https://www.doosanbobcat.com"
+  },
+  {
+    "name": "Desktop Metal",
+    "industry": "Manufacturing",
+    "website": "https://www.desktopmetal.com"
+  },
+  {
+    "name": "ZEON Chemicals",
+    "industry": "Manufacturing",
+    "website": "https://www.zeonchemicals.com"
+  },
+  {
+    "name": "Spray Equipment & Service Center",
+    "industry": "Manufacturing",
+    "website": "https://sprayequipment.com"
+  },
+  {
+    "name": "Greenbrier",
+    "industry": "Manufacturing",
+    "website": "https://gbrx.com"
+  },
+  {
+    "name": "Sharretts Plating",
+    "industry": "Manufacturing",
+    "website": "https://www.sharrettsplating.com"
+  },
+  {
+    "name": "Fairlawn Tool Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.fairlawntool.com"
+  },
+  {
+    "name": "Siemens Energy",
+    "industry": "Manufacturing",
+    "website": "https://www.siemens-energy.com"
+  },
+  {
+    "name": "Kongskilde Industries",
+    "industry": "Manufacturing",
+    "website": "https://www.kongskilde.com"
+  },
+  {
+    "name": "Pelican",
+    "industry": "Manufacturing",
+    "website": "https://www.pelican.com"
+  },
+  {
+    "name": "Independent Machine Company",
+    "industry": "Manufacturing",
+    "website": "https://www.independentmachine.com"
+  },
+  {
+    "name": "Methods Machine Tools, Inc",
+    "industry": "Manufacturing",
+    "website": "https://www.methodsmachine.com"
+  },
+  {
+    "name": "Northrop Grumman",
+    "industry": "Manufacturing",
+    "website": "https://www.northropgrumman.com"
+  },
+  {
+    "name": "Baker Hughes",
+    "industry": "Manufacturing",
+    "website": "https://www.bakerhughes.com"
+  },
+  {
+    "name": "GE Vernova",
+    "industry": "Manufacturing",
+    "website": "https://www.ge.com/vernova"
+  },
+  {
+    "name": "Collins Aerospace",
+    "industry": "Manufacturing",
+    "website": "https://www.rtx.com/collinsaerospace"
+  },
+  {
+    "name": "Aerojet Rocketdyne",
+    "industry": "Manufacturing",
+    "website": "https://www.aerojetrocketdyne.com"
+  },
+  {
+    "name": "Howmet Aerospace",
+    "industry": "Manufacturing",
+    "website": "https://www.howmet.com"
+  },
+  {
+    "name": "Airbus Group",
+    "industry": "Manufacturing",
+    "website": "https://www.airbus.com"
+  },
+  {
+    "name": "Astra",
+    "industry": "Manufacturing",
+    "website": "https://astra.com"
+  },
+  {
+    "name": "Aurora Flight Sciences",
+    "industry": "Manufacturing",
+    "website": "https://www.aurora.aero"
+  },
+  {
+    "name": "Aptera Motors",
+    "industry": "Manufacturing",
+    "website": "https://www.aptera.us"
+  },
+  {
+    "name": "Dodge",
+    "industry": "Manufacturing",
+    "website": "https://www.dodge.com"
+  },
+  {
+    "name": "Chrysler",
+    "industry": "Manufacturing",
+    "website": "https://www.chrysler.com"
+  },
+  {
+    "name": "Toyota Motor Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.toyota.com"
+  },
+  {
+    "name": "Honda Motor Company",
+    "industry": "Manufacturing",
+    "website": "https://www.honda.com"
+  },
+  {
+    "name": "Nissan Motor Company",
+    "industry": "Manufacturing",
+    "website": "https://www.nissan-global.com"
+  },
+  {
+    "name": "Mercedes-Benz Group AG",
+    "industry": "Manufacturing",
+    "website": "https://www.mercedes-benz.com"
+  },
+  {
+    "name": "Dow Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.dow.com"
+  },
+  {
+    "name": "LyondellBasell Industries N.V.",
+    "industry": "Manufacturing",
+    "website": "https://www.lyondellbasell.com"
+  },
+  {
+    "name": "Sherwin-Williams Co.",
+    "industry": "Manufacturing",
+    "website": "https://www.sherwin-williams.com"
+  },
+  {
+    "name": "PPG Industries Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.ppg.com"
+  },
+  {
+    "name": "DuPont de Nemours Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.dupont.com"
+  },
+  {
+    "name": "Celanese Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.celanese.com"
+  },
+  {
+    "name": "Angus Chemical Company",
+    "industry": "Manufacturing",
+    "website": "https://www.angus.com"
+  },
+  {
+    "name": "Huntsman Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.huntsman.com"
+  },
+  {
+    "name": "Westlake Chemical Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.westlake.com"
+  },
+  {
+    "name": "BASF Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.basf.com"
+  },
+  {
+    "name": "Albemarle Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.albemarle.com"
+  },
+  {
+    "name": "Chemours",
+    "industry": "Manufacturing",
+    "website": "https://www.chemours.com"
+  },
+  {
+    "name": "SABIC",
+    "industry": "Manufacturing",
+    "website": "https://www.sabic.com"
+  },
+  {
+    "name": "Chevron Phillips Chemical",
+    "industry": "Manufacturing",
+    "website": "https://www.cpchem.com"
+  },
+  {
+    "name": "Lyondell Chemical Company",
+    "industry": "Manufacturing",
+    "website": "https://www.lyondellbasell.com"
+  },
+  {
+    "name": "Ecolab Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.ecolab.com"
+  },
+  {
+    "name": "Ingevity Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.ingevity.com"
+  },
+  {
+    "name": "Air Products and Chemicals Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.airproducts.com"
+  },
+  {
+    "name": "PepsiCo",
+    "industry": "Manufacturing",
+    "website": "https://www.pepsico.com"
+  },
+  {
+    "name": "Tyson Foods",
+    "industry": "Manufacturing",
+    "website": "https://www.tysonfoods.com"
+  },
+  {
+    "name": "General Mills",
+    "industry": "Manufacturing",
+    "website": "https://www.generalmills.com"
+  },
+  {
+    "name": "Kraft Heinz",
+    "industry": "Manufacturing",
+    "website": "https://www.kraftheinzcompany.com"
+  },
+  {
+    "name": "Mars, Incorporated",
+    "industry": "Manufacturing",
+    "website": "https://www.mars.com"
+  },
+  {
+    "name": "Cargill",
+    "industry": "Manufacturing",
+    "website": "https://www.cargill.com"
+  },
+  {
+    "name": "Conagra Brands",
+    "industry": "Manufacturing",
+    "website": "https://www.conagrabrands.com"
+  },
+  {
+    "name": "Hormel Foods",
+    "industry": "Manufacturing",
+    "website": "https://www.hormelfoods.com"
+  },
+  {
+    "name": "JBS USA",
+    "industry": "Manufacturing",
+    "website": "https://www.jbssa.com"
+  },
+  {
+    "name": "Mondelez International",
+    "industry": "Manufacturing",
+    "website": "https://www.mondelezinternational.com"
+  },
+  {
+    "name": "Nestlé",
+    "industry": "Manufacturing",
+    "website": "https://www.nestle.com"
+  },
+  {
+    "name": "Smithfield Foods",
+    "industry": "Manufacturing",
+    "website": "https://www.smithfieldfoods.com"
+  },
+  {
+    "name": "Bimbo Bakeries USA",
+    "industry": "Manufacturing",
+    "website": "https://www.bimbobakeriesusa.com"
+  },
+  {
+    "name": "The Hershey Company",
+    "industry": "Manufacturing",
+    "website": "https://www.thehersheycompany.com"
+  },
+  {
+    "name": "Lamb Weston",
+    "industry": "Manufacturing",
+    "website": "https://www.lambweston.com"
+  },
+  {
+    "name": "Apple",
+    "industry": "Manufacturing",
+    "website": "https://www.apple.com"
+  },
+  {
+    "name": "Cisco Systems",
+    "industry": "Manufacturing",
+    "website": "https://www.cisco.com"
+  },
+  {
+    "name": "Intel",
+    "industry": "Manufacturing",
+    "website": "https://www.intel.com"
+  },
+  {
+    "name": "Qualcomm",
+    "industry": "Manufacturing",
+    "website": "https://www.qualcomm.com"
+  },
+  {
+    "name": "AMD",
+    "industry": "Manufacturing",
+    "website": "https://www.amd.com"
+  },
+  {
+    "name": "Flex Ltd.",
+    "industry": "Manufacturing",
+    "website": "https://flex.com"
+  },
+  {
+    "name": "Jabil Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.jabil.com"
+  },
+  {
+    "name": "Sanmina Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.sanmina.com"
+  },
+  {
+    "name": "Plexus Corp.",
+    "industry": "Manufacturing",
+    "website": "https://www.plexus.com"
+  },
+  {
+    "name": "Benchmark Electronics",
+    "industry": "Manufacturing",
+    "website": "https://www.benchmark.com"
+  },
+  {
+    "name": "TE Connectivity",
+    "industry": "Manufacturing",
+    "website": "https://www.te.com"
+  },
+  {
+    "name": "Corning Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.corning.com"
+  },
+  {
+    "name": "Creation Technologies",
+    "industry": "Manufacturing",
+    "website": "https://www.creationtech.com"
+  },
+  {
+    "name": "SMTC Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.smtc.com"
+  },
+  {
+    "name": "Vexos Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.vexos.com"
+  },
+  {
+    "name": "Nucor Corporation",
+    "industry": "Manufacturing",
+    "website": "http://nucor.com/"
+  },
+  {
+    "name": "Steel Dynamics, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.steeldynamics.com/"
+  },
+  {
+    "name": "Reliance Steel & Aluminum",
+    "industry": "Manufacturing",
+    "website": "https://www.rsac.com/"
+  },
+  {
+    "name": "United States Steel Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.ussteel.com/"
+  },
+  {
+    "name": "Commercial Metals Company",
+    "industry": "Manufacturing",
+    "website": "https://www.cmc.com/"
+  },
+  {
+    "name": "TimkenSteel Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.timkensteel.com/"
+  },
+  {
+    "name": "Arconic Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.arconic.com/"
+  },
+  {
+    "name": "Mayville Engineering Company",
+    "industry": "Manufacturing",
+    "website": "https://www.mayvilleengineering.com/"
+  },
+  {
+    "name": "O'Neal Manufacturing Services",
+    "industry": "Manufacturing",
+    "website": "https://www.onealmfg.com/"
+  },
+  {
+    "name": "Pfizer",
+    "industry": "Manufacturing",
+    "website": "https://www.pfizer.com"
+  },
+  {
+    "name": "Merck & Co., Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.merck.com"
+  },
+  {
+    "name": "Roche Holdings, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.roche.com"
+  },
+  {
+    "name": "AbbVie, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.abbvie.com"
+  },
+  {
+    "name": "Amgen",
+    "industry": "Manufacturing",
+    "website": "https://www.amgen.com"
+  },
+  {
+    "name": "GSK",
+    "industry": "Manufacturing",
+    "website": "https://www.gsk.com"
+  },
+  {
+    "name": "Eli Lilly and Co",
+    "industry": "Manufacturing",
+    "website": "https://www.lilly.com"
+  },
+  {
+    "name": "Boehringer Ingelheim",
+    "industry": "Manufacturing",
+    "website": "https://www.boehringer-ingelheim.com"
+  },
+  {
+    "name": "Gilead Sciences",
+    "industry": "Manufacturing",
+    "website": "https://www.gilead.com"
+  },
+  {
+    "name": "Berry Global Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.berryglobal.com"
+  },
+  {
+    "name": "Amcor PLC",
+    "industry": "Manufacturing",
+    "website": "https://www.amcor.com"
+  },
+  {
+    "name": "ALPLA-Werke Alwin Lehner GmbH & Co. KG",
+    "industry": "Manufacturing",
+    "website": "https://www.alpla.com"
+  },
+  {
+    "name": "Inteplast Group, Ltd.",
+    "industry": "Manufacturing",
+    "website": "https://www.inteplast.com"
+  },
+  {
+    "name": "Tessy Plastics Corp.",
+    "industry": "Manufacturing",
+    "website": "https://www.tessy.com"
+  },
+  {
+    "name": "Plastic Technologies, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.plastictechnologies.com"
+  },
+  {
+    "name": "Millwood, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.millwoodinc.com"
+  },
+  {
+    "name": "JM Eagle, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.jmeagle.com"
+  },
+  {
+    "name": "Sigma Plastics Group Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.sigmaplastics.com"
+  },
+  {
+    "name": "Sealed Air Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.sealedair.com"
+  },
+  {
+    "name": "Sonoco Products Company",
+    "industry": "Manufacturing",
+    "website": "https://www.sonoco.com"
+  },
+  {
+    "name": "Plastipak Holdings, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.plastipak.com"
+  },
+  {
+    "name": "Graham Packaging Company",
+    "industry": "Manufacturing",
+    "website": "https://www.grahampackaging.com"
+  },
+  {
+    "name": "rose plastic AG",
+    "industry": "Manufacturing",
+    "website": "https://www.rose-plastic.us"
+  },
+  {
+    "name": "Applied Materials, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.appliedmaterials.com"
+  },
+  {
+    "name": "Becton, Dickinson and Company",
+    "industry": "Manufacturing",
+    "website": "https://www.bd.com"
+  },
+  {
+    "name": "Lam Research Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.lamresearch.com"
+  },
+  {
+    "name": "Behlen Mfg. Co.",
+    "industry": "Manufacturing",
+    "website": "https://www.behlenmfg.com"
+  },
+  {
+    "name": "Middleby Marshall Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.middleby.com"
+  },
+  {
+    "name": "Tetra Pak U.S. Holdings Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.tetrapak.com"
+  },
+  {
+    "name": "Kadant Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.kadant.com"
+  },
+  {
+    "name": "Duravant LLC",
+    "industry": "Manufacturing",
+    "website": "https://www.duravant.com"
+  },
+  {
+    "name": "Koch Enterprises, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.kochind.com"
+  },
+  {
+    "name": "Safety-Kleen Systems, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.safety-kleen.com"
+  },
+  {
+    "name": "Ichor Holdings, Ltd.",
+    "industry": "Manufacturing",
+    "website": "https://www.ichorholdings.com"
+  },
+  {
+    "name": "ASML US, LLC",
+    "industry": "Manufacturing",
+    "website": "https://www.asml.com"
+  },
+  {
+    "name": "Pratt & Whitney",
+    "industry": "Manufacturing",
+    "website": "https://www.prattwhitney.com"
+  },
+  {
+    "name": "Walmart",
+    "industry": "Retail",
+    "website": "https://www.walmart.com"
+  },
+  {
+    "name": "Amazon",
+    "industry": "Retail",
+    "website": "https://www.amazon.com"
+  },
+  {
+    "name": "Costco",
+    "industry": "Retail",
+    "website": "https://www.costco.com"
+  },
+  {
+    "name": "Home Depot",
+    "industry": "Retail",
+    "website": "https://www.homedepot.com"
+  },
+  {
+    "name": "Kroger",
+    "industry": "Retail",
+    "website": "https://www.kroger.com"
+  },
+  {
+    "name": "Target",
+    "industry": "Retail",
+    "website": "https://www.target.com"
+  },
+  {
+    "name": "CVS Health",
+    "industry": "Retail",
+    "website": "https://www.cvs.com"
+  },
+  {
+    "name": "Lowe's",
+    "industry": "Retail",
+    "website": "https://www.lowes.com"
+  },
+  {
+    "name": "Albertsons",
+    "industry": "Retail",
+    "website": "https://www.albertsons.com"
+  },
+  {
+    "name": "TJX Companies",
+    "industry": "Retail",
+    "website": "https://www.tjx.com"
+  },
+  {
+    "name": "Dollar General",
+    "industry": "Retail",
+    "website": "https://www.dollargeneral.com"
+  },
+  {
+    "name": "Macy's",
+    "industry": "Retail",
+    "website": "https://www.macys.com"
+  },
+  {
+    "name": "Ross Stores",
+    "industry": "Retail",
+    "website": "https://www.rossstores.com"
+  },
+  {
+    "name": "Urban Outfitters",
+    "industry": "Retail",
+    "website": "https://www.urbanoutfitters.com"
+  },
+  {
+    "name": "Sprouts Farmers Market",
+    "industry": "Retail",
+    "website": "https://www.sprouts.com"
+  },
+  {
+    "name": "Ollie's Bargain Outlet",
+    "industry": "Retail",
+    "website": "https://www.ollies.us"
+  },
+  {
+    "name": "Aldi",
+    "industry": "Retail",
+    "website": "https://www.aldi.com"
+  },
+  {
+    "name": "Carrefour",
+    "industry": "Retail",
+    "website": "https://www.carrefour.com"
+  },
+  {
+    "name": "Tesco",
+    "industry": "Retail",
+    "website": "https://www.tesco.com"
+  },
+  {
+    "name": "JD Sports Fashion",
+    "industry": "Retail",
+    "website": "https://www.jdsports.com"
+  },
+  {
+    "name": "Inditex",
+    "industry": "Retail",
+    "website": "https://www.inditex.com"
+  },
+  {
+    "name": "Costco Wholesale",
+    "industry": "Retail",
+    "website": "https://www.costco.com"
+  },
+  {
+    "name": "The Home Depot",
+    "industry": "Retail",
+    "website": "https://www.homedepot.com"
+  },
+  {
+    "name": "Walgreens",
+    "industry": "Retail",
+    "website": "https://www.walgreens.com"
+  },
+  {
+    "name": "Publix",
+    "industry": "Retail",
+    "website": "https://www.publix.com"
+  },
+  {
+    "name": "Best Buy",
+    "industry": "Retail",
+    "website": "https://www.bestbuy.com"
+  },
+  {
+    "name": "Zara",
+    "industry": "Retail",
+    "website": "https://www.zara.com"
+  },
+  {
+    "name": "Nike",
+    "industry": "Retail",
+    "website": "https://www.nike.com"
+  },
+  {
+    "name": "Foot Locker",
+    "industry": "Retail",
+    "website": "https://www.footlocker.com"
+  },
+  {
+    "name": "Marshalls",
+    "industry": "Retail",
+    "website": "https://www.marshalls.com"
+  },
+  {
+    "name": "T.J.Maxx",
+    "industry": "Retail",
+    "website": "https://www.tjmaxx.com"
+  },
+  {
+    "name": "Nordstrom",
+    "industry": "Retail",
+    "website": "https://www.nordstrom.com"
+  },
+  {
+    "name": "Saks Fifth Avenue",
+    "industry": "Retail",
+    "website": "https://www.saksfifthavenue.com"
+  },
+  {
+    "name": "Ahold Delhaize",
+    "industry": "Retail",
+    "website": "https://www.ahold.com"
+  },
+  {
+    "name": "Publix Super Markets",
+    "industry": "Retail",
+    "website": "https://www.publix.com"
+  },
+  {
+    "name": "DICK'S Sporting Goods",
+    "industry": "Retail",
+    "website": "https://www.dickssportinggoods.com"
+  },
+  {
+    "name": "Ulta Beauty",
+    "industry": "Retail",
+    "website": "https://www.ulta.com"
+  },
+  {
+    "name": "Tractor Supply Company",
+    "industry": "Retail",
+    "website": "https://www.tractorsupply.com"
+  },
+  {
+    "name": "Five Below",
+    "industry": "Retail",
+    "website": "https://www.fivebelow.com"
+  },
+  {
+    "name": "Arko Corp",
+    "industry": "Retail",
+    "website": "https://www.arko.com"
+  },
+  {
+    "name": "Academy Sports and Outdoors, Inc.",
+    "industry": "Retail",
+    "website": "https://www.academy.com"
+  },
+  {
+    "name": "Advance Auto Parts, Inc.",
+    "industry": "Retail",
+    "website": "https://www.advanceautoparts.com"
+  },
+  {
+    "name": "National Vision Holdings, Inc.",
+    "industry": "Retail",
+    "website": "https://www.nationalvision.com"
+  },
+  {
+    "name": "The RealReal, Inc.",
+    "industry": "Retail",
+    "website": "https://www.therealreal.com"
+  },
+  {
+    "name": "Winmark Corporation",
+    "industry": "Retail",
+    "website": "https://www.winmarkcorporation.com"
+  },
+  {
+    "name": "Sally Beauty Holdings, Inc.",
+    "industry": "Retail",
+    "website": "https://www.sallybeauty.com"
+  },
+  {
+    "name": "O'Reilly Automotive, Inc.",
+    "industry": "Retail",
+    "website": "https://www.oreillyauto.com"
+  },
+  {
+    "name": "AutoZone, Inc.",
+    "industry": "Retail",
+    "website": "https://www.autozone.com"
+  },
+  {
+    "name": "Ulta Beauty, Inc.",
+    "industry": "Retail",
+    "website": "https://www.ulta.com"
+  },
+  {
+    "name": "Williams-Sonoma, Inc.",
+    "industry": "Retail",
+    "website": "https://www.williams-sonoma.com"
+  },
+  {
+    "name": "DICK'S Sporting Goods, Inc.",
+    "industry": "Retail",
+    "website": "https://www.dickssportinggoods.com"
+  },
+  {
+    "name": "Genuine Parts Company",
+    "industry": "Retail",
+    "website": "https://www.genpt.com"
+  },
+  {
+    "name": "Best Buy Co., Inc.",
+    "industry": "Retail",
+    "website": "https://www.bestbuy.com"
+  },
+  {
+    "name": "Five Below, Inc.",
+    "industry": "Retail",
+    "website": "https://www.fivebelow.com"
+  },
+  {
+    "name": "Hobby Lobby",
+    "industry": "Retail",
+    "website": "https://www.hobbylobby.com"
+  },
+  {
+    "name": "Michaels",
+    "industry": "Retail",
+    "website": "https://www.michaels.com"
+  },
+  {
+    "name": "Bath & Body Works",
+    "industry": "Retail",
+    "website": "https://www.bathandbodyworks.com"
+  },
+  {
+    "name": "Sephora",
+    "industry": "Retail",
+    "website": "https://www.sephora.com"
+  },
+  {
+    "name": "PetSmart",
+    "industry": "Retail",
+    "website": "https://www.petsmart.com"
+  },
+  {
+    "name": "Bass Pro Shops",
+    "industry": "Retail",
+    "website": "https://www.basspro.com"
+  },
+  {
+    "name": "Amazon.com, Inc.",
+    "industry": "Retail",
+    "website": "https://www.amazon.com"
+  },
+  {
+    "name": "Walmart Inc.",
+    "industry": "Retail",
+    "website": "https://www.walmart.com"
+  },
+  {
+    "name": "eBay Inc.",
+    "industry": "Retail",
+    "website": "https://www.ebay.com"
+  },
+  {
+    "name": "The Home Depot, Inc.",
+    "industry": "Retail",
+    "website": "https://www.homedepot.com"
+  },
+  {
+    "name": "Shopify Inc.",
+    "industry": "Retail",
+    "website": "https://www.shopify.com"
+  },
+  {
+    "name": "Costco Wholesale Corporation",
+    "industry": "Retail",
+    "website": "https://www.costco.com"
+  },
+  {
+    "name": "Target Corporation",
+    "industry": "Retail",
+    "website": "https://www.target.com"
+  },
+  {
+    "name": "Wayfair Inc.",
+    "industry": "Retail",
+    "website": "https://www.wayfair.com"
+  },
+  {
+    "name": "The Kroger Co.",
+    "industry": "Retail",
+    "website": "https://www.kroger.com"
+  },
+  {
+    "name": "Etsy, Inc.",
+    "industry": "Retail",
+    "website": "https://www.etsy.com"
+  },
+  {
+    "name": "Chewy, Inc.",
+    "industry": "Retail",
+    "website": "https://www.chewy.com"
+  },
+  {
+    "name": "Overstock.com, Inc.",
+    "industry": "Retail",
+    "website": "https://www.overstock.com"
+  },
+  {
+    "name": "Lowe’s Companies, Inc.",
+    "industry": "Retail",
+    "website": "https://www.lowes.com"
+  },
+  {
+    "name": "Macy’s, Inc.",
+    "industry": "Retail",
+    "website": "https://www.macys.com"
+  },
+  {
+    "name": "Nordstrom, Inc.",
+    "industry": "Retail",
+    "website": "https://www.nordstrom.com"
+  },
+  {
+    "name": "PDD Holdings Inc. (Temu)",
+    "industry": "Retail",
+    "website": "https://www.temu.com"
+  },
+  {
+    "name": "SHEIN Group Ltd.",
+    "industry": "Retail",
+    "website": "https://www.shein.com"
+  },
+  {
+    "name": "Alibaba Group Holding Ltd. (AliExpress US)",
+    "industry": "Retail",
+    "website": "https://www.aliexpress.com"
+  },
+  {
+    "name": "Publix Super Markets, Inc.",
+    "industry": "Retail",
+    "website": "https://www.publix.com"
+  },
+  {
+    "name": "Albertsons Companies",
+    "industry": "Retail",
+    "website": "https://www.albertsons.com"
+  },
+  {
+    "name": "Food Lion",
+    "industry": "Retail",
+    "website": "https://www.foodlion.com"
+  },
+  {
+    "name": "Safeway Inc.",
+    "industry": "Retail",
+    "website": "https://www.safeway.com"
+  },
+  {
+    "name": "Save A Lot",
+    "industry": "Retail",
+    "website": "https://www.savealot.com"
+  },
+  {
+    "name": "Trader Joe's",
+    "industry": "Retail",
+    "website": "https://www.traderjoes.com"
+  },
+  {
+    "name": "Whole Foods Market",
+    "industry": "Retail",
+    "website": "https://www.wholefoodsmarket.com"
+  },
+  {
+    "name": "Nike, Inc.",
+    "industry": "Retail",
+    "website": "https://www.nike.com"
+  },
+  {
+    "name": "Ross Stores, Inc.",
+    "industry": "Retail",
+    "website": "https://www.rossstores.com"
+  },
+  {
+    "name": "TJX Companies, Inc.",
+    "industry": "Retail",
+    "website": "https://www.tjx.com"
+  },
+  {
+    "name": "V.F. Corporation",
+    "industry": "Retail",
+    "website": "https://www.vfc.com"
+  },
+  {
+    "name": "American Eagle Outfitters, Inc.",
+    "industry": "Retail",
+    "website": "https://www.aeo.com"
+  },
+  {
+    "name": "New York & Company, Inc.",
+    "industry": "Retail",
+    "website": "https://www.nyandcompany.com"
+  },
+  {
+    "name": "Ralph Lauren Corporation",
+    "industry": "Retail",
+    "website": "https://www.ralphlauren.com"
+  },
+  {
+    "name": "Under Armour, Inc.",
+    "industry": "Retail",
+    "website": "https://www.underarmour.com"
+  },
+  {
+    "name": "Urban Outfitters, Inc.",
+    "industry": "Retail",
+    "website": "https://www.urbanoutfitters.com"
+  },
+  {
+    "name": "Macy's, Inc.",
+    "industry": "Retail",
+    "website": "https://www.macys.com"
+  },
+  {
+    "name": "Victoria's Secret",
+    "industry": "Retail",
+    "website": "https://www.victoriassecret.com"
+  },
+  {
+    "name": "Gap Inc.",
+    "industry": "Retail",
+    "website": "https://www.gap.com"
+  },
+  {
+    "name": "Levi Strauss & Co.",
+    "industry": "Retail",
+    "website": "https://www.levi.com"
+  },
+  {
+    "name": "Menard Inc.",
+    "industry": "Retail",
+    "website": "https://www.menards.com"
+  },
+  {
+    "name": "True Value Hardware",
+    "industry": "Retail",
+    "website": "https://www.truevalue.com"
+  },
+  {
+    "name": "Home Depot Inc.",
+    "industry": "Retail",
+    "website": "https://www.homedepot.com"
+  },
+  {
+    "name": "Lowe's Companies Inc.",
+    "industry": "Retail",
+    "website": "https://www.lowes.com"
+  },
+  {
+    "name": "84 Lumber",
+    "industry": "Retail",
+    "website": "https://www.84lumber.com"
+  },
+  {
+    "name": "Harbor Freight Tools",
+    "industry": "Retail",
+    "website": "https://www.harborfreight.com"
+  },
+  {
+    "name": "Ace Hardware",
+    "industry": "Retail",
+    "website": "https://www.acehardware.com"
+  },
+  {
+    "name": "Haverty Furniture Companies, Inc.",
+    "industry": "Retail",
+    "website": "https://www.havertys.com"
+  },
+  {
+    "name": "Floor & Decor Holdings, Inc.",
+    "industry": "Retail",
+    "website": "https://www.flooranddecor.com"
+  },
+  {
+    "name": "Orchard Supply Hardware",
+    "industry": "Retail",
+    "website": "https://www.osh.com"
+  },
+  {
+    "name": "IKEA",
+    "industry": "Retail",
+    "website": "https://www.ikea.com"
+  },
+  {
+    "name": "Bunnings Warehouse",
+    "industry": "Retail",
+    "website": "https://www.bunnings.com.au"
+  },
+  {
+    "name": "Hornbach Baumarkt AG",
+    "industry": "Retail",
+    "website": "https://www.hornbach.com"
+  },
+  {
+    "name": "GameStop",
+    "industry": "Retail",
+    "website": "https://www.gamestop.com"
+  },
+  {
+    "name": "Newegg",
+    "industry": "Retail",
+    "website": "https://www.newegg.com"
+  },
+  {
+    "name": "B&H Photo Video",
+    "industry": "Retail",
+    "website": "https://www.bhphotovideo.com"
+  },
+  {
+    "name": "Micro Center",
+    "industry": "Retail",
+    "website": "https://www.microcenter.com"
+  },
+  {
+    "name": "P. C. Richard & Son",
+    "industry": "Retail",
+    "website": "https://www.pcrichard.com"
+  },
+  {
+    "name": "Nebraska Furniture Mart",
+    "industry": "Retail",
+    "website": "https://www.nfm.com"
+  },
+  {
+    "name": "Apple Store",
+    "industry": "Retail",
+    "website": "https://www.apple.com/store"
+  },
+  {
+    "name": "Adorama",
+    "industry": "Retail",
+    "website": "https://www.adorama.com"
+  },
+  {
+    "name": "Abt Electronics",
+    "industry": "Retail",
+    "website": "https://www.abt.com"
+  },
+  {
+    "name": "RadioShack",
+    "industry": "Retail",
+    "website": "https://www.radioshack.com"
+  },
+  {
+    "name": "Ritz Camera & Image",
+    "industry": "Retail",
+    "website": "https://www.ritzcamera.com"
+  },
+  {
+    "name": "Conn's",
+    "industry": "Retail",
+    "website": "https://www.conns.com"
+  },
+  {
+    "name": "T.J. Maxx",
+    "industry": "Retail",
+    "website": "https://www.tjmaxx.com"
+  },
+  {
+    "name": "Boscov's",
+    "industry": "Retail",
+    "website": "https://www.boscovs.com"
+  },
+  {
+    "name": "Dollar Tree",
+    "industry": "Retail",
+    "website": "https://www.dollartree.com"
+  },
+  {
+    "name": "7-Eleven",
+    "industry": "Retail",
+    "website": "https://www.7-eleven.com"
+  },
+  {
+    "name": "Kohl's",
+    "industry": "Retail",
+    "website": "https://www.kohls.com"
+  },
+  {
+    "name": "Neiman Marcus",
+    "industry": "Retail",
+    "website": "https://www.neimanmarcus.com"
+  },
+  {
+    "name": "Dillard's",
+    "industry": "Retail",
+    "website": "https://www.dillards.com"
+  },
+  {
+    "name": "Bloomingdale's",
+    "industry": "Retail",
+    "website": "https://www.bloomingdales.com"
+  },
+  {
+    "name": "Dollar General Corporation",
+    "industry": "Retail",
+    "website": "https://www.dollargeneral.com"
+  },
+  {
+    "name": "Dollar Tree, Inc.",
+    "industry": "Retail",
+    "website": "https://www.dollartree.com"
+  },
+  {
+    "name": "BJ's Wholesale Club Holdings, Inc.",
+    "industry": "Retail",
+    "website": "https://www.bjs.com"
+  },
+  {
+    "name": "Ollie's Bargain Outlet Holdings, Inc.",
+    "industry": "Retail",
+    "website": "https://www.ollies.us"
+  },
+  {
+    "name": "PriceSmart, Inc.",
+    "industry": "Retail",
+    "website": "https://www.pricesmart.com"
+  },
+  {
+    "name": "Big Lots, Inc.",
+    "industry": "Retail",
+    "website": "https://www.biglots.com"
+  },
+  {
+    "name": "The RealReal",
+    "industry": "Retail",
+    "website": "https://www.therealreal.com"
+  },
+  {
+    "name": "Rebag",
+    "industry": "Retail",
+    "website": "https://www.rebag.com"
+  },
+  {
+    "name": "Kendra Scott",
+    "industry": "Retail",
+    "website": "https://www.kendrascott.com"
+  },
+  {
+    "name": "Coach",
+    "industry": "Retail",
+    "website": "https://www.coach.com"
+  },
+  {
+    "name": "Kate Spade New York",
+    "industry": "Retail",
+    "website": "https://www.katespade.com"
+  },
+  {
+    "name": "Williams-Sonoma",
+    "industry": "Retail",
+    "website": "https://www.williams-sonoma.com"
+  },
+  {
+    "name": "Fossil Group",
+    "industry": "Retail",
+    "website": "https://www.fossil.com"
+  },
+  {
+    "name": "American Eagle Outfitters",
+    "industry": "Retail",
+    "website": "https://www.ae.com"
+  },
+  {
+    "name": "Tory Burch",
+    "industry": "Retail",
+    "website": "https://www.toryburch.com"
+  },
+  {
+    "name": "Hermès",
+    "industry": "Retail",
+    "website": "https://www.hermes.com"
+  },
+  {
+    "name": "Burberry",
+    "industry": "Retail",
+    "website": "https://www.burberry.com"
+  },
+  {
+    "name": "Lululemon",
+    "industry": "Retail",
+    "website": "https://www.lululemon.com"
+  },
+  {
+    "name": "H&M",
+    "industry": "Retail",
+    "website": "https://www.hm.com"
+  },
+  {
+    "name": "Adidas",
+    "industry": "Retail",
+    "website": "https://www.adidas.com"
+  },
+  {
+    "name": "Levi's",
+    "industry": "Retail",
+    "website": "https://www.levi.com"
+  },
+  {
+    "name": "Academy Sports + Outdoors",
+    "industry": "Retail",
+    "website": "https://www.academy.com"
+  },
+  {
+    "name": "Backcountry.com",
+    "industry": "Retail",
+    "website": "https://www.backcountry.com"
+  },
+  {
+    "name": "Big 5 Sporting Goods",
+    "industry": "Retail",
+    "website": "https://www.big5sportinggoods.com"
+  },
+  {
+    "name": "Cabela's",
+    "industry": "Retail",
+    "website": "https://www.cabelas.com"
+  },
+  {
+    "name": "Camping World",
+    "industry": "Retail",
+    "website": "https://www.campingworld.com"
+  },
+  {
+    "name": "Hibbett Sports",
+    "industry": "Retail",
+    "website": "https://www.hibbett.com"
+  },
+  {
+    "name": "REI",
+    "industry": "Retail",
+    "website": "https://www.rei.com"
+  },
+  {
+    "name": "Scheels",
+    "industry": "Retail",
+    "website": "https://www.scheels.com"
+  },
+  {
+    "name": "Petco",
+    "industry": "Retail",
+    "website": "https://www.petco.com"
+  },
+  {
+    "name": "Pet Supplies Plus",
+    "industry": "Retail",
+    "website": "https://www.petsuppliesplus.com"
+  },
+  {
+    "name": "Chewy",
+    "industry": "Retail",
+    "website": "https://www.chewy.com"
+  },
+  {
+    "name": "Pet Supermarket",
+    "industry": "Retail",
+    "website": "https://www.petsupermarket.com"
+  },
+  {
+    "name": "Chuck & Don's",
+    "industry": "Retail",
+    "website": "https://www.chuckanddons.com"
+  },
+  {
+    "name": "Hollywood Feed",
+    "industry": "Retail",
+    "website": "https://www.hollywoodfeed.com"
+  },
+  {
+    "name": "Talis-us Pet Store",
+    "industry": "Retail",
+    "website": "https://www.talis-us.com"
+  },
+  {
+    "name": "Patton Avenue Pet Company",
+    "industry": "Retail",
+    "website": "https://www.pattonavenuepet.com"
+  },
+  {
+    "name": "The Dog Bakery",
+    "industry": "Retail",
+    "website": "https://www.thedogbakery.com"
+  },
+  {
+    "name": "Coca-Cola",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.coca-cola.com"
+  },
+  {
+    "name": "Colgate-Palmolive",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.colgatepalmolive.com"
+  },
+  {
+    "name": "Kimberly-Clark",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.kimberly-clark.com"
+  },
+  {
+    "name": "Church & Dwight",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.churchdwight.com"
+  },
+  {
+    "name": "Reckitt Benckiser",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.reckitt.com"
+  },
+  {
+    "name": "SC Johnson",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.scjohnson.com"
+  },
+  {
+    "name": "Clorox",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.thecloroxcompany.com"
+  },
+  {
+    "name": "Hershey",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.thehersheycompany.com"
+  },
+  {
+    "name": "Diageo",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.diageo.com"
+  },
+  {
+    "name": "L'Oréal",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.loreal.com"
+  },
+  {
+    "name": "Estée Lauder",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.esteelauder.com"
+  },
+  {
+    "name": "The Coca-Cola Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.coca-cola.com"
+  },
+  {
+    "name": "Danone",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.danone.com"
+  },
+  {
+    "name": "PepsiCo Inc",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.pepsico.com"
+  },
+  {
+    "name": "Kellanova",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.kellanova.com"
+  },
+  {
+    "name": "Tyson Foods Inc",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.tysonfoods.com"
+  },
+  {
+    "name": "Schreiber Foods",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.schreiberfoods.com"
+  },
+  {
+    "name": "Coca Cola",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.coca-cola.com"
+  },
+  {
+    "name": "Nestlé USA",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.nestleusa.com"
+  },
+  {
+    "name": "L’Oréal USA",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.loreal.com"
+  },
+  {
+    "name": "Estée Lauder Companies",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.elcompanies.com"
+  },
+  {
+    "name": "Edgewell Personal Care",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.edgewell.com"
+  },
+  {
+    "name": "Mary Kay",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.marykay.com"
+  },
+  {
+    "name": "Revlon",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.revlon.com"
+  },
+  {
+    "name": "Alberto Culver",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.alberto.com"
+  },
+  {
+    "name": "PepsiCo Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.pepsico.com"
+  },
+  {
+    "name": "Mondelez International Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.mondelezinternational.com"
+  },
+  {
+    "name": "Nestlé SA",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.nestle.com"
+  },
+  {
+    "name": "General Mills Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.generalmills.com"
+  },
+  {
+    "name": "Conagra Brands Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.conagrabrands.com"
+  },
+  {
+    "name": "Utz Brands Holdings, LLC",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.utzsnacks.com"
+  },
+  {
+    "name": "J&J Snack Foods Corp.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.jjsnack.com"
+  },
+  {
+    "name": "Mars Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.mars.com"
+  },
+  {
+    "name": "Grupo Bimbo SAB de CV",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.grupobimbo.com"
+  },
+  {
+    "name": "Tyson Foods Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.tysonfoods.com"
+  },
+  {
+    "name": "The Kraft Heinz Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.kraftheinzcompany.com"
+  },
+  {
+    "name": "Herr's Foods Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.herrs.com"
+  },
+  {
+    "name": "McCain Foods Ltd.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.mccain.com"
+  },
+  {
+    "name": "Calbee Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.calbee.com"
+  },
+  {
+    "name": "Snyder's of Hanover",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.snydersofhanover.com"
+  },
+  {
+    "name": "Martin's Potato Chips",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.martinspotatochips.com"
+  },
+  {
+    "name": "Constellation Brands",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.cbrands.com"
+  },
+  {
+    "name": "Molson Coors Beverage Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.molsoncoors.com"
+  },
+  {
+    "name": "Boston Beer Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bostonbeer.com"
+  },
+  {
+    "name": "Dutch Bros",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.dutchbros.com"
+  },
+  {
+    "name": "Celsius Holdings",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.celsius.com"
+  },
+  {
+    "name": "Starbucks",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.starbucks.com"
+  },
+  {
+    "name": "Keurig Dr Pepper",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.keurigdrpepper.com"
+  },
+  {
+    "name": "Heineken",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.theheinekencompany.com"
+  },
+  {
+    "name": "Monster Beverage Corporation",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.monsterbevcorp.com"
+  },
+  {
+    "name": "Bacardi Limited",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bacardi.com"
+  },
+  {
+    "name": "Ambev",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.ambev.com.br"
+  },
+  {
+    "name": "Kao Corporation",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.kao.com/global/en/"
+  },
+  {
+    "name": "Dober Chemical Corp.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.dober.com"
+  },
+  {
+    "name": "The Clorox Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.thecloroxcompany.com"
+  },
+  {
+    "name": "Church & Dwight Co., Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.churchdwight.com"
+  },
+  {
+    "name": "Zep, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.zepinc.com"
+  },
+  {
+    "name": "Buckeye International, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.buckeyeinternational.com"
+  },
+  {
+    "name": "Weiman Products, LLC",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.weiman.com"
+  },
+  {
+    "name": "Seventh Generation",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.seventhgeneration.com"
+  },
+  {
+    "name": "Blueland",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.blueland.com"
+  },
+  {
+    "name": "Abbott Laboratories",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.abbott.com"
+  },
+  {
+    "name": "Amway Corp.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.amway.com"
+  },
+  {
+    "name": "Bayer AG",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bayer.com"
+  },
+  {
+    "name": "Herbalife International of America, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.herbalife.com"
+  },
+  {
+    "name": "L’Oreal S.A.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.loreal.com"
+  },
+  {
+    "name": "Nestle S.A.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.nestle.com"
+  },
+  {
+    "name": "The Procter & Gamble Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.pg.com"
+  },
+  {
+    "name": "Unilever PLC",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.unilever.com"
+  },
+  {
+    "name": "Procter & Gamble Beauty",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.pg.com"
+  },
+  {
+    "name": "Coty Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.coty.com"
+  },
+  {
+    "name": "e.l.f. Cosmetics",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.elfcosmetics.com"
+  },
+  {
+    "name": "Mary Kay Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.marykay.com"
+  },
+  {
+    "name": "Tarte Cosmetics",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.tartecosmetics.com"
+  },
+  {
+    "name": "Avon Products Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.avon.com"
+  },
+  {
+    "name": "L'Oréal USA",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.loreal.com"
+  },
+  {
+    "name": "Amway",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.amway.com"
+  },
+  {
+    "name": "Cargill Beauty",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.cargill.com"
+  },
+  {
+    "name": "Glossier",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.glossier.com"
+  },
+  {
+    "name": "Rare Beauty",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.rarebeauty.com"
+  },
+  {
+    "name": "Kiehl's",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.kiehls.com"
+  },
+  {
+    "name": "CoverGirl",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.covergirl.com"
+  },
+  {
+    "name": "ABCO Laboratories, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "http://www.abcolabs.com"
+  },
+  {
+    "name": "Alvarado Street Bakery",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.alvaradostreetbakery.com"
+  },
+  {
+    "name": "Amy's Kitchen, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.amyskitchen.com"
+  },
+  {
+    "name": "Annie Chun's Gourmet Foods, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.anniechun.com"
+  },
+  {
+    "name": "Barbara's Bakery, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.barbaras.com"
+  },
+  {
+    "name": "Bell & Evans",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bellandevans.com"
+  },
+  {
+    "name": "Bob's Red Mill Natural Foods, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bobsredmill.com"
+  },
+  {
+    "name": "Bragg Live Food Products, LLC",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bragg.com"
+  },
+  {
+    "name": "Organic Valley",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.organicvalley.coop"
+  },
+  {
+    "name": "Nature's Path Organic Foods",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.naturespath.com"
+  },
+  {
+    "name": "Mary's Gone Crackers",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.marysgonecrackers.com"
+  },
+  {
+    "name": "Navitas Organics",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.navitasorganics.com"
+  },
+  {
+    "name": "RW Garcia",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.rwgarcia.com"
+  },
+  {
+    "name": "Elevation Burger",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.elevationburger.com"
+  },
+  {
+    "name": "Cece's Veggie Co.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.cecesveggieco.com"
+  },
+  {
+    "name": "Nutpods",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.nutpods.com"
+  },
+  {
+    "name": "Eden Foods",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.edenfoods.com"
+  },
+  {
+    "name": "Hain Celestial Group",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.hain.com"
+  },
+  {
+    "name": "Kellanova Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.kellanova.com"
+  },
+  {
+    "name": "Nestlé S.A.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.nestle.com"
+  },
+  {
+    "name": "McCain Foods Limited",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.mccain.com"
+  },
+  {
+    "name": "Ajinomoto Co. Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.ajinomoto.com"
+  },
+  {
+    "name": "Kraft Heinz Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.kraftheinzcompany.com"
+  },
+  {
+    "name": "Smithfield Foods Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.smithfieldfoods.com"
+  },
+  {
+    "name": "Maple Leaf Foods Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.mapleleaffoods.com"
+  },
+  {
+    "name": "Hormel Foods Corporation",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.hormelfoods.com"
+  },
+  {
+    "name": "JBS USA Holdings Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.jbssa.com"
+  },
+  {
+    "name": "B&G Foods Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bgfoods.com"
+  },
+  {
+    "name": "Beyond Meat Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.beyondmeat.com"
+  },
+  {
+    "name": "The Hain Celestial Group Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.hain.com"
+  },
+  {
+    "name": "Amy's Kitchen Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.amyskitchen.com"
+  },
+  {
+    "name": "Rich Products Corporation",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.richs.com"
+  },
+  {
+    "name": "Gorton's Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.gortons.com"
+  },
+  {
+    "name": "Dairy Farmers of America",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.dfamilk.com"
+  },
+  {
+    "name": "Leprino Foods",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.leprinofoods.com"
+  },
+  {
+    "name": "Lactalis",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.lactalis.com"
+  },
+  {
+    "name": "Saputo",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.saputo.com"
+  },
+  {
+    "name": "Fonterra",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.fonterra.com"
+  },
+  {
+    "name": "Arla Foods",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.arla.com"
+  },
+  {
+    "name": "FrieslandCampina",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.frieslandcampina.com"
+  },
+  {
+    "name": "Meiji Holdings",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.meiji.com"
+  },
+  {
+    "name": "Amul",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.amul.com"
+  },
+  {
+    "name": "Agropur",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.agropur.com"
+  },
+  {
+    "name": "Yili Group",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.yili.com"
+  },
+  {
+    "name": "Mengniu Dairy",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.mengniu.com.cn"
+  },
+  {
+    "name": "H.P. Hood",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.hphood.com"
+  },
+  {
+    "name": "Sargento",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.sargento.com"
+  },
+  {
+    "name": "Tillamook",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.tillamook.com"
+  },
+  {
+    "name": "Chobani",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.chobani.com"
+  },
+  {
+    "name": "Butler Supply",
+    "industry": "Distribution",
+    "website": "http://www.butlersupply.com"
+  },
+  {
+    "name": "CEEUS Inc.",
+    "industry": "Distribution",
+    "website": "http://www.ceeus.com"
+  },
+  {
+    "name": "Chelsea Lighting",
+    "industry": "Distribution",
+    "website": "http://www.chelsealighting.com"
+  },
+  {
+    "name": "Clayton Engineering",
+    "industry": "Distribution",
+    "website": "http://www.claytonengineering.com"
+  },
+  {
+    "name": "Metro Wire & Cable Corp.",
+    "industry": "Distribution",
+    "website": "http://www.metrowire.com"
+  },
+  {
+    "name": "City Electric Supply",
+    "industry": "Distribution",
+    "website": "http://www.cityelectricsupply.com"
+  },
+  {
+    "name": "Winsupply",
+    "industry": "Distribution",
+    "website": "http://www.winsupplyinc.com"
+  },
+  {
+    "name": "Border States Electric",
+    "industry": "Distribution",
+    "website": "http://www.borderstates.com"
+  },
+  {
+    "name": "Elliott Electric Supply",
+    "industry": "Distribution",
+    "website": "http://www.elliottelectric.com"
+  },
+  {
+    "name": "W.W. Grainger",
+    "industry": "Distribution",
+    "website": "http://www.grainger.com"
+  },
+  {
+    "name": "MRC Global",
+    "industry": "Distribution",
+    "website": "http://www.mrcglobal.com"
+  },
+  {
+    "name": "Wesco",
+    "industry": "Distribution",
+    "website": "http://www.wesco.com"
+  },
+  {
+    "name": "Würth Industry North America",
+    "industry": "Distribution",
+    "website": "http://www.wurthindustry.com"
+  },
+  {
+    "name": "Vallen Distribution",
+    "industry": "Distribution",
+    "website": "http://www.vallen.com"
+  },
+  {
+    "name": "DNOW Inc.",
+    "industry": "Distribution",
+    "website": "http://www.dnow.com"
+  },
+  {
+    "name": "F.W. Webb Company",
+    "industry": "Distribution",
+    "website": "http://www.fwwebb.com"
+  },
+  {
+    "name": "Graybar",
+    "industry": "Distribution",
+    "website": "http://www.graybar.com"
+  },
+  {
+    "name": "DXP",
+    "industry": "Distribution",
+    "website": "http://www.dxpe.com"
+  },
+  {
+    "name": "Distribution Solutions Group",
+    "industry": "Distribution",
+    "website": "http://www.distributionsolutionsgroup.com"
+  },
+  {
+    "name": "Berkshire Tool Supply Group",
+    "industry": "Distribution",
+    "website": "http://www.berkshiretool.com"
+  },
+  {
+    "name": "Core & Main",
+    "industry": "Distribution",
+    "website": "http://www.coreandmain.com"
+  },
+  {
+    "name": "White Cap",
+    "industry": "Distribution",
+    "website": "http://www.whitecap.com"
+  },
+  {
+    "name": "Applied Industrial Technologies",
+    "industry": "Distribution",
+    "website": "http://www.applied.com"
+  },
+  {
+    "name": "MSC Industrial Direct",
+    "industry": "Distribution",
+    "website": "http://www.mscdirect.com"
+  },
+  {
+    "name": "BDI",
+    "industry": "Distribution",
+    "website": "http://www.bdiusa.com"
+  },
+  {
+    "name": "Kimball Midwest",
+    "industry": "Distribution",
+    "website": "http://www.kimballmidwest.com"
+  },
+  {
+    "name": "L&R Distributors",
+    "industry": "Distribution",
+    "website": "http://www.lrdist.com"
+  },
+  {
+    "name": "SRS Distribution",
+    "industry": "Distribution",
+    "website": "http://www.srsdistribution.com"
+  },
+  {
+    "name": "Alex Lee Inc.",
+    "industry": "Distribution",
+    "website": "https://www.alexlee.com"
+  },
+  {
+    "name": "American Excelsior Company",
+    "industry": "Distribution",
+    "website": "https://www.americanexcelsior.com"
+  },
+  {
+    "name": "Anixter",
+    "industry": "Distribution",
+    "website": "https://www.anixter.com"
+  },
+  {
+    "name": "Arrow Electronics",
+    "industry": "Distribution",
+    "website": "https://www.arrow.com"
+  },
+  {
+    "name": "Associated Grocers of Florida",
+    "industry": "Distribution",
+    "website": "https://www.agflorida.com"
+  },
+  {
+    "name": "Avnet",
+    "industry": "Distribution",
+    "website": "https://www.avnet.com"
+  },
+  {
+    "name": "C&S Wholesale Grocers",
+    "industry": "Distribution",
+    "website": "https://www.cswg.com"
+  },
+  {
+    "name": "D&H Distributing",
+    "industry": "Distribution",
+    "website": "https://www.dandh.com"
+  },
+  {
+    "name": "DigiKey",
+    "industry": "Distribution",
+    "website": "https://www.digikey.com"
+  },
+  {
+    "name": "Enesco",
+    "industry": "Distribution",
+    "website": "https://www.enesco.com"
+  },
+  {
+    "name": "HD Supply",
+    "industry": "Distribution",
+    "website": "https://www.hdsupply.com"
+  },
+  {
+    "name": "JanPak",
+    "industry": "Distribution",
+    "website": "https://www.janpak.com"
+  },
+  {
+    "name": "Lawson Products",
+    "industry": "Distribution",
+    "website": "https://www.lawsonproducts.com"
+  },
+  {
+    "name": "Master Electronics",
+    "industry": "Distribution",
+    "website": "https://www.masterelectronics.com"
+  },
+  {
+    "name": "Mouser Electronics",
+    "industry": "Distribution",
+    "website": "https://www.mouser.com"
+  },
+  {
+    "name": "Patterson Companies",
+    "industry": "Distribution",
+    "website": "https://www.pattersoncompanies.com"
+  },
+  {
+    "name": "Tech Data",
+    "industry": "Distribution",
+    "website": "https://www.techdata.com"
+  },
+  {
+    "name": "WESCO International",
+    "industry": "Distribution",
+    "website": "https://www.wesco.com"
+  },
+  {
+    "name": "Sysco Corporation",
+    "industry": "Distribution",
+    "website": "https://www.sysco.com"
+  },
+  {
+    "name": "US Foods",
+    "industry": "Distribution",
+    "website": "https://www.usfoods.com"
+  },
+  {
+    "name": "Gordon Food Service",
+    "industry": "Distribution",
+    "website": "https://www.gfs.com"
+  },
+  {
+    "name": "Performance Food Group",
+    "industry": "Distribution",
+    "website": "https://www.pfgc.com"
+  },
+  {
+    "name": "McLane Company",
+    "industry": "Distribution",
+    "website": "https://www.mclaneco.com"
+  },
+  {
+    "name": "United Natural Foods, Inc.",
+    "industry": "Distribution",
+    "website": "https://www.unfi.com"
+  },
+  {
+    "name": "Shamrock Foods",
+    "industry": "Distribution",
+    "website": "https://www.shamrockfoodservice.com"
+  },
+  {
+    "name": "Cheney Brothers",
+    "industry": "Distribution",
+    "website": "https://www.cheneybrothers.com"
+  },
+  {
+    "name": "KeHE Distributors",
+    "industry": "Distribution",
+    "website": "https://www.kehe.com"
+  },
+  {
+    "name": "NOW Inc.",
+    "industry": "Distribution",
+    "website": "https://www.nowinc.com"
+  },
+  {
+    "name": "F.W. Webb",
+    "industry": "Distribution",
+    "website": "https://www.fwwebb.com"
+  },
+  {
+    "name": "Wolseley Industrial Group",
+    "industry": "Distribution",
+    "website": "https://www.wolseley.com"
+  },
+  {
+    "name": "Global Industrial Company",
+    "industry": "Distribution",
+    "website": "https://www.globalindustrial.com"
+  },
+  {
+    "name": "DXP Enterprises",
+    "industry": "Distribution",
+    "website": "https://www.dxpe.com"
+  },
+  {
+    "name": "Fastenal",
+    "industry": "Distribution",
+    "website": "https://www.fastenal.com"
+  },
+  {
+    "name": "MSC Industrial Supply",
+    "industry": "Distribution",
+    "website": "https://www.mscdirect.com"
+  },
+  {
+    "name": "Sonepar USA",
+    "industry": "Distribution",
+    "website": "https://www.sonepar.com"
+  },
+  {
+    "name": "Airgas",
+    "industry": "Distribution",
+    "website": "https://www.airgas.com"
+  },
+  {
+    "name": "Motion Industries",
+    "industry": "Distribution",
+    "website": "https://www.motionindustries.com"
+  },
+  {
+    "name": "Rexel USA, Inc.",
+    "industry": "Distribution",
+    "website": "https://www.rexelusa.com"
+  },
+  {
+    "name": "Distribution NOW",
+    "industry": "Distribution",
+    "website": "https://www.dnow.com"
+  },
+  {
+    "name": "Ferguson",
+    "industry": "Distribution",
+    "website": "https://www.ferguson.com"
+  },
+  {
+    "name": "BlackHawk Industrial",
+    "industry": "Distribution",
+    "website": "https://www.blackhawkindustrial.com"
+  },
+  {
+    "name": "CBT Company",
+    "industry": "Distribution",
+    "website": "https://www.cbtcompany.com"
+  },
+  {
+    "name": "Eastern Industrial Supplies",
+    "industry": "Distribution",
+    "website": "https://www.easternindustrial.com"
+  },
+  {
+    "name": "Mallory Safety and Supply",
+    "industry": "Distribution",
+    "website": "https://www.mallorysafety.com"
+  },
+  {
+    "name": "Digi-Key",
+    "industry": "Distribution",
+    "website": "https://www.digikey.com"
+  },
+  {
+    "name": "Future Electronics",
+    "industry": "Distribution",
+    "website": "https://www.futureelectronics.com"
+  },
+  {
+    "name": "RS Components",
+    "industry": "Distribution",
+    "website": "https://www.rs-online.com"
+  },
+  {
+    "name": "PEI-Genesis",
+    "industry": "Distribution",
+    "website": "https://www.peigenesis.com"
+  },
+  {
+    "name": "Powell Electronics",
+    "industry": "Distribution",
+    "website": "https://www.powellelectronics.com"
+  },
+  {
+    "name": "FDH Electronics",
+    "industry": "Distribution",
+    "website": "https://www.fdhelectronics.com"
+  },
+  {
+    "name": "WPG Americas",
+    "industry": "Distribution",
+    "website": "https://www.wpgamericas.com"
+  },
+  {
+    "name": "Nexty Electronics",
+    "industry": "Distribution",
+    "website": "https://www.nexty-ele.com"
+  },
+  {
+    "name": "Macnica",
+    "industry": "Distribution",
+    "website": "https://www.macnica.com"
+  },
+  {
+    "name": "RFMW",
+    "industry": "Distribution",
+    "website": "https://www.rfmw.com"
+  },
+  {
+    "name": "Newark Electronics",
+    "industry": "Distribution",
+    "website": "https://www.newark.com"
+  },
+  {
+    "name": "Morris & Dickson",
+    "industry": "Distribution",
+    "website": "https://www.morrisdickson.com"
+  },
+  {
+    "name": "McKesson Corporation",
+    "industry": "Distribution",
+    "website": "https://www.mckesson.com"
+  },
+  {
+    "name": "AmerisourceBergen (Cencora)",
+    "industry": "Distribution",
+    "website": "https://www.amerisourcebergen.com"
+  },
+  {
+    "name": "Cardinal Health",
+    "industry": "Distribution",
+    "website": "https://www.cardinalhealth.com"
+  },
+  {
+    "name": "Drugzone Pharmaceuticals Inc",
+    "industry": "Distribution",
+    "website": "https://www.drugzone.com"
+  },
+  {
+    "name": "HealthSource Distributors",
+    "industry": "Distribution",
+    "website": "https://www.healthsourcedistributors.com"
+  },
+  {
+    "name": "Smith Drug Company",
+    "industry": "Distribution",
+    "website": "https://www.smithdrug.com"
+  },
+  {
+    "name": "Diamond Pharmacy Services",
+    "industry": "Distribution",
+    "website": "https://www.diamondpharmacy.com"
+  },
+  {
+    "name": "FFF Enterprises, Inc.",
+    "industry": "Distribution",
+    "website": "https://www.fffenterprises.com"
+  },
+  {
+    "name": "H. D. Smith",
+    "industry": "Distribution",
+    "website": "https://www.hdsmith.com"
+  },
+  {
+    "name": "Owens & Minor, Inc.",
+    "industry": "Distribution",
+    "website": "https://www.owens-minor.com"
+  },
+  {
+    "name": "Anda, Inc.",
+    "industry": "Distribution",
+    "website": "https://www.anda.com"
+  },
+  {
+    "name": "CanWel Building Materials Ltd.",
+    "industry": "Distribution",
+    "website": "https://www.canwel.com"
+  },
+  {
+    "name": "DRYCO Building Supplies",
+    "industry": "Distribution",
+    "website": "https://www.dryco.ca"
+  },
+  {
+    "name": "Beland Forest Products Ltd.",
+    "industry": "Distribution",
+    "website": "https://www.beland.com"
+  },
+  {
+    "name": "Doman Building Materials Group Ltd.",
+    "industry": "Distribution",
+    "website": "https://www.doman.ca"
+  },
+  {
+    "name": "Star Building Materials",
+    "industry": "Distribution",
+    "website": "https://www.starbuilding.ca"
+  },
+  {
+    "name": "Roofmart",
+    "industry": "Distribution",
+    "website": "https://www.roofmart.ca"
+  },
+  {
+    "name": "BMD",
+    "industry": "Distribution",
+    "website": "https://www.bmdusa.com"
+  },
+  {
+    "name": "Boise Cascade",
+    "industry": "Distribution",
+    "website": "https://www.bc.com"
+  },
+  {
+    "name": "Brenntag",
+    "industry": "Distribution",
+    "website": "https://www.brenntag.com"
+  },
+  {
+    "name": "Univar Solutions",
+    "industry": "Distribution",
+    "website": "https://www.univarsolutions.com"
+  },
+  {
+    "name": "IMCD",
+    "industry": "Distribution",
+    "website": "https://www.imcdgroup.com"
+  },
+  {
+    "name": "Tricon Energy",
+    "industry": "Distribution",
+    "website": "https://www.triconenergy.com"
+  },
+  {
+    "name": "Azelis",
+    "industry": "Distribution",
+    "website": "https://www.azelis.com"
+  },
+  {
+    "name": "PVS Chemicals",
+    "industry": "Distribution",
+    "website": "https://www.pvschemicals.com"
+  },
+  {
+    "name": "Tilley Distribution",
+    "industry": "Distribution",
+    "website": "https://www.tilleydistribution.com"
+  },
+  {
+    "name": "Shrieve Chemical",
+    "industry": "Distribution",
+    "website": "https://shrieve.com"
+  },
+  {
+    "name": "Ravago Chemicals",
+    "industry": "Distribution",
+    "website": "https://www.ravago.com"
+  },
+  {
+    "name": "Harwick Standard Distribution",
+    "industry": "Distribution",
+    "website": "https://www.harwick.com"
+  },
+  {
+    "name": "CellMark",
+    "industry": "Distribution",
+    "website": "https://www.cellmark.com"
+  },
+  {
+    "name": "Hawkins",
+    "industry": "Distribution",
+    "website": "https://www.hawkinsinc.com"
+  },
+  {
+    "name": "Caldic",
+    "industry": "Distribution",
+    "website": "https://www.caldic.com"
+  },
+  {
+    "name": "Superior Industrial Solutions",
+    "industry": "Distribution",
+    "website": "https://www.superiorindustrial.com"
+  },
+  {
+    "name": "Omya",
+    "industry": "Distribution",
+    "website": "https://www.omya.com"
+  },
+  {
+    "name": "Genuine Parts Company (NAPA Auto Parts)",
+    "industry": "Distribution",
+    "website": "https://www.genpt.com"
+  },
+  {
+    "name": "Advance Auto Parts",
+    "industry": "Distribution",
+    "website": "https://www.advanceautoparts.com"
+  },
+  {
+    "name": "Worldpac, LLC",
+    "industry": "Distribution",
+    "website": "https://www.worldpac.com"
+  },
+  {
+    "name": "Automann USA",
+    "industry": "Distribution",
+    "website": "https://www.automann.com"
+  },
+  {
+    "name": "Alliance Automotive Group",
+    "industry": "Distribution",
+    "website": "https://www.allianceautomotivegroup.eu"
+  },
+  {
+    "name": "Repco",
+    "industry": "Distribution",
+    "website": "https://www.repco.com.au"
+  },
+  {
+    "name": "GPC Asia Pacific",
+    "industry": "Distribution",
+    "website": "https://www.gpcasiapacific.com"
+  },
+  {
+    "name": "AmerisourceBergen",
+    "industry": "Distribution",
+    "website": "https://www.amerisourcebergen.com"
+  },
+  {
+    "name": "Medline Industries",
+    "industry": "Distribution",
+    "website": "https://www.medline.com"
+  },
+  {
+    "name": "Henry Schein, Inc.",
+    "industry": "Distribution",
+    "website": "https://www.henryschein.com"
+  },
+  {
+    "name": "Axiom Medical Supplies",
+    "industry": "Distribution",
+    "website": "https://www.axiommedicalsupply.com"
+  },
+  {
+    "name": "Drive Medical",
+    "industry": "Distribution",
+    "website": "https://www.drivemedical.com"
+  },
+  {
+    "name": "J&B Medical Supply",
+    "industry": "Distribution",
+    "website": "https://www.jbmedicalsupply.com"
+  },
+  {
+    "name": "Byram Healthcare",
+    "industry": "Distribution",
+    "website": "https://www.byramhealthcare.com"
+  },
+  {
+    "name": "CCS Medical",
+    "industry": "Distribution",
+    "website": "https://www.ccsmed.com"
+  },
+  {
+    "name": "Edgepark Medical Supplies",
+    "industry": "Distribution",
+    "website": "https://www.edgepark.com"
+  },
+  {
+    "name": "Lincare",
+    "industry": "Distribution",
+    "website": "https://www.lincare.com"
+  },
+  {
+    "name": "Medtronic",
+    "industry": "Distribution",
+    "website": "https://www.medtronic.com"
+  },
+  {
+    "name": "Siemens Healthineers",
+    "industry": "Distribution",
+    "website": "https://www.siemens-healthineers.com"
+  },
+  {
+    "name": "Philips Healthcare",
+    "industry": "Distribution",
+    "website": "https://www.philips.com/healthcare"
+  },
+  {
+    "name": "Zimmer Biomet",
+    "industry": "Distribution",
+    "website": "https://www.zimmerbiomet.com"
+  },
+  {
+    "name": "Imperial Dade",
+    "industry": "Distribution",
+    "website": "https://www.imperialdade.com/"
+  },
+  {
+    "name": "WebstaurantStore",
+    "industry": "Distribution",
+    "website": "https://www.webstaurantstore.com/"
+  },
+  {
+    "name": "Wholesale Janitorial Supply",
+    "industry": "Distribution",
+    "website": "https://www.wholesalejanitorialsupply.com/"
+  },
+  {
+    "name": "C&C Janitorial Supplies, Inc.",
+    "industry": "Distribution",
+    "website": "https://www.ccsupplies.com/"
+  },
+  {
+    "name": "Alliance",
+    "industry": "Distribution",
+    "website": "https://alliancepfs.com/"
+  },
+  {
+    "name": "Chemcraft Industries",
+    "industry": "Distribution",
+    "website": "https://www.chemcraftind.com/"
+  },
+  {
+    "name": "North American Corporation",
+    "industry": "Distribution",
+    "website": "https://www.bradyplus.com/north-american"
+  },
+  {
+    "name": "CleanSource Inc.",
+    "industry": "Distribution",
+    "website": "https://www.cleansource.com/"
+  },
+  {
+    "name": "Worldwide Janitor",
+    "industry": "Distribution",
+    "website": "https://www.worldwidejanitor.com/"
+  },
+  {
+    "name": "Wesco International Inc.",
+    "industry": "Distribution",
+    "website": "https://www.wesco.com"
+  },
+  {
+    "name": "Sonepar USA Holdings Inc.",
+    "industry": "Distribution",
+    "website": "https://www.sonepar.com"
+  },
+  {
+    "name": "Graybar Electric Co.",
+    "industry": "Distribution",
+    "website": "https://www.graybar.com"
+  },
+  {
+    "name": "Rexel Holdings (Rexel USA)",
+    "industry": "Distribution",
+    "website": "https://www.rexelusa.com"
+  },
+  {
+    "name": "Consolidated Electrical Distributors (CED)",
+    "industry": "Distribution",
+    "website": "https://www.cedcareers.com"
+  },
+  {
+    "name": "City Electric Supply Co.",
+    "industry": "Distribution",
+    "website": "https://www.cityelectricsupply.com"
+  },
+  {
+    "name": "McNaughton-McKay Electric Co.",
+    "industry": "Distribution",
+    "website": "https://www.mcnaughton-mckay.com"
+  },
+  {
+    "name": "US Electrical Services",
+    "industry": "Distribution",
+    "website": "https://www.uses.com"
+  },
+  {
+    "name": "Crescent Electric Supply Co.",
+    "industry": "Distribution",
+    "website": "https://www.crescentelectric.com"
+  },
+  {
+    "name": "Omni Cable",
+    "industry": "Distribution",
+    "website": "https://www.omnicable.com"
+  },
+  {
+    "name": "Scott Electric",
+    "industry": "Distribution",
+    "website": "https://www.scottelectric.com"
+  },
+  {
+    "name": "Granite City Electrical Supply Inc.",
+    "industry": "Distribution",
+    "website": "https://www.granitecityelectric.com"
+  },
+  {
+    "name": "G&G Electric Supply",
+    "industry": "Distribution",
+    "website": "https://www.ggelectricsupply.com"
+  },
+  {
+    "name": "Coburn Supply Co.",
+    "industry": "Distribution",
+    "website": "https://www.coburns.com"
+  },
+  {
+    "name": "D&S Electrical Supply Co.",
+    "industry": "Distribution",
+    "website": "https://www.dselectrical.com"
+  },
+  {
+    "name": "Swift Electric Supply",
+    "industry": "Distribution",
+    "website": "https://www.swiftelectricsupply.com"
+  },
+  {
+    "name": "Nassau National Cable",
+    "industry": "Distribution",
+    "website": "https://www.nassaunationalcable.com"
+  },
+  {
+    "name": "Watsco Inc.",
+    "industry": "Distribution",
+    "website": "https://www.watsco.com"
+  },
+  {
+    "name": "Ferguson Enterprises LLC",
+    "industry": "Distribution",
+    "website": "https://www.ferguson.com"
+  },
+  {
+    "name": "Winsupply Inc.",
+    "industry": "Distribution",
+    "website": "https://www.winsupplyinc.com"
+  },
+  {
+    "name": "R. E. Michel Co.",
+    "industry": "Distribution",
+    "website": "https://www.remichel.com"
+  },
+  {
+    "name": "F.W. Webb Co.",
+    "industry": "Distribution",
+    "website": "https://www.fwwebb.com"
+  },
+  {
+    "name": "The Habegger Corp.",
+    "industry": "Distribution",
+    "website": "https://www.habegger.com"
+  },
+  {
+    "name": "AC Pro",
+    "industry": "Distribution",
+    "website": "https://www.acpro.com"
+  },
+  {
+    "name": "Sid Harvey Industries",
+    "industry": "Distribution",
+    "website": "https://www.sidharvey.com"
+  },
+  {
+    "name": "Gustave A. Larson Co.",
+    "industry": "Distribution",
+    "website": "https://www.gustavelarson.com"
+  },
+  {
+    "name": "Hercules Industries Inc.",
+    "industry": "Distribution",
+    "website": "https://www.herculesindustries.com"
+  },
+  {
+    "name": "Shearer Supply",
+    "industry": "Distribution",
+    "website": "https://www.shearersupply.com"
+  },
+  {
+    "name": "Auer Steel & Heating Supply Co.",
+    "industry": "Distribution",
+    "website": "https://www.auersteel.com"
+  },
+  {
+    "name": "Conklin Metal Industries",
+    "industry": "Distribution",
+    "website": "https://www.conklinmetal.com"
+  },
+  {
+    "name": "VAD HVAC Distributors",
+    "industry": "Distribution",
+    "website": "https://www.vadhvac.com"
+  },
+  {
+    "name": "American Metals Supply Co. Inc.",
+    "industry": "Distribution",
+    "website": "https://www.amsupply.com"
+  },
+  {
+    "name": "The Corken Steel Products Co.",
+    "industry": "Distribution",
+    "website": "https://www.corken.com"
+  },
+  {
+    "name": "Behler-Young Co.",
+    "industry": "Distribution",
+    "website": "https://www.behler-young.com"
+  },
+  {
+    "name": "G.W. Berkheimer Co. Inc.",
+    "industry": "Distribution",
+    "website": "https://www.gwberkheimer.com"
+  },
+  {
+    "name": "Refrigeration Sales Corp.",
+    "industry": "Distribution",
+    "website": "https://www.refrigerationsales.com"
+  },
+  {
+    "name": "American Refrigeration Supplies Inc.",
+    "industry": "Distribution",
+    "website": "https://www.arsupply.com"
+  },
+  {
+    "name": "APR Supply Co.",
+    "industry": "Distribution",
+    "website": "https://www.aprsupply.com"
+  },
+  {
+    "name": "Johnson Supply",
+    "industry": "Distribution",
+    "website": "https://www.johnsonsupply.com"
+  },
+  {
+    "name": "Charles D. Jones Co.",
+    "industry": "Distribution",
+    "website": "https://www.charlesdjones.com"
+  },
+  {
+    "name": "Young Supply Co.",
+    "industry": "Distribution",
+    "website": "https://www.youngsupplies.com"
+  },
+  {
+    "name": "HVAC Distributors Inc.",
+    "industry": "Distribution",
+    "website": "https://www.hvacdist.com"
+  },
+  {
+    "name": "M&A Supply Co. Inc.",
+    "industry": "Distribution",
+    "website": "https://www.masupply.com"
+  },
+  {
+    "name": "Duncan Supply Co. Inc.",
+    "industry": "Distribution",
+    "website": "https://www.duncansupply.com"
+  },
+  {
+    "name": "First Supply LLC",
+    "industry": "Distribution",
+    "website": "https://www.firstsupply.com"
+  },
+  {
+    "name": "Total Home Supply",
+    "industry": "Distribution",
+    "website": "https://www.totalhomesupply.com"
+  },
+  {
+    "name": "Ingle Supply Co.",
+    "industry": "Distribution",
+    "website": "https://www.inglesupply.com"
+  },
+  {
+    "name": "Ferguson Enterprises",
+    "industry": "Distribution",
+    "website": "https://www.ferguson.com/"
+  },
+  {
+    "name": "Keller Supply",
+    "industry": "Distribution",
+    "website": "https://www.kellersupply.com/"
+  },
+  {
+    "name": "Hajoca",
+    "industry": "Distribution",
+    "website": "https://www.hajoca.com/"
+  },
+  {
+    "name": "Morsco",
+    "industry": "Distribution",
+    "website": "https://www.morsco.com/"
+  },
+  {
+    "name": "Chemed Corporation (Roto-Rooter)",
+    "industry": "Distribution",
+    "website": "https://www.rotorooter.com/"
+  },
+  {
+    "name": "Watts Water Technologies",
+    "industry": "Distribution",
+    "website": "https://www.watts.com/"
+  },
+  {
+    "name": "Patagonia, Inc.",
+    "industry": "Retail",
+    "website": "https://www.patagonia.com"
+  },
+  {
+    "name": "Columbia Sportswear Co.",
+    "industry": "Retail",
+    "website": "https://www.columbia.com"
+  },
+  {
+    "name": "Outdoor Research",
+    "industry": "Retail",
+    "website": "https://www.outdoorresearch.com"
+  },
+  {
+    "name": "Next Adventure",
+    "industry": "Retail",
+    "website": "https://nextadventure.net"
+  },
+  {
+    "name": "Smartwool",
+    "industry": "Retail",
+    "website": "https://www.smartwool.com"
+  },
+  {
+    "name": "The North Face",
+    "industry": "Retail",
+    "website": "https://www.thenorthface.com"
+  },
+  {
+    "name": "Wayfair",
+    "industry": "Retail",
+    "website": "https://www.wayfair.com"
+  },
+  {
+    "name": "Ashley Furniture Industries",
+    "industry": "Retail",
+    "website": "https://www.ashleyfurniture.com"
+  },
+  {
+    "name": "The TJX Companies Inc.",
+    "industry": "Retail",
+    "website": "https://www.tjx.com"
+  },
+  {
+    "name": "IKEA USA",
+    "industry": "Retail",
+    "website": "https://www.ikea.com/us/en/"
+  },
+  {
+    "name": "Rooms To Go",
+    "industry": "Retail",
+    "website": "https://www.roomstogo.com"
+  },
+  {
+    "name": "RH",
+    "industry": "Retail",
+    "website": "https://www.rh.com"
+  },
+  {
+    "name": "Raymour & Flanigan",
+    "industry": "Retail",
+    "website": "https://www.raymourflanigan.com"
+  },
+  {
+    "name": "At Home",
+    "industry": "Retail",
+    "website": "https://www.athome.com"
+  },
+  {
+    "name": "American Furniture Warehouse",
+    "industry": "Retail",
+    "website": "https://www.afw.com"
+  },
+  {
+    "name": "Kirkland’s Home",
+    "industry": "Retail",
+    "website": "https://www.kirklands.com"
+  },
+  {
+    "name": "Ethan Allen",
+    "industry": "Retail",
+    "website": "https://www.ethanallen.com"
+  },
+  {
+    "name": "Crate & Barrel",
+    "industry": "Retail",
+    "website": "https://www.crateandbarrel.com"
+  },
+  {
+    "name": "Pottery Barn",
+    "industry": "Retail",
+    "website": "https://www.potterybarn.com"
+  },
+  {
+    "name": "Havertys",
+    "industry": "Retail",
+    "website": "https://www.havertys.com"
+  },
+  {
+    "name": "West Elm",
+    "industry": "Retail",
+    "website": "https://www.westelm.com"
+  },
+  {
+    "name": "Carvana",
+    "industry": "Retail",
+    "website": "https://www.carvana.com"
+  },
+  {
+    "name": "Copart",
+    "industry": "Retail",
+    "website": "https://www.copart.com"
+  },
+  {
+    "name": "Penske Automotive Group",
+    "industry": "Retail",
+    "website": "https://www.penskeautomotive.com"
+  },
+  {
+    "name": "Lithia Motors",
+    "industry": "Retail",
+    "website": "https://www.lithiainfiniti.com"
+  },
+  {
+    "name": "AutoNation",
+    "industry": "Retail",
+    "website": "https://www.autonation.com"
+  },
+  {
+    "name": "CarMax",
+    "industry": "Retail",
+    "website": "https://www.carmax.com"
+  },
+  {
+    "name": "Asbury Automotive Group",
+    "industry": "Retail",
+    "website": "https://www.asburyauto.com"
+  },
+  {
+    "name": "Group 1 Automotive",
+    "industry": "Retail",
+    "website": "https://www.group1auto.com"
+  },
+  {
+    "name": "Sonic Automotive",
+    "industry": "Retail",
+    "website": "https://www.sonicautomotive.com"
+  },
+  {
+    "name": "O'Reilly Auto Parts",
+    "industry": "Retail",
+    "website": "https://www.oreillyauto.com"
+  },
+  {
+    "name": "AutoZone",
+    "industry": "Retail",
+    "website": "https://www.autozone.com"
+  },
+  {
+    "name": "Barnes & Noble",
+    "industry": "Retail",
+    "website": "https://www.barnesandnoble.com"
+  },
+  {
+    "name": "Books-A-Million",
+    "industry": "Retail",
+    "website": "https://www.booksamillion.com"
+  },
+  {
+    "name": "Better World Books",
+    "industry": "Retail",
+    "website": "https://www.betterworldbooks.com"
+  },
+  {
+    "name": "Sam’s Club",
+    "industry": "Retail",
+    "website": "https://www.samsclub.com"
+  },
+  {
+    "name": "Tiffany & Co.",
+    "industry": "Retail",
+    "website": "https://www.tiffany.com"
+  },
+  {
+    "name": "Kay Jewelers",
+    "industry": "Retail",
+    "website": "https://www.kay.com"
+  },
+  {
+    "name": "Signet Jewelers",
+    "industry": "Retail",
+    "website": "https://www.signetjewelers.com"
+  },
+  {
+    "name": "Helzberg Diamonds",
+    "industry": "Retail",
+    "website": "https://www.helzberg.com"
+  },
+  {
+    "name": "Zale Corporation",
+    "industry": "Retail",
+    "website": "https://www.zales.com"
+  },
+  {
+    "name": "James Avery Artisan Jewelry",
+    "industry": "Retail",
+    "website": "https://www.jamesavery.com"
+  },
+  {
+    "name": "Fred Meyer Jewelers",
+    "industry": "Retail",
+    "website": "https://www.fredmeyerjewelers.com"
+  },
+  {
+    "name": "Robbins Brothers",
+    "industry": "Retail",
+    "website": "https://www.robbinsbrothers.com"
+  },
+  {
+    "name": "Reeds Jewelers",
+    "industry": "Retail",
+    "website": "https://www.reeds.com"
+  },
+  {
+    "name": "Bulgari Corporation of America",
+    "industry": "Retail",
+    "website": "https://www.bulgari.com"
+  },
+  {
+    "name": "7-Eleven Inc.",
+    "industry": "Retail",
+    "website": "https://www.7-eleven.com"
+  },
+  {
+    "name": "Alimentation Couche-Tard Inc.",
+    "industry": "Retail",
+    "website": "https://www.couche-tard.com"
+  },
+  {
+    "name": "Casey's General Stores Inc.",
+    "industry": "Retail",
+    "website": "https://www.caseys.com"
+  },
+  {
+    "name": "Murphy USA Inc.",
+    "industry": "Retail",
+    "website": "https://www.murphyusa.com"
+  },
+  {
+    "name": "EG America LLC",
+    "industry": "Retail",
+    "website": "https://www.egamerica.com"
+  },
+  {
+    "name": "QuikTrip Corp.",
+    "industry": "Retail",
+    "website": "https://www.quiktrip.com"
+  },
+  {
+    "name": "Wawa Inc.",
+    "industry": "Retail",
+    "website": "https://www.wawa.com"
+  },
+  {
+    "name": "Kwik Trip Inc.",
+    "industry": "Retail",
+    "website": "https://www.kwiktrip.com"
+  },
+  {
+    "name": "Maverik Inc.",
+    "industry": "Retail",
+    "website": "https://www.maverik.com"
+  },
+  {
+    "name": "Sheetz Inc.",
+    "industry": "Retail",
+    "website": "https://www.sheetz.com"
+  },
+  {
+    "name": "Love's Travel Stops",
+    "industry": "Retail",
+    "website": "https://www.loves.com"
+  },
+  {
+    "name": "RaceTrac",
+    "industry": "Retail",
+    "website": "https://www.racetrac.com"
+  },
+  {
+    "name": "Cumberland Farms",
+    "industry": "Retail",
+    "website": "https://www.cumberlandfarms.com"
+  },
+  {
+    "name": "Stewart's Shops",
+    "industry": "Retail",
+    "website": "https://www.stewartsshops.com"
+  },
+  {
+    "name": "Office Depot",
+    "industry": "Retail",
+    "website": "https://www.officedepot.com/"
+  },
+  {
+    "name": "Staples",
+    "industry": "Retail",
+    "website": "https://www.staples.com/"
+  },
+  {
+    "name": "Uline",
+    "industry": "Retail",
+    "website": "https://www.uline.com/"
+  },
+  {
+    "name": "Michaels Companies, Inc.",
+    "industry": "Retail",
+    "website": "https://www.michaels.com"
+  },
+  {
+    "name": "Hobby Lobby Stores Inc.",
+    "industry": "Retail",
+    "website": "https://www.hobbylobby.com"
+  },
+  {
+    "name": "Gamestop Corp.",
+    "industry": "Retail",
+    "website": "https://www.gamestop.com"
+  },
+  {
+    "name": "R",
+    "industry": "Retail",
+    "website": "https://www.toysrus.com"
+  },
+  {
+    "name": "FAO Schwarz",
+    "industry": "Retail",
+    "website": "https://www.faoschwarz.com"
+  },
+  {
+    "name": "Build-A-Bear Workshop",
+    "industry": "Retail",
+    "website": "https://www.buildabear.com"
+  },
+  {
+    "name": "Lakeshore Learning Materials",
+    "industry": "Retail",
+    "website": "https://www.lakeshorelearning.com"
+  },
+  {
+    "name": "The Lego Group",
+    "industry": "Retail",
+    "website": "https://www.lego.com"
+  },
+  {
+    "name": "Oriental Trading Company",
+    "industry": "Retail",
+    "website": "https://www.orientaltrading.com"
+  },
+  {
+    "name": "Mastermind Toys",
+    "industry": "Retail",
+    "website": "https://www.mastermindtoys.com"
+  },
+  {
+    "name": "Toy Joy",
+    "industry": "Retail",
+    "website": "https://www.toyjoy.com"
+  },
+  {
+    "name": "Manhattan Toy",
+    "industry": "Retail",
+    "website": "https://www.manhattantoy.com"
+  },
+  {
+    "name": "A.C. Moore",
+    "industry": "Retail",
+    "website": "https://www.acmoore.com"
+  },
+  {
+    "name": "Ben Franklin",
+    "industry": "Retail",
+    "website": "https://www.benfranklin.com"
+  },
+  {
+    "name": "Blick Art Materials",
+    "industry": "Retail",
+    "website": "https://www.dickblick.com"
+  },
+  {
+    "name": "Dunelm Group",
+    "industry": "Retail",
+    "website": "https://www.dunelm.com"
+  },
+  {
+    "name": "Hobbycraft",
+    "industry": "Retail",
+    "website": "https://www.hobbycraft.co.uk"
+  },
+  {
+    "name": "JoAnn Fabrics",
+    "industry": "Retail",
+    "website": "https://www.joann.com"
+  },
+  {
+    "name": "Paper Source",
+    "industry": "Retail",
+    "website": "https://www.papersource.com"
+  },
+  {
+    "name": "The Range",
+    "industry": "Retail",
+    "website": "https://www.therange.co.uk"
+  },
+  {
+    "name": "TJ Maxx",
+    "industry": "Retail",
+    "website": "https://www.tjmaxx.com"
+  },
+  {
+    "name": "Utrecht Art Supplies",
+    "industry": "Retail",
+    "website": "https://www.utrecht.com"
+  },
+  {
+    "name": "Craft Warehouse",
+    "industry": "Retail",
+    "website": "https://craftwarehouse.com"
+  },
+  {
+    "name": "Caleres",
+    "industry": "Retail",
+    "website": "https://www.caleres.com"
+  },
+  {
+    "name": "DSW, Inc.",
+    "industry": "Retail",
+    "website": "https://www.dsw.com"
+  },
+  {
+    "name": "Genesco",
+    "industry": "Retail",
+    "website": "https://www.genesco.com"
+  },
+  {
+    "name": "Deichmann Group",
+    "industry": "Retail",
+    "website": "https://www.deichmann.com"
+  },
+  {
+    "name": "Wolverine",
+    "industry": "Retail",
+    "website": "https://www.wolverine.com"
+  },
+  {
+    "name": "Merrell",
+    "industry": "Retail",
+    "website": "https://www.merrell.com"
+  },
+  {
+    "name": "Crocs",
+    "industry": "Retail",
+    "website": "https://www.crocs.com"
+  },
+  {
+    "name": "Brooks Sports",
+    "industry": "Retail",
+    "website": "https://www.brooksrunning.com"
+  },
+  {
+    "name": "Keen",
+    "industry": "Retail",
+    "website": "https://www.keenfootwear.com"
+  },
+  {
+    "name": "Hoka One One",
+    "industry": "Retail",
+    "website": "https://www.hokaoneone.com"
+  },
+  {
+    "name": "On Running",
+    "industry": "Retail",
+    "website": "https://www.on-running.com"
+  },
+  {
+    "name": "Payless",
+    "industry": "Retail",
+    "website": "https://www.payless.com"
+  },
+  {
+    "name": "Altra Running",
+    "industry": "Retail",
+    "website": "https://www.altrarunning.com"
+  },
+  {
+    "name": "Timberland",
+    "industry": "Retail",
+    "website": "https://www.timberland.com"
+  },
+  {
+    "name": "Robert Wayne Footwear",
+    "industry": "Retail",
+    "website": "https://www.robertwayne.com"
+  },
+  {
+    "name": "Skechers",
+    "industry": "Retail",
+    "website": "https://www.skechers.com"
+  },
+  {
+    "name": "Sperry",
+    "industry": "Retail",
+    "website": "https://www.sperry.com"
+  },
+  {
+    "name": "Dr. Martens",
+    "industry": "Retail",
+    "website": "https://www.drmartens.com"
+  },
+  {
+    "name": "UGG",
+    "industry": "Retail",
+    "website": "https://www.ugg.com"
+  },
+  {
+    "name": "Vans",
+    "industry": "Retail",
+    "website": "https://www.vans.com"
+  },
+  {
+    "name": "Steve Madden",
+    "industry": "Retail",
+    "website": "https://www.stevemadden.com"
+  },
+  {
+    "name": "Sorel",
+    "industry": "Retail",
+    "website": "https://www.sorel.com"
+  },
+  {
+    "name": "Saucony",
+    "industry": "Retail",
+    "website": "https://www.saucony.com"
+  },
+  {
+    "name": "ASICS America",
+    "industry": "Retail",
+    "website": "https://www.asics.com"
+  },
+  {
+    "name": "Nature Made",
+    "industry": "Retail",
+    "website": "https://www.naturemade.com"
+  },
+  {
+    "name": "Thorne Research",
+    "industry": "Retail",
+    "website": "https://www.thorne.com"
+  },
+  {
+    "name": "HUM",
+    "industry": "Retail",
+    "website": "https://www.humnutrition.com"
+  },
+  {
+    "name": "Double Wood Supplements",
+    "industry": "Retail",
+    "website": "https://www.doublewoodsupplements.com"
+  },
+  {
+    "name": "Ritual",
+    "industry": "Retail",
+    "website": "https://www.ritual.com"
+  },
+  {
+    "name": "Garden of Life",
+    "industry": "Retail",
+    "website": "https://www.gardenoflife.com"
+  },
+  {
+    "name": "NOW Foods",
+    "industry": "Retail",
+    "website": "https://www.nowfoods.com"
+  },
+  {
+    "name": "Puritan's Pride",
+    "industry": "Retail",
+    "website": "https://www.puritan.com"
+  },
+  {
+    "name": "Swanson",
+    "industry": "Retail",
+    "website": "https://www.swansonvitamins.com"
+  },
+  {
+    "name": "SmartyPants",
+    "industry": "Retail",
+    "website": "https://smartypantsvitamins.com"
+  },
+  {
+    "name": "Care/of",
+    "industry": "Retail",
+    "website": "https://takecareof.com"
+  },
+  {
+    "name": "Nature’s Way",
+    "industry": "Retail",
+    "website": "https://www.naturesway.com"
+  },
+  {
+    "name": "Flintstones Vitamins",
+    "industry": "Retail",
+    "website": "https://www.flintstonesvitamins.com"
+  },
+  {
+    "name": "Zarbee's",
+    "industry": "Retail",
+    "website": "https://www.zarbees.com"
+  },
+  {
+    "name": "Culturelle",
+    "industry": "Retail",
+    "website": "https://www.culturelle.com"
+  },
+  {
+    "name": "BJ's Wholesale Club",
+    "industry": "Retail",
+    "website": "https://www.bjs.com"
+  },
+  {
+    "name": "Meijer",
+    "industry": "Retail",
+    "website": "https://www.meijer.com"
+  },
+  {
+    "name": "Sam's Club",
+    "industry": "Retail",
+    "website": "https://www.samsclub.com"
+  },
+  {
+    "name": "Metro AG",
+    "industry": "Retail",
+    "website": "https://www.metro.com"
+  },
+  {
+    "name": "Family Dollar",
+    "industry": "Retail",
+    "website": "https://www.familydollar.com"
+  },
+  {
+    "name": "99 Cents Only Stores",
+    "industry": "Retail",
+    "website": "https://www.99only.com"
+  },
+  {
+    "name": "Big Lots",
+    "industry": "Retail",
+    "website": "https://www.biglots.com"
+  },
+  {
+    "name": "Shein",
+    "industry": "Retail",
+    "website": "https://www.shein.com"
+  },
+  {
+    "name": "ASOS",
+    "industry": "Retail",
+    "website": "https://www.asos.com"
+  },
+  {
+    "name": "Forever 21",
+    "industry": "Retail",
+    "website": "https://www.forever21.com"
+  },
+  {
+    "name": "Mango",
+    "industry": "Retail",
+    "website": "https://shop.mango.com"
+  },
+  {
+    "name": "Gap",
+    "industry": "Retail",
+    "website": "https://www.gap.com"
+  },
+  {
+    "name": "Fashion Nova",
+    "industry": "Retail",
+    "website": "https://www.fashionnova.com"
+  },
+  {
+    "name": "Cotton On",
+    "industry": "Retail",
+    "website": "https://cottonon.com"
+  },
+  {
+    "name": "Uniqlo",
+    "industry": "Retail",
+    "website": "https://www.uniqlo.com/us/en/"
+  },
+  {
+    "name": "Mom’s Organic Market",
+    "industry": "Retail",
+    "website": "https://momsorganicmarket.com"
+  },
+  {
+    "name": "Bristol Farms",
+    "industry": "Retail",
+    "website": "https://www.bristolfarms.com"
+  },
+  {
+    "name": "Earth Fare",
+    "industry": "Retail",
+    "website": "https://www.earthfare.com"
+  },
+  {
+    "name": "Trader Joe’s",
+    "industry": "Retail",
+    "website": "https://www.traderjoes.com"
+  },
+  {
+    "name": "Fresh Thyme Market",
+    "industry": "Retail",
+    "website": "https://www.freshthyme.com"
+  },
+  {
+    "name": "Natural Grocers",
+    "industry": "Retail",
+    "website": "https://www.naturalgrocers.com"
+  },
+  {
+    "name": "Safeway",
+    "industry": "Retail",
+    "website": "https://www.safeway.com"
+  },
+  {
+    "name": "Wellness Pet Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.wellnesspetfood.com"
+  },
+  {
+    "name": "Diamond Pet Foods",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.diamondpet.com"
+  },
+  {
+    "name": "Nestlé Purina PetCare",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.purina.com"
+  },
+  {
+    "name": "Hill’s Pet Nutrition",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.hillspet.com"
+  },
+  {
+    "name": "J.M. Smucker",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.jmsmucker.com"
+  },
+  {
+    "name": "Freshpet",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.freshpet.com"
+  },
+  {
+    "name": "Alphia",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.alphia.com"
+  },
+  {
+    "name": "Midwestern Pet Foods",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.midwesternpetfoods.com"
+  },
+  {
+    "name": "Simmons Pet Food",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.simmonspetfood.com"
+  },
+  {
+    "name": "United Petfood",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.unitedpetfood.com"
+  },
+  {
+    "name": "Cotton Babies",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.cottonbabies.com"
+  },
+  {
+    "name": "The Honest Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.honest.com"
+  },
+  {
+    "name": "Munchkin",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.munchkin.com"
+  },
+  {
+    "name": "First Quality",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.firstquality.com"
+  },
+  {
+    "name": "Ferrero",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.ferrero.com"
+  },
+  {
+    "name": "Tootsie Roll Industries",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.tootsie.com"
+  },
+  {
+    "name": "Haribo",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.haribo.com"
+  },
+  {
+    "name": "Just Born",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.justborn.com"
+  },
+  {
+    "name": "Brach's Candy Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.brachs.com"
+  },
+  {
+    "name": "Ferrara Pan Candy Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.ferraropan.com"
+  },
+  {
+    "name": "Wrigley Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.wrigley.com"
+  },
+  {
+    "name": "Jelly Belly",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.jellybelly.com"
+  },
+  {
+    "name": "M&M's",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.mms.com"
+  },
+  {
+    "name": "Spangler Candy Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.spanglercandy.com"
+  },
+  {
+    "name": "Gertrude Hawk Chocolates",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.gertrudehawkchocolates.com"
+  },
+  {
+    "name": "Brown & Haley",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.brownandhaley.com"
+  },
+  {
+    "name": "Edward Marc Brands",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.edwardmarc.com"
+  },
+  {
+    "name": "Kellogg NA Co.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.kelloggcompany.com"
+  },
+  {
+    "name": "Bob's Red Mill Natural Foods",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bobsredmill.com"
+  },
+  {
+    "name": "Umpqua Oats",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.umpquaoats.com"
+  },
+  {
+    "name": "Post Holdings",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.postholdings.com"
+  },
+  {
+    "name": "Quaker Oats Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.quakeroats.com"
+  },
+  {
+    "name": "Kashi",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.kashi.com"
+  },
+  {
+    "name": "Nature's Path",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.naturespath.com"
+  },
+  {
+    "name": "Annie's Homegrown",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.annies.com"
+  },
+  {
+    "name": "Heinz Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.heinz.com"
+  },
+  {
+    "name": "McCormick & Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.mccormick.com"
+  },
+  {
+    "name": "Tabasco (McIlhenny Company)",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.tabasco.com"
+  },
+  {
+    "name": "Kikkoman Corporation",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.kikkomanusa.com"
+  },
+  {
+    "name": "Frank's RedHot",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.franksredhot.com"
+  },
+  {
+    "name": "Hunt's",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.hunts.com"
+  },
+  {
+    "name": "Pace Foods",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.pacefoods.com"
+  },
+  {
+    "name": "Mrs. Butterworth's",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.mrsbutterworths.com"
+  },
+  {
+    "name": "Hellmann's",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.hellmanns.com"
+  },
+  {
+    "name": "Newman's Own",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://newmansown.com"
+  },
+  {
+    "name": "Primal Kitchen",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.primalkitchen.com"
+  },
+  {
+    "name": "Sriracha (Huy Fong Foods)",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.huyfong.com"
+  },
+  {
+    "name": "Georgia-Pacific Corp.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.gp.com"
+  },
+  {
+    "name": "International Paper",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.internationalpaper.com"
+  },
+  {
+    "name": "WestRock",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.westrock.com"
+  },
+  {
+    "name": "Graphic Packaging International",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.graphicpkg.com"
+  },
+  {
+    "name": "Packaging Corporation of America",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.packagingcorp.com"
+  },
+  {
+    "name": "Pratt Industries",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.prattindustries.com"
+  },
+  {
+    "name": "Weyerhaeuser Corporation",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.weyerhaeuser.com"
+  },
+  {
+    "name": "Neenah Paper",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.neenahpaper.com"
+  },
+  {
+    "name": "Procter & Gamble Co",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.pg.com"
+  },
+  {
+    "name": "Unilever N V",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.unilever.com"
+  },
+  {
+    "name": "Colgate-Palmolive Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.colgatepalmolive.com"
+  },
+  {
+    "name": "ChemWorks Group, LLC",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://chemworksco.com"
+  },
+  {
+    "name": "Buff City Soap Supply, LLC",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://buffcitysoap.com"
+  },
+  {
+    "name": "Ultra Soap Direct",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://ultrasoapdirect.com"
+  },
+  {
+    "name": "The Unscented Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://unscentedco.com"
+  },
+  {
+    "name": "Red Bull GmbH",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.redbull.com"
+  },
+  {
+    "name": "Monster Beverage Corp.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.monsterenergy.com"
+  },
+  {
+    "name": "PepsiCo Inc. (Rockstar)",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.pepsico.com"
+  },
+  {
+    "name": "Celsius Holdings Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.celsius.com"
+  },
+  {
+    "name": "Keurig Dr Pepper (C4)",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.keurigdrpepper.com"
+  },
+  {
+    "name": "Living Essentials LLC (5-Hour Energy)",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.5hourenergy.com"
+  },
+  {
+    "name": "Bang Energy",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bangenergy.com"
+  },
+  {
+    "name": "The Coca-Cola Company (Reign Storm)",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.coca-cola.com"
+  },
+  {
+    "name": "National Beverage Corp. (Rip It)",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.nationalbeverage.com"
+  },
+  {
+    "name": "Anheuser-Busch InBev (Hi-Ball)",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.ab-inbev.com"
+  },
+  {
+    "name": "GURU Organic Energy",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://gurubeverage.com"
+  },
+  {
+    "name": "Zevia LLC",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.zevia.com"
+  },
+  {
+    "name": "DAS Labs LLC (Buck ed-Up)",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.daslabs.com"
+  },
+  {
+    "name": "Woodbolt Distribution (Xtend)",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.woodboltdistribution.com"
+  },
+  {
+    "name": "Alani Nu",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://alaninu.com"
+  },
+  {
+    "name": "Ghost Energy",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.ghostlifestyle.com"
+  },
+  {
+    "name": "Zoa Energy",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.zoaenergy.com"
+  },
+  {
+    "name": "Constellation Brands, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.cbrands.com/"
+  },
+  {
+    "name": "Pernod Ricard USA",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.pernod-ricard.com/"
+  },
+  {
+    "name": "E. & J. Gallo Winery",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.gallo.com/"
+  },
+  {
+    "name": "Beam Suntory Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.beamsuntory.com/"
+  },
+  {
+    "name": "Diageo Plc",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.diageo.com/"
+  },
+  {
+    "name": "Brown-Forman Corporation",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.brown-forman.com/"
+  },
+  {
+    "name": "Sazerac Company, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.sazerac.com/"
+  },
+  {
+    "name": "Proximo Spirits (Becle, S.A.B. de C.V.)",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.proximospirits.com/"
+  },
+  {
+    "name": "The Coffee Bean & Tea Leaf",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.coffeebean.com"
+  },
+  {
+    "name": "Colectivo Coffee",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://colectivocoffee.com"
+  },
+  {
+    "name": "Community Coffee",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.communitycoffee.com"
+  },
+  {
+    "name": "Café Britt",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.cafebritt.com"
+  },
+  {
+    "name": "Caffè Nero",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.caffenero.com"
+  },
+  {
+    "name": "Cameron's Coffee",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.cameronscoffee.com"
+  },
+  {
+    "name": "Caribou Coffee",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.cariboucoffee.com"
+  },
+  {
+    "name": "Peet's Coffee & Tea",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.peets.com"
+  },
+  {
+    "name": "Starbucks Corporation",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.starbucks.com"
+  },
+  {
+    "name": "The J.M. Smucker Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.jmsmucker.com"
+  },
+  {
+    "name": "Keurig Dr Pepper Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.keurigdrpepper.com"
+  },
+  {
+    "name": "La Colombe Coffee Roasters",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.lacolombe.com"
+  },
+  {
+    "name": "Blue Bottle Coffee",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://bluebottlecoffee.com"
+  },
+  {
+    "name": "Death Wish Coffee Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.deathwishcoffee.com"
+  },
+  {
+    "name": "Intelligentsia Coffee & Tea",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.intelligentsia.com"
+  },
+  {
+    "name": "Massimo Zanetti Beverage USA",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.mzb-usa.com"
+  },
+  {
+    "name": "Tata Consumer Products Ltd.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.tataconsumer.com"
+  },
+  {
+    "name": "JDE Peet's N.V.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.jdepeets.com"
+  },
+  {
+    "name": "Ben & Jerry's",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.benjerry.com"
+  },
+  {
+    "name": "Häagen-Dazs",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.haagen-dazs.com"
+  },
+  {
+    "name": "General Mills, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.generalmills.com"
+  },
+  {
+    "name": "Kroger Co.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.kroger.com"
+  },
+  {
+    "name": "Dreyer's Grand Ice Cream",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.dreyers.com"
+  },
+  {
+    "name": "Jeni's Splendid Ice Creams",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.jenis.com"
+  },
+  {
+    "name": "Dippin' Dots",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.dippindots.com"
+  },
+  {
+    "name": "Graeter's",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.graeters.com"
+  },
+  {
+    "name": "Cold Stone Creamery",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.coldstonecreamery.com"
+  },
+  {
+    "name": "Blue Bell Creameries",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bluebell.com"
+  },
+  {
+    "name": "Carvel",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.carvel.com"
+  },
+  {
+    "name": "Perry's Ice Cream",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.perrysicecream.com"
+  },
+  {
+    "name": "Tyson Foods, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.tysonfoods.com/"
+  },
+  {
+    "name": "Cargill Meat Solutions Corp.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.cargill.com/"
+  },
+  {
+    "name": "Pilgrim's Pride Corporation",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.pilgrims.com/"
+  },
+  {
+    "name": "Perdue Farms",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.perduefarms.com/"
+  },
+  {
+    "name": "National Beef Packing Co., LLC",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://nationalbeef.com/"
+  },
+  {
+    "name": "Koch Foods LLC",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.kochfoods.com/"
+  },
+  {
+    "name": "Fair Oaks Foods LLC",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.fairoaksfoods.com/"
+  },
+  {
+    "name": "Farmers Pride Inc. (dba Bell & Evans)",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bellandevans.com/"
+  },
+  {
+    "name": "Flowers Foods, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.flowersfoods.com"
+  },
+  {
+    "name": "Grupo Bimbo, S.A.B. de C.V.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.grupobimbo.com"
+  },
+  {
+    "name": "Mondelēz International, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.mondelezinternational.com"
+  },
+  {
+    "name": "Campbell Soup Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.campbellsoupcompany.com"
+  },
+  {
+    "name": "Hearthside Food Solutions",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.hearthsidefoods.com"
+  },
+  {
+    "name": "Dawn Food Products Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.dawnfoods.com"
+  },
+  {
+    "name": "Turano Baking Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.turanobaking.com"
+  },
+  {
+    "name": "SmartyPants Vitamins",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.smartypantsvitamins.com"
+  },
+  {
+    "name": "Nature's Way",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.naturesway.com"
+  },
+  {
+    "name": "OLLY",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.olly.com"
+  },
+  {
+    "name": "Herbalife",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.herbalife.com"
+  },
+  {
+    "name": "Life Extension",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.lifeextension.com"
+  },
+  {
+    "name": "Kirkland Signature",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.costco.com/kirkland-signature.html"
+  },
+  {
+    "name": "The Bountiful Company",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bountifulcompany.com"
+  },
+  {
+    "name": "NutraBio",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.nutrabio.com"
+  },
+  {
+    "name": "Vitafusion",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.vitafusion.com"
+  },
+  {
+    "name": "Nature's Bounty",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.naturesbounty.com"
+  },
+  {
+    "name": "Bonduelle",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bonduelle.com"
+  },
+  {
+    "name": "Dole Packaged Foods",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.dole.com"
+  },
+  {
+    "name": "Del Monte Foods, Inc.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.delmonte.com"
+  },
+  {
+    "name": "Seneca Foods Corporation",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.senecafoods.com"
+  },
+  {
+    "name": "National Beverage Corp.",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.nationalbeverage.com"
+  },
+  {
+    "name": "Knouse Foods",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.knousefoods.com"
+  },
+  {
+    "name": "Mama Lil's",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.mamalils.com"
+  },
+  {
+    "name": "Bush's Best",
+    "industry": "Consumer Packaged Goods",
+    "website": "https://www.bushbeans.com"
+  },
+  {
+    "name": "Valdese Weavers",
+    "industry": "Manufacturing",
+    "website": "https://www.valdeseweavers.com/"
+  },
+  {
+    "name": "WTS - World Textile Sourcing",
+    "industry": "Manufacturing",
+    "website": "https://www.worldtextilesourcing.com/"
+  },
+  {
+    "name": "American Textile Company",
+    "industry": "Manufacturing",
+    "website": "https://www.americantextile.com/"
+  },
+  {
+    "name": "Elevate Textiles",
+    "industry": "Manufacturing",
+    "website": "https://www.elevatetextiles.com/"
+  },
+  {
+    "name": "Milliken & Company",
+    "industry": "Manufacturing",
+    "website": "https://www.milliken.com/"
+  },
+  {
+    "name": "Apex Mills",
+    "industry": "Manufacturing",
+    "website": "https://www.apexmills.com/"
+  },
+  {
+    "name": "Hanesbrands, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.hanes.com/"
+  },
+  {
+    "name": "Fruit Of The Loom, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.fruit.com/"
+  },
+  {
+    "name": "Mohawk Industries, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.mohawkind.com/"
+  },
+  {
+    "name": "Shaw Industries, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.shawinc.com/"
+  },
+  {
+    "name": "Maples Industries, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.maplesrugs.com/"
+  },
+  {
+    "name": "Best Home Furnishings",
+    "industry": "Manufacturing",
+    "website": "https://www.besthomefurnishings.com"
+  },
+  {
+    "name": "Sherrill Furniture Company",
+    "industry": "Manufacturing",
+    "website": "https://www.sherrillfurniture.com"
+  },
+  {
+    "name": "Vermont Woods Studios",
+    "industry": "Manufacturing",
+    "website": "https://vermontwoodsstudios.com"
+  },
+  {
+    "name": "Guardian Industries Corp.",
+    "industry": "Manufacturing",
+    "website": "https://www.guardianglass.com/us/en"
+  },
+  {
+    "name": "Anchor Hocking Co.",
+    "industry": "Manufacturing",
+    "website": "https://www.anchorhocking.com"
+  },
+  {
+    "name": "Libbey Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.libbey.com"
+  },
+  {
+    "name": "Pittsburgh Glass Works",
+    "industry": "Manufacturing",
+    "website": "http://www.pghglass.com"
+  },
+  {
+    "name": "AGC Glass Company North America",
+    "industry": "Manufacturing",
+    "website": "https://www.agc.com/en/"
+  },
+  {
+    "name": "Georgia-Pacific LLC",
+    "industry": "Manufacturing",
+    "website": "https://www.gp.com"
+  },
+  {
+    "name": "Weyerhaeuser",
+    "industry": "Manufacturing",
+    "website": "https://www.weyerhaeuser.com"
+  },
+  {
+    "name": "Domtar",
+    "industry": "Manufacturing",
+    "website": "https://www.domtar.com"
+  },
+  {
+    "name": "Clearwater Paper",
+    "industry": "Manufacturing",
+    "website": "https://www.clearwaterpaper.com"
+  },
+  {
+    "name": "Smurfit Kappa",
+    "industry": "Manufacturing",
+    "website": "https://www.smurfitkappa.com"
+  },
+  {
+    "name": "Sonoco",
+    "industry": "Manufacturing",
+    "website": "https://www.sonoco.com"
+  },
+  {
+    "name": "Seaman Paper Company",
+    "industry": "Manufacturing",
+    "website": "https://www.seamanpaper.com"
+  },
+  {
+    "name": "Pixelle Specialty Solutions",
+    "industry": "Manufacturing",
+    "website": "https://www.pixelle.com"
+  },
+  {
+    "name": "Fort James Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.fortjames.com"
+  },
+  {
+    "name": "RockTenn",
+    "industry": "Manufacturing",
+    "website": "https://www.rocktenn.com"
+  },
+  {
+    "name": "Advanced Micro Devices (AMD)",
+    "industry": "Manufacturing",
+    "website": "https://www.amd.com"
+  },
+  {
+    "name": "Micron Technology",
+    "industry": "Manufacturing",
+    "website": "https://www.micron.com"
+  },
+  {
+    "name": "Texas Instruments (TI)",
+    "industry": "Manufacturing",
+    "website": "https://www.ti.com"
+  },
+  {
+    "name": "ON Semiconductor (onsemi)",
+    "industry": "Manufacturing",
+    "website": "https://www.onsemi.com"
+  },
+  {
+    "name": "GlobalFoundries",
+    "industry": "Manufacturing",
+    "website": "https://www.globalfoundries.com"
+  },
+  {
+    "name": "NVIDIA Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.nvidia.com"
+  },
+  {
+    "name": "Broadcom Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.broadcom.com"
+  },
+  {
+    "name": "Samsung Austin Semiconductor LLC",
+    "industry": "Manufacturing",
+    "website": "https://www.samsung.com/us/semiconductor/"
+  },
+  {
+    "name": "Amkor Technology",
+    "industry": "Manufacturing",
+    "website": "https://www.amkor.com"
+  },
+  {
+    "name": "NXP Semiconductors",
+    "industry": "Manufacturing",
+    "website": "https://www.nxp.com"
+  },
+  {
+    "name": "Enphase Energy",
+    "industry": "Manufacturing",
+    "website": "https://www.enphase.com"
+  },
+  {
+    "name": "Applied Materials",
+    "industry": "Manufacturing",
+    "website": "https://www.appliedmaterials.com"
+  },
+  {
+    "name": "Texas Instruments",
+    "industry": "Manufacturing",
+    "website": "https://www.ti.com"
+  },
+  {
+    "name": "Infineon Technologies",
+    "industry": "Manufacturing",
+    "website": "https://www.infineon.com"
+  },
+  {
+    "name": "Skyworks Solutions",
+    "industry": "Manufacturing",
+    "website": "https://www.skyworksinc.com"
+  },
+  {
+    "name": "Synaptics",
+    "industry": "Manufacturing",
+    "website": "https://www.synaptics.com"
+  },
+  {
+    "name": "Northrop Grumman Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.northropgrumman.com"
+  },
+  {
+    "name": "General Dynamics Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.gd.com"
+  },
+  {
+    "name": "General Electric Company",
+    "industry": "Manufacturing",
+    "website": "https://www.ge.com"
+  },
+  {
+    "name": "Karman Space & Defense",
+    "industry": "Manufacturing",
+    "website": "https://karman-sd.com/"
+  },
+  {
+    "name": "Ensign-Bickford Aerospace & Defense",
+    "industry": "Manufacturing",
+    "website": "https://www.ensign-bickford.com"
+  },
+  {
+    "name": "Johnson & Johnson MedTech",
+    "industry": "Manufacturing",
+    "website": "https://www.jnj.com/medical-devices"
+  },
+  {
+    "name": "Stryker Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.stryker.com"
+  },
+  {
+    "name": "GE Healthcare",
+    "industry": "Manufacturing",
+    "website": "https://www.gehealthcare.com"
+  },
+  {
+    "name": "Boston Scientific",
+    "industry": "Manufacturing",
+    "website": "https://www.bostonscientific.com"
+  },
+  {
+    "name": "BD (Becton, Dickinson and Company)",
+    "industry": "Manufacturing",
+    "website": "https://www.bd.com"
+  },
+  {
+    "name": "Baxter International",
+    "industry": "Manufacturing",
+    "website": "https://www.baxter.com"
+  },
+  {
+    "name": "Alcon",
+    "industry": "Manufacturing",
+    "website": "https://www.alcon.com"
+  },
+  {
+    "name": "B. Braun",
+    "industry": "Manufacturing",
+    "website": "https://www.bbraun.com"
+  },
+  {
+    "name": "Intuitive Surgical",
+    "industry": "Manufacturing",
+    "website": "https://www.intuitive.com"
+  },
+  {
+    "name": "Olympus Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.olympus-global.com"
+  },
+  {
+    "name": "Terumo Corporation",
+    "industry": "Manufacturing",
+    "website": "https://www.terumo.com"
+  },
+  {
+    "name": "Smith & Nephew",
+    "industry": "Manufacturing",
+    "website": "https://www.smith-nephew.com"
+  },
+  {
+    "name": "Fujifilm Holdings (Healthcare segment)",
+    "industry": "Manufacturing",
+    "website": "https://www.fujifilm.com/us/en/healthcare"
+  },
+  {
+    "name": "Hologic",
+    "industry": "Manufacturing",
+    "website": "https://www.hologic.com"
+  },
+  {
+    "name": "Mindray",
+    "industry": "Manufacturing",
+    "website": "https://www.mindray.com"
+  },
+  {
+    "name": "East Penn Manufacturing Co.",
+    "industry": "Manufacturing",
+    "website": "https://www.dekabatteries.com"
+  },
+  {
+    "name": "Clarios Advanced Solutions, LLC",
+    "industry": "Manufacturing",
+    "website": "https://www.clarios.com"
+  },
+  {
+    "name": "SK Battery America, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.skbattery.com"
+  },
+  {
+    "name": "Stryten Salina, LLC",
+    "industry": "Manufacturing",
+    "website": "https://www.stryten.com"
+  },
+  {
+    "name": "Ultium Cells, LLC",
+    "industry": "Manufacturing",
+    "website": "https://www.ultiumcells.com"
+  },
+  {
+    "name": "A123 Systems, LLC",
+    "industry": "Manufacturing",
+    "website": "https://www.a123systems.com"
+  },
+  {
+    "name": "EnerSys, Inc.",
+    "industry": "Manufacturing",
+    "website": "https://www.enersys.com"
+  },
+  {
+    "name": "Clarios, LLC",
+    "industry": "Manufacturing",
+    "website": "https://www.clarios.com"
+  },
+  {
+    "name": "Southern Glazer's Wine & Spirits",
+    "industry": "Distribution",
+    "website": "https://www.southernglazers.com/"
+  },
+  {
+    "name": "Breakthru Beverage Group",
+    "industry": "Distribution",
+    "website": "https://www.breakthrubev.com/"
+  },
+  {
+    "name": "Martignetti Companies",
+    "industry": "Distribution",
+    "website": "https://www.martignetti.com/"
+  },
+  {
+    "name": "Winebow",
+    "industry": "Distribution",
+    "website": "https://www.winebow.com/"
+  },
+  {
+    "name": "Young’s Market Company",
+    "industry": "Distribution",
+    "website": "https://www.youngsmarket.com/"
+  },
+  {
+    "name": "Allied Beverage",
+    "industry": "Distribution",
+    "website": "https://www.alliedbeverage.com/"
+  },
+  {
+    "name": "Charmer-Sunbelt Group",
+    "industry": "Distribution",
+    "website": "https://www.charmer-sunbelt.com/"
+  },
+  {
+    "name": "Opici Family Distributing",
+    "industry": "Distribution",
+    "website": "https://www.opiciwines.com/"
+  },
+  {
+    "name": "Frederick Wildman and Sons",
+    "industry": "Distribution",
+    "website": "https://www.frederickwildman.com/"
+  },
+  {
+    "name": "Republic National Distributing Company",
+    "industry": "Distribution",
+    "website": "https://www.rndc-usa.com/"
+  },
+  {
+    "name": "Staples Inc.",
+    "industry": "Distribution",
+    "website": "https://www.staples.com"
+  },
+  {
+    "name": "Office Depot, Inc.",
+    "industry": "Distribution",
+    "website": "https://www.officedepot.com"
+  },
+  {
+    "name": "3M Company",
+    "industry": "Distribution",
+    "website": "https://www.3m.com"
+  },
+  {
+    "name": "BIC Group",
+    "industry": "Distribution",
+    "website": "https://www.bic.com"
+  },
+  {
+    "name": "ACCO Brands Corporation",
+    "industry": "Distribution",
+    "website": "https://www.accobrands.com"
+  },
+  {
+    "name": "Pilot Corporation",
+    "industry": "Distribution",
+    "website": "https://www.pilotpen.com"
+  },
+  {
+    "name": "Kokuyo Co., Ltd.",
+    "industry": "Distribution",
+    "website": "https://www.kokuyo.com"
+  },
+  {
+    "name": "Lyreco Group",
+    "industry": "Distribution",
+    "website": "https://www.lyreco.com"
+  },
+  {
+    "name": "Essendant",
+    "industry": "Distribution",
+    "website": "https://www.essendant.com"
+  },
+  {
+    "name": "HNI Corporation",
+    "industry": "Distribution",
+    "website": "https://www.hnicorp.com"
+  },
+  {
+    "name": "International Paper Co",
+    "industry": "Distribution",
+    "website": "https://www.internationalpaper.com"
+  },
+  {
+    "name": "WestRock Co",
+    "industry": "Distribution",
+    "website": "https://www.westrock.com"
+  },
+  {
+    "name": "Berry Global Group Inc",
+    "industry": "Distribution",
+    "website": "https://www.berryglobal.com"
+  },
+  {
+    "name": "Crown Holdings Inc",
+    "industry": "Distribution",
+    "website": "https://www.crowncork.com"
+  },
+  {
+    "name": "Pactiv Evergreen",
+    "industry": "Distribution",
+    "website": "https://www.pactiv.com"
+  },
+  {
+    "name": "Major Safety",
+    "industry": "Distribution",
+    "website": "https://www.majorsafety.com"
+  },
+  {
+    "name": "Total Safety",
+    "industry": "Distribution",
+    "website": "https://www.totalsafety.com"
+  },
+  {
+    "name": "Ritz Safety",
+    "industry": "Distribution",
+    "website": "https://www.ritzsafety.com"
+  },
+  {
+    "name": "Mann Supply",
+    "industry": "Distribution",
+    "website": "https://mannsupply.com"
+  },
+  {
+    "name": "Dentec Safety",
+    "industry": "Distribution",
+    "website": "https://dentecsafety.com"
+  },
+  {
+    "name": "McLane Foodservice",
+    "industry": "Distribution",
+    "website": "https://www.mclaneco.com"
+  },
+  {
+    "name": "Reinhart Foodservice",
+    "industry": "Distribution",
+    "website": "https://www.reinhartfoodservice.com"
+  },
+  {
+    "name": "The Martin-Brower Company",
+    "industry": "Distribution",
+    "website": "https://www.martinbrower.com"
+  },
+  {
+    "name": "Ben E. Keith Company",
+    "industry": "Distribution",
+    "website": "https://www.benekeith.com"
+  },
+  {
+    "name": "Food Services of America",
+    "industry": "Distribution",
+    "website": "https://www.fsafood.com"
+  },
+  {
+    "name": "Shamrock Foods Company",
+    "industry": "Distribution",
+    "website": "https://www.shamrockfoodservice.com"
+  },
+  {
+    "name": "Golden State Foods",
+    "industry": "Distribution",
+    "website": "https://www.goldenstatefoods.com"
+  },
+  {
+    "name": "Harbor Foodservice",
+    "industry": "Distribution",
+    "website": "https://www.harborfoodservice.com"
+  },
+  {
+    "name": "Maines Paper & Food Service",
+    "industry": "Distribution",
+    "website": "https://www.maines.net"
+  },
+  {
+    "name": "Nicholas and Company",
+    "industry": "Distribution",
+    "website": "https://www.nicholasandco.com"
+  },
+  {
+    "name": "DC Pet Distribution",
+    "industry": "Distribution",
+    "website": "https://dcpetdistribution.com/"
+  },
+  {
+    "name": "Pet Palette Distribution",
+    "industry": "Distribution",
+    "website": "https://petpalettedistribution.com/"
+  },
+  {
+    "name": "AFCO Distribution",
+    "industry": "Distribution",
+    "website": "https://www.afcodistribution.com/"
+  },
+  {
+    "name": "Phillips Pet Food & Supplies",
+    "industry": "Distribution",
+    "website": "https://www.phillipspet.com/"
+  },
+  {
+    "name": "RJ Matthews Company",
+    "industry": "Distribution",
+    "website": "https://www.rjmatthews.com/"
+  },
+  {
+    "name": "The Gralen Company",
+    "industry": "Distribution",
+    "website": "https://www.gralenco.com/"
+  },
+  {
+    "name": "Marshall Pet Products Inc.",
+    "industry": "Distribution",
+    "website": "https://www.marshallpet.com/"
+  },
+  {
+    "name": "Pet Food Experts, Inc.",
+    "industry": "Distribution",
+    "website": "https://www.petfoodexperts.com/"
+  },
+  {
+    "name": "King Wholesale Inc.",
+    "industry": "Distribution",
+    "website": "https://www.kingwholesale.com/"
+  },
+  {
+    "name": "Arrow Electronics, Inc.",
+    "industry": "Distribution",
+    "website": "https://www.arrow.com"
+  },
+  {
+    "name": "Avnet, Inc.",
+    "industry": "Distribution",
+    "website": "https://www.avnet.com"
+  },
+  {
+    "name": "PC Connection, Inc.",
+    "industry": "Distribution",
+    "website": "https://www.pcconnection.com"
+  },
+  {
+    "name": "ScanSource, Inc.",
+    "industry": "Distribution",
+    "website": "https://www.scansource.com"
+  },
+  {
+    "name": "EACO Corp",
+    "industry": "Distribution",
+    "website": "https://www.eacocorp.com"
+  },
+  {
+    "name": "Taitron Components Incorporated",
+    "industry": "Distribution",
+    "website": "https://www.taitroncomponents.com"
+  },
+  {
+    "name": "TD SYNNEX Corporation",
+    "industry": "Distribution",
+    "website": "https://www.synnex.com"
+  },
+  {
+    "name": "Ingram Micro",
+    "industry": "Distribution",
+    "website": "https://www.ingrammicro.com"
+  },
+  {
+    "name": "Carahsoft",
+    "industry": "Distribution",
+    "website": "https://www.carahsoft.com"
+  },
+  {
+    "name": "Galleher, LLC",
+    "industry": "Distribution",
+    "website": "https://galleher.com"
+  },
+  {
+    "name": "Bedrosians Tile & Stone",
+    "industry": "Distribution",
+    "website": "https://www.bedrosians.com"
+  },
+  {
+    "name": "UCX",
+    "industry": "Distribution",
+    "website": "https://ucx.com"
+  },
+  {
+    "name": "All Surfaces",
+    "industry": "Distribution",
+    "website": "https://allsurfaces.com"
+  },
+  {
+    "name": "Professional Flooring Supply",
+    "industry": "Distribution",
+    "website": "https://www.professionalflooring.com"
+  }
+]
