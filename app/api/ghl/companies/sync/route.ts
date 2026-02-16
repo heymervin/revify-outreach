@@ -149,10 +149,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Default: Create a new sync job for background processing
+    // Pin the active GHL account so the Edge Function uses the correct credentials
     const { data: newJob, error: insertError } = await adminClient
       .from('ghl_sync_jobs')
       .insert({
         organization_id: organizationId,
+        ghl_account_id: ghlAccount.id,
         status: 'pending',
         current_page: 0,
         companies_synced: 0,
