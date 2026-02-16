@@ -33,6 +33,7 @@ interface GHLBusinessSearchResponse {
 
 interface CompanyRecord {
   organization_id: string;
+  ghl_account_id: string;
   ghl_id: string;
   name: string;
   website: string | null;
@@ -258,6 +259,7 @@ async function handleIncrementalSync(
 
       allCompanies.push({
         organization_id: organizationId,
+        ghl_account_id: accountId,
         ghl_id: record.id,
         name: record.properties.name,
         website: record.properties.website || null,
@@ -285,7 +287,7 @@ async function handleIncrementalSync(
     const { error: upsertError } = await adminClient
       .from('ghl_companies')
       .upsert(batch, {
-        onConflict: 'organization_id,ghl_id',
+        onConflict: 'organization_id,ghl_account_id,ghl_id',
         ignoreDuplicates: false,
       });
 
@@ -375,11 +377,17 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // Get companies count from ghl_companies table
-    const { count: companiesCount } = await adminClient
+    // Get companies count from ghl_companies table, scoped to active account
+    const companiesQuery = adminClient
       .from('ghl_companies')
       .select('*', { count: 'exact', head: true })
       .eq('organization_id', organizationId);
+
+    if (ghlAccount) {
+      companiesQuery.eq('ghl_account_id', ghlAccount.id);
+    }
+
+    const { count: companiesCount } = await companiesQuery;
 
     const syncedAt = ghlAccount.last_sync_at;
     const isStale = !syncedAt || (Date.now() - new Date(syncedAt).getTime() > 60 * 60 * 1000);

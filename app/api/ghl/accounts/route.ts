@@ -36,7 +36,18 @@ export async function GET() {
       return NextResponse.json({ error: 'Failed to fetch accounts' }, { status: 500 });
     }
 
-    return NextResponse.json({ accounts: accounts || [] });
+    // Fetch user's currently selected account
+    const adminClient = createAdminClient();
+    const { data: userSettings } = await adminClient
+      .from('user_settings')
+      .select('selected_ghl_account_id')
+      .eq('user_id', user.id)
+      .single();
+
+    return NextResponse.json({
+      accounts: accounts || [],
+      selected_account_id: userSettings?.selected_ghl_account_id || null,
+    });
   } catch (error) {
     console.error('[GHL Accounts API] Unexpected error:', error);
     return NextResponse.json(

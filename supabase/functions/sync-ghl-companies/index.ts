@@ -66,6 +66,7 @@ interface GHLAccountRecord {
 
 interface CompanyRecord {
   organization_id: string;
+  ghl_account_id: string;
   ghl_id: string;
   name: string;
   website: string | null;
@@ -244,6 +245,7 @@ async function processJob(supabase: ReturnType<typeof createClient>, job: SyncJo
 
         allCompanies.push({
           organization_id: job.organization_id,
+          ghl_account_id: (ghlAccount as GHLAccountRecord).id,
           ghl_id: record.id,
           name: record.properties.name,
           website: record.properties.website || null,
@@ -274,7 +276,7 @@ async function processJob(supabase: ReturnType<typeof createClient>, job: SyncJo
         const { error: upsertError } = await supabase
           .from('ghl_companies')
           .upsert(batch, {
-            onConflict: 'organization_id,ghl_id',
+            onConflict: 'organization_id,ghl_account_id,ghl_id',
             ignoreDuplicates: false,
           });
 
