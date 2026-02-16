@@ -638,6 +638,23 @@ export default function ResearchPage() {
         </div>
       </header>
 
+      {/* Active GHL Account Banner */}
+      {activeAccountName && (
+        <div className="bg-teal-50 border-b border-teal-100 px-4 sm:px-8 py-3">
+          <div className="flex items-center justify-between max-w-4xl mx-auto">
+            <div className="flex items-center gap-2">
+              <Building2 className="w-4 h-4 text-teal-700" />
+              <p className="text-sm text-teal-700">
+                Active GHL Account: <span className="font-semibold">{activeAccountName}</span>
+              </p>
+            </div>
+            <span className="text-xs text-teal-600">
+              Research and push operations use this account
+            </span>
+          </div>
+        </div>
+      )}
+
       <div className="p-4 sm:p-8">
         <div className="max-w-4xl mx-auto">
           {/* Research Form */}
@@ -1426,7 +1443,7 @@ export default function ResearchPage() {
                   ) : (
                     <Send className="w-4 h-4" />
                   )}
-                  {pushSuccess ? 'Synced to GHL' : !selectedGhlCompany ? 'Select GHL Company First' : 'Push to GHL'}
+                  {pushSuccess ? 'Synced to GHL' : !selectedGhlCompany ? 'Select GHL Company First' : `Push to GHL${activeAccountName ? ` (${activeAccountName})` : ''}`}
                 </button>
                 <button className="btn-secondary flex-1 min-h-[44px]">
                   <Copy className="w-4 h-4" />
