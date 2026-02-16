@@ -82,13 +82,29 @@ export async function POST(request: Request) {
       );
     }
 
-    // Check if this is the first account for the org
+    // Check existing accounts for the org
     const { data: existingAccounts } = await supabase
       .from('ghl_accounts')
-      .select('id')
+      .select('id, location_id')
       .eq('organization_id', userData.organization_id);
 
     const isFirstAccount = !existingAccounts || existingAccounts.length === 0;
+
+    // Enforce max 5 accounts per organization
+    if (existingAccounts && existingAccounts.length >= 5) {
+      return NextResponse.json(
+        { error: 'Maximum of 5 GHL accounts per organization' },
+        { status: 400 }
+      );
+    }
+
+    // Prevent duplicate location_id within same org
+    if (existingAccounts?.some((a) => a.location_id === location_id)) {
+      return NextResponse.json(
+        { error: 'An account with this Location ID already exists' },
+        { status: 409 }
+      );
+    }
 
     // Encrypt access token if provided
     let encryptedAccessToken = null;

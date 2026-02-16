@@ -42,14 +42,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Account not found' }, { status: 404 });
     }
 
-    // Update user_settings with selected account
-    const { error: updateError } = await adminClient
+    // Upsert user_settings to handle users who may not have a row yet
+    const { error: upsertError } = await adminClient
       .from('user_settings')
-      .update({ selected_ghl_account_id: account_id })
-      .eq('user_id', user.id);
+      .upsert(
+        { user_id: user.id, selected_ghl_account_id: account_id },
+        { onConflict: 'user_id' }
+      );
 
-    if (updateError) {
-      console.error('[GHL Select API] Error updating user settings:', updateError);
+    if (upsertError) {
+      console.error('[GHL Select API] Error updating user settings:', upsertError);
       return NextResponse.json({ error: 'Failed to update selection' }, { status: 500 });
     }
 

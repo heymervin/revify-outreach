@@ -36,36 +36,63 @@ export async function PATCH(
 
     const adminClient = createAdminClient();
 
-    // If setting as primary, unset other primary accounts first
+    // If setting as primary, use RPC to atomically swap primary in one transaction
     if (is_primary === true) {
-      await adminClient
-        .from('ghl_accounts')
-        .update({ is_primary: false })
-        .eq('organization_id', userData.organization_id)
-        .neq('id', accountId);
+      const { error: rpcError } = await adminClient.rpc('set_primary_ghl_account', {
+        p_account_id: accountId,
+        p_organization_id: userData.organization_id,
+      });
+
+      if (rpcError) {
+        // Fallback: unset others then set this one (non-atomic but functional)
+        console.warn('[GHL Accounts API] RPC not available, falling back:', rpcError.message);
+        await adminClient
+          .from('ghl_accounts')
+          .update({ is_primary: false })
+          .eq('organization_id', userData.organization_id);
+
+        await adminClient
+          .from('ghl_accounts')
+          .update({ is_primary: true })
+          .eq('id', accountId)
+          .eq('organization_id', userData.organization_id);
+      }
     }
 
-    // Build update object
+    // Build update object for non-primary fields
     const updates: Record<string, unknown> = {};
     if (account_name !== undefined) updates.account_name = account_name;
     if (location_id !== undefined) updates.location_id = location_id;
-    if (is_primary !== undefined) updates.is_primary = is_primary;
     if (access_token) {
       const encrypted = encryptApiKey(access_token);
       updates.access_token_encrypted = encrypted.encrypted;
     }
 
-    const { data: updatedAccount, error: updateError } = await adminClient
+    // Only run non-primary update if there are fields to update
+    if (Object.keys(updates).length > 0) {
+      const { error: updateError } = await adminClient
+        .from('ghl_accounts')
+        .update(updates)
+        .eq('id', accountId)
+        .eq('organization_id', userData.organization_id);
+
+      if (updateError) {
+        console.error('[GHL Accounts API] Error updating account:', updateError);
+        return NextResponse.json({ error: 'Failed to update account' }, { status: 500 });
+      }
+    }
+
+    // Fetch the updated account to return
+    const { data: updatedAccount, error: fetchError } = await adminClient
       .from('ghl_accounts')
-      .update(updates)
+      .select('id, account_name, location_id, location_name, is_primary, last_sync_at')
       .eq('id', accountId)
       .eq('organization_id', userData.organization_id)
-      .select('id, account_name, location_id, location_name, is_primary, last_sync_at')
       .single();
 
-    if (updateError) {
-      console.error('[GHL Accounts API] Error updating account:', updateError);
-      return NextResponse.json({ error: 'Failed to update account' }, { status: 500 });
+    if (fetchError) {
+      console.error('[GHL Accounts API] Error fetching updated account:', fetchError);
+      return NextResponse.json({ error: 'Failed to fetch updated account' }, { status: 500 });
     }
 
     return NextResponse.json({ account: updatedAccount });
@@ -109,11 +136,12 @@ export async function DELETE(
 
     const adminClient = createAdminClient();
 
-    // Check if this is the only account
+    // Check if this is the only account (order by created_at for proper promotion)
     const { data: allAccounts } = await adminClient
       .from('ghl_accounts')
-      .select('id, is_primary')
-      .eq('organization_id', userData.organization_id);
+      .select('id, is_primary, created_at')
+      .eq('organization_id', userData.organization_id)
+      .order('created_at', { ascending: true });
 
     if (!allAccounts || allAccounts.length <= 1) {
       return NextResponse.json(
@@ -138,14 +166,14 @@ export async function DELETE(
       return NextResponse.json({ error: 'Failed to delete account' }, { status: 500 });
     }
 
-    // If deleted account was primary, promote oldest remaining account
+    // If deleted account was primary, promote oldest remaining account (list sorted by created_at)
     if (wasPrimary) {
-      const remaining = allAccounts.filter((a) => a.id !== accountId);
-      if (remaining.length > 0) {
+      const oldest = allAccounts.find((a) => a.id !== accountId);
+      if (oldest) {
         await adminClient
           .from('ghl_accounts')
           .update({ is_primary: true })
-          .eq('id', remaining[0].id);
+          .eq('id', oldest.id);
       }
     }
 

@@ -28,10 +28,12 @@ export async function getPrimaryGHLAccount(
 }
 
 /**
- * Get a specific GHL account by ID
+ * Get a specific GHL account by ID, scoped to an organization.
+ * Requires organizationId to prevent cross-tenant data access.
  */
 export async function getGHLAccountById(
-  accountId: string
+  accountId: string,
+  organizationId: string
 ): Promise<GHLAccountWithTokens | null> {
   const supabase = createAdminClient();
 
@@ -39,6 +41,7 @@ export async function getGHLAccountById(
     .from('ghl_accounts')
     .select('*')
     .eq('id', accountId)
+    .eq('organization_id', organizationId)
     .single();
 
   if (error || !data) {
