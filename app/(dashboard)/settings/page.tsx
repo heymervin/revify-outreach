@@ -25,9 +25,12 @@ import {
   Copy,
 } from 'lucide-react';
 import { GHLAccountsSection } from '@/components/settings/GHLAccountsSection';
+import { ModelConfigSection } from '@/components/settings/ModelConfigSection';
+import { Sparkles } from 'lucide-react';
 
 const tabs = [
   { id: 'api-keys', label: 'API Keys', icon: Key },
+  { id: 'models', label: 'AI Models', icon: Sparkles },
   { id: 'prompts', label: 'Prompts', icon: FileText },
   { id: 'ghl', label: 'GoHighLevel', icon: LinkIcon },
   { id: 'profile', label: 'Profile', icon: User },
@@ -574,6 +577,23 @@ export default function SettingsPage() {
                   </div>
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* AI Models Tab */}
+          {activeTab === 'models' && (
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-purple-600" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-900">AI Model Configuration</h3>
+                  <p className="text-sm text-slate-500">Choose which AI models to use for different operations</p>
+                </div>
+              </div>
+
+              <ModelConfigSection />
             </div>
           )}
 
