@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient, createAdminClient } from '@/lib/supabase/server';
 import { decryptApiKey } from '@/lib/crypto';
 import { validateInput, emailSendSchema } from '@/lib/validation';
+import { getGHLAccountById, getActiveGHLAccount } from '@/lib/ghl/getActiveAccount';
 import {
   handleApiError,
   AuthenticationError,
@@ -53,10 +54,10 @@ export async function POST(
       throw new NotFoundError('Organization');
     }
 
-    // Get the draft
+    // Get the draft with GHL account ID
     const { data: draft, error: draftError } = await supabase
       .from('email_drafts')
-      .select('*')
+      .select('*, ghl_account_id')
       .eq('id', id)
       .eq('user_id', user.id)
       .single();
@@ -87,37 +88,33 @@ export async function POST(
       throw new ValidationError(`Email body must be ${MAX_BODY_LENGTH} characters or less`);
     }
 
-    // Get GHL config using admin client to bypass RLS
-    const { data: ghlConfig } = await adminClient
-      .from('ghl_config')
-      .select('*')
-      .eq('organization_id', userData.organization_id)
-      .single();
+    // Get GHL account - use pinned account from draft or fallback to active account
+    const ghlAccount = draft.ghl_account_id
+      ? await getGHLAccountById(draft.ghl_account_id, userData.organization_id)
+      : await getActiveGHLAccount(user.id, userData.organization_id);
 
-    if (!ghlConfig?.location_id) {
+    if (!ghlAccount) {
+      throw new ConfigurationError(
+        'GHL Account',
+        'No GHL account configured. Please add a GHL account in Settings.'
+      );
+    }
+
+    if (!ghlAccount.location_id) {
       throw new ConfigurationError(
         'GHL Location ID',
-        'GoHighLevel not configured. Please add your Location ID in Settings.'
+        `GHL account "${ghlAccount.account_name}" is missing a location ID.`
       );
     }
 
-    // Get GHL API key
-    const { data: apiKeyData } = await adminClient
-      .from('api_keys')
-      .select('encrypted_key')
-      .eq('organization_id', userData.organization_id)
-      .eq('provider', 'ghl')
-      .single();
-
-    if (!apiKeyData?.encrypted_key) {
+    if (!ghlAccount.access_token) {
       throw new ConfigurationError(
         'GHL API Key',
-        'GoHighLevel API key not configured. Please add it in Settings.'
+        `GHL account "${ghlAccount.account_name}" is missing API credentials. Please re-authenticate in Settings.`
       );
     }
 
-    // Decrypt the GHL API key
-    const ghlApiKey = decryptApiKey(apiKeyData.encrypted_key);
+    const ghlApiKey = ghlAccount.access_token;
 
     // Get contact_id from request body or draft
     const body = await request.json().catch(() => ({}));
@@ -133,10 +130,11 @@ export async function POST(
       contactId: contactId,
       subject: draft.subject.trim(),
       html: draft.body.replace(/\n/g, '<br>'),
-      emailFrom: ghlConfig.email_from || undefined,
+      // emailFrom is optional - GHL will use default if not specified
+      emailFrom: (ghlAccount.sync_settings as any)?.email_from || undefined,
     };
 
-    console.log('[Draft Send] Sending email to contact:', contactId);
+    console.log('[Draft Send] Sending email via GHL account:', ghlAccount.account_name, '(', ghlAccount.id, ') to contact:', contactId);
 
     // Send email via GHL Conversations API
     const response = await fetch(
@@ -201,6 +199,8 @@ export async function POST(
         draft_id: id,
         contact_id: contactId,
         message_id: messageId,
+        ghl_account_id: ghlAccount.id,
+        ghl_account_name: ghlAccount.account_name,
         subject: draft.subject.substring(0, 100), // Truncate for logging
         duration_ms: durationMs,
       },
@@ -217,6 +217,9 @@ export async function POST(
         details: {
           contact_id: contactId,
           ghl_message_id: messageId,
+          ghl_account_id: ghlAccount.id,
+          ghl_account_name: ghlAccount.account_name,
+          ghl_location_id: ghlAccount.location_id,
           subject_preview: draft.subject.substring(0, 50),
           body_length: draft.body.length,
           sent_at: new Date().toISOString(),
