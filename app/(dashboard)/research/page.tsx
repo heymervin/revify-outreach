@@ -175,6 +175,7 @@ export default function ResearchPage() {
   const [selectedGhlCompany, setSelectedGhlCompany] = useState<GHLCompany | null>(null);
   const [useGhlSource, setUseGhlSource] = useState(false);
   const [activeAccountName, setActiveAccountName] = useState<string | null>(null);
+  const [activeAccountId, setActiveAccountId] = useState<string | null>(null);
   const ghlDropdownRef = useRef<HTMLDivElement>(null);
 
   // Selected company research status
@@ -226,7 +227,7 @@ export default function ResearchPage() {
 
         setGhlConfigured(!!configResult.data?.location_id && !!keyResult.data?.key_hint);
 
-        // Set active account name
+        // Set active account name and ID
         if (accountsResult) {
           const accounts = accountsResult.accounts || [];
           const selected = accountsResult.selected_account_id
@@ -235,6 +236,7 @@ export default function ResearchPage() {
           const primary = accounts.find((a: { is_primary: boolean }) => a.is_primary);
           const active = selected || primary || accounts[0];
           setActiveAccountName(active?.account_name || null);
+          setActiveAccountId(active?.id || null);
         }
       } catch {
         setGhlConfigured(false);
@@ -534,6 +536,7 @@ export default function ResearchPage() {
             companyName: result.company_profile.confirmed_name,
             website: companyWebsite,
           },
+          ghl_account_id: activeAccountId, // Pin to active account at time of research
         }),
       });
 
