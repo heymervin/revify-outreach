@@ -938,14 +938,15 @@ export default function SettingsPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-slate-900">GoHighLevel Accounts</h3>
-                    <p className="text-sm text-slate-500">Manage your GHL account connections</p>
+                    <p className="text-sm text-slate-500">Each account has its own Location ID and API key</p>
                   </div>
                 </div>
 
                 <GHLAccountsSection />
               </div>
 
-              {/* GHL API Key */}
+              {/* DEPRECATED: Old shared GHL API Key section - hidden since API keys are now per-account */}
+              {false && (
               <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
@@ -1038,6 +1039,7 @@ export default function SettingsPage() {
                   </div>
                 </div>
               </div>
+              )}
             </div>
           )}
 
