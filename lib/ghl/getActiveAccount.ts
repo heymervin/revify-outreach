@@ -42,6 +42,7 @@ export async function getGHLAccountById(
     .single();
 
   if (error || !data) {
+    console.error('[GHL] Failed to fetch account by ID:', accountId, error);
     return null;
   }
 
@@ -52,15 +53,20 @@ export async function getGHLAccountById(
  * Decrypt account tokens
  */
 function decryptAccountTokens(account: GHLAccount): GHLAccountWithTokens {
-  return {
-    ...account,
-    access_token: account.access_token_encrypted
-      ? decryptApiKey(account.access_token_encrypted)
-      : null,
-    refresh_token: account.refresh_token_encrypted
-      ? decryptApiKey(account.refresh_token_encrypted)
-      : null,
-  };
+  try {
+    return {
+      ...account,
+      access_token: account.access_token_encrypted
+        ? decryptApiKey(account.access_token_encrypted)
+        : null,
+      refresh_token: account.refresh_token_encrypted
+        ? decryptApiKey(account.refresh_token_encrypted)
+        : null,
+    };
+  } catch (error) {
+    console.error('[GHL] Failed to decrypt tokens for account:', account.id, error);
+    return { ...account, access_token: null, refresh_token: null };
+  }
 }
 
 /**
@@ -82,11 +88,16 @@ export async function getActiveGHLAccount(
 
   // 2. If user has a selected account, try to use it
   if (userSettings?.selected_ghl_account_id) {
-    const account = await getGHLAccountById(userSettings.selected_ghl_account_id);
+    // Atomically fetch and validate selected account
+    const { data: selectedAccount } = await supabase
+      .from('ghl_accounts')
+      .select('*')
+      .eq('id', userSettings.selected_ghl_account_id)
+      .eq('organization_id', organizationId)
+      .single();
 
-    // Verify account belongs to user's org
-    if (account && account.organization_id === organizationId) {
-      return account;
+    if (selectedAccount) {
+      return decryptAccountTokens(selectedAccount);
     }
   }
 
