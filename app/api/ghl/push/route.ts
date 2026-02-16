@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
+import { getActiveGHLAccount } from '@/lib/ghl';
 
 const GHL_API_BASE = 'https://services.leadconnectorhq.com';
+const API_VERSION = '2021-07-28';
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,103 +26,71 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Organization not found' }, { status: 400 });
     }
 
-    // Get GHL config
-    const { data: ghlConfig } = await supabase
-      .from('ghl_config')
-      .select('*')
-      .eq('organization_id', userData.organization_id)
-      .single();
+    // Get active GHL account (user-selected or primary)
+    const ghlAccount = await getActiveGHLAccount(user.id, userData.organization_id);
 
-    if (!ghlConfig?.location_id) {
+    if (!ghlAccount?.location_id || !ghlAccount.access_token) {
       return NextResponse.json(
-        { error: 'GHL not configured. Please add your Location ID in Settings.' },
+        { error: 'GHL account not configured. Please add a GHL account in Settings.' },
         { status: 400 }
       );
     }
 
-    // Get GHL API key
-    const { data: apiKeyData } = await supabase
-      .from('api_keys')
-      .select('encrypted_key')
-      .eq('organization_id', userData.organization_id)
-      .eq('provider', 'ghl')
-      .single();
-
-    if (!apiKeyData?.encrypted_key) {
-      return NextResponse.json(
-        { error: 'GHL API key not configured. Please add it in Settings.' },
-        { status: 400 }
-      );
-    }
+    const ghlApiKey = ghlAccount.access_token;
 
     const body = await request.json();
-    const { session_id, research_data, contact_data } = body;
+    const { session_id, research_data, contact_data, business_id } = body;
 
-    // Create or update contact in GHL
-    const contactPayload = {
-      locationId: ghlConfig.location_id,
-      firstName: contact_data?.firstName || research_data?.company_profile?.confirmed_name,
-      lastName: contact_data?.lastName || '',
-      email: contact_data?.email || '',
-      phone: contact_data?.phone || '',
-      companyName: research_data?.company_profile?.confirmed_name,
-      website: research_data?.company_profile?.website,
-      tags: ['revify-research'],
-      customFields: [
-        {
-          key: 'research_industry',
-          value: research_data?.company_profile?.industry || '',
-        },
-        {
-          key: 'research_revenue',
-          value: research_data?.company_profile?.estimated_revenue || '',
-        },
-        {
-          key: 'research_employees',
-          value: research_data?.company_profile?.employee_count || '',
-        },
-        {
-          key: 'research_confidence',
-          value: String(research_data?.research_confidence?.overall_score || 0),
-        },
-        {
-          key: 'research_signals',
-          value: JSON.stringify(research_data?.recent_signals?.slice(0, 3) || []),
-        },
-        {
-          key: 'research_pain_points',
-          value: JSON.stringify(research_data?.pain_point_hypotheses?.slice(0, 3) || []),
-        },
-        {
-          key: 'research_date',
-          value: new Date().toISOString(),
-        },
-      ],
-    };
-
-    const response = await fetch(`${GHL_API_BASE}/contacts/`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKeyData.encrypted_key}`,
-        'Content-Type': 'application/json',
-        Version: '2021-07-28',
-      },
-      body: JSON.stringify(contactPayload),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Failed to push to GHL');
+    if (!business_id) {
+      return NextResponse.json(
+        { error: 'Business ID is required to push research to GHL' },
+        { status: 400 }
+      );
     }
 
-    const ghlContact = await response.json();
+    // Build properties payload for GHL Custom Objects API
+    // Only send company_research field which stores the full research data
+    const properties: Record<string, string> = {
+      company_research: JSON.stringify(research_data || {}),
+    };
+
+    const businessPayload = {
+      properties,
+    };
+
+    const locationId = ghlAccount.location_id;
+    console.log('[GHL Push] Updating business record:', business_id);
+    console.log('[GHL Push] Payload:', JSON.stringify(businessPayload, null, 2));
+
+    // Update business record in GHL using Custom Objects API
+    // locationId must be a query parameter, not in the body
+    const response = await fetch(`${GHL_API_BASE}/objects/business/records/${business_id}?locationId=${locationId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${ghlApiKey}`,
+        'Content-Type': 'application/json',
+        Version: API_VERSION,
+      },
+      body: JSON.stringify(businessPayload),
+    });
+
+    console.log('[GHL Push] Response status:', response.status);
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error('[GHL Push] API error:', response.status, errorData);
+      throw new Error(errorData.message || errorData.error || `Failed to update business in GHL (${response.status})`);
+    }
+
+    const ghlBusiness = await response.json();
+    console.log('[GHL Push] Success:', ghlBusiness);
 
     // Update research session with GHL reference
     if (session_id) {
       await supabase
         .from('research_sessions')
         .update({
-          ghl_company_id: ghlContact.contact?.id,
+          ghl_company_id: business_id,
           ghl_pushed_at: new Date().toISOString(),
         })
         .eq('id', session_id);
@@ -132,18 +102,19 @@ export async function POST(request: NextRequest) {
       user_id: user.id,
       action_type: 'ghl_sync',
       metadata: {
-        contact_id: ghlContact.contact?.id,
+        business_id: business_id,
         company_name: research_data?.company_profile?.confirmed_name,
       },
     });
 
     return NextResponse.json({
       success: true,
-      contact_id: ghlContact.contact?.id,
-      message: 'Research pushed to GHL successfully',
+      business_id: business_id,
+      record: ghlBusiness,
+      message: 'Research pushed to GHL business successfully',
     });
   } catch (error) {
-    console.error('GHL push error:', error);
+    console.error('[GHL Push] Error:', error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to push to GHL' },
       { status: 500 }
