@@ -62,6 +62,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // Get user's organization
+    const { data: userData } = await supabase
+      .from('users')
+      .select('organization_id')
+      .eq('id', user.id)
+      .single();
+
+    if (!userData?.organization_id) {
+      return NextResponse.json(
+        { error: 'Organization not found' },
+        { status: 400 }
+      );
+    }
+
     const body = await request.json();
     const {
       research_id,
@@ -78,6 +92,23 @@ export async function POST(request: NextRequest) {
         { error: 'Subject and body are required' },
         { status: 400 }
       );
+    }
+
+    // Validate ghl_account_id belongs to user's organization
+    if (ghl_account_id) {
+      const { data: accountCheck } = await supabase
+        .from('ghl_accounts')
+        .select('id')
+        .eq('id', ghl_account_id)
+        .eq('organization_id', userData.organization_id)
+        .single();
+
+      if (!accountCheck) {
+        return NextResponse.json(
+          { error: 'Invalid GHL account - account does not belong to your organization' },
+          { status: 400 }
+        );
+      }
     }
 
     const { data: draft, error } = await supabase
