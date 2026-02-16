@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS api_keys (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   organization_id UUID REFERENCES organizations(id) ON DELETE CASCADE NOT NULL,
-  provider TEXT NOT NULL CHECK (provider IN ('openai', 'gemini', 'anthropic', 'tavily', 'ghl')),
+  provider TEXT NOT NULL CHECK (provider IN ('openai', 'gemini', 'anthropic', 'tavily', 'ghl', 'apollo')),
   encrypted_key TEXT NOT NULL,
   key_hint TEXT, -- Last 4 chars for display
   is_valid BOOLEAN DEFAULT TRUE,
@@ -72,9 +72,35 @@ CREATE TABLE IF NOT EXISTS user_settings (
   default_email_tone TEXT DEFAULT 'professional',
   ui_preferences JSONB DEFAULT '{"theme": "light", "sidebarCollapsed": false}',
   notification_settings JSONB DEFAULT '{"email": true, "lowCredits": true}',
+  selected_research_prompt_id UUID,
+  selected_email_prompt_id UUID,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- Prompt Templates
+CREATE TABLE IF NOT EXISTS prompt_templates (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  organization_id UUID REFERENCES organizations(id) ON DELETE CASCADE NOT NULL,
+  name TEXT NOT NULL,
+  type TEXT NOT NULL CHECK (type IN ('research', 'email')),
+  content TEXT NOT NULL,
+  variables TEXT[] DEFAULT '{}',
+  is_default BOOLEAN DEFAULT FALSE,
+  is_active BOOLEAN DEFAULT TRUE,
+  created_by UUID REFERENCES users(id) ON DELETE SET NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Only one default per org per type
+CREATE UNIQUE INDEX IF NOT EXISTS idx_prompt_default ON prompt_templates(organization_id, type)
+  WHERE is_default = true;
+
+-- Add foreign key for user_settings after prompt_templates exists
+ALTER TABLE user_settings
+  ADD CONSTRAINT fk_research_prompt FOREIGN KEY (selected_research_prompt_id) REFERENCES prompt_templates(id) ON DELETE SET NULL,
+  ADD CONSTRAINT fk_email_prompt FOREIGN KEY (selected_email_prompt_id) REFERENCES prompt_templates(id) ON DELETE SET NULL;
 
 -- =============================================
 -- USAGE & BILLING
@@ -121,7 +147,7 @@ CREATE INDEX IF NOT EXISTS idx_usage_user_created ON usage_records(user_id, crea
 -- RESEARCH & ACTIVITY
 -- =============================================
 
--- Research Sessions (metadata only - results go to GHL)
+-- Research Sessions (metadata and full results for email generation)
 CREATE TABLE IF NOT EXISTS research_sessions (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   organization_id UUID REFERENCES organizations(id) ON DELETE CASCADE NOT NULL,
@@ -136,6 +162,7 @@ CREATE TABLE IF NOT EXISTS research_sessions (
   confidence_score DECIMAL(3,2),
   signals_found INTEGER DEFAULT 0,
   pain_points_found INTEGER DEFAULT 0,
+  research_output JSONB, -- Full ResearchOutputV3 for email generation
   ghl_company_id TEXT,
   ghl_pushed_at TIMESTAMPTZ,
   credits_used DECIMAL(10,4),
@@ -148,6 +175,27 @@ CREATE TABLE IF NOT EXISTS research_sessions (
 -- Create indexes
 CREATE INDEX IF NOT EXISTS idx_research_org_created ON research_sessions(organization_id, created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_research_company ON research_sessions(company_name, organization_id);
+
+-- Email Drafts
+CREATE TABLE IF NOT EXISTS email_drafts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE NOT NULL,
+  research_id UUID REFERENCES research_sessions(id) ON DELETE SET NULL,
+  ghl_contact_id TEXT,
+  ghl_message_id TEXT,
+  subject TEXT NOT NULL,
+  body TEXT NOT NULL,
+  original_body TEXT,
+  status TEXT DEFAULT 'draft' CHECK (status IN ('draft', 'sent', 'failed')),
+  sent_at TIMESTAMPTZ,
+  error_message TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Create indexes
+CREATE INDEX IF NOT EXISTS idx_drafts_user_status ON email_drafts(user_id, status);
+CREATE INDEX IF NOT EXISTS idx_drafts_research ON email_drafts(research_id);
 
 -- =============================================
 -- OBSERVABILITY
@@ -206,8 +254,10 @@ ALTER TABLE user_settings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE subscriptions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE usage_records ENABLE ROW LEVEL SECURITY;
 ALTER TABLE research_sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE email_drafts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE api_logs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE audit_logs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE prompt_templates ENABLE ROW LEVEL SECURITY;
 
 -- Helper function to get user's organization
 CREATE OR REPLACE FUNCTION get_user_org_id()
@@ -267,6 +317,20 @@ CREATE POLICY "Admins can manage GHL config"
     )
   );
 
+-- Prompt Templates policies
+CREATE POLICY "Users can view org prompts"
+  ON prompt_templates FOR SELECT
+  USING (organization_id = get_user_org_id());
+
+CREATE POLICY "Admins can manage prompts"
+  ON prompt_templates FOR ALL
+  USING (
+    organization_id = get_user_org_id()
+    AND EXISTS (
+      SELECT 1 FROM users WHERE id = auth.uid() AND role IN ('owner', 'admin')
+    )
+  );
+
 -- User Settings policies
 CREATE POLICY "Users can manage own settings"
   ON user_settings FOR ALL
@@ -298,6 +362,23 @@ CREATE POLICY "Users can view org research"
 CREATE POLICY "Users can insert research"
   ON research_sessions FOR INSERT
   WITH CHECK (organization_id = get_user_org_id());
+
+-- Email Drafts policies
+CREATE POLICY "Users can view own drafts"
+  ON email_drafts FOR SELECT
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can insert own drafts"
+  ON email_drafts FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update own drafts"
+  ON email_drafts FOR UPDATE
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete own drafts"
+  ON email_drafts FOR DELETE
+  USING (auth.uid() = user_id);
 
 -- API Logs policies
 CREATE POLICY "Users can view org logs"
@@ -345,6 +426,14 @@ CREATE TRIGGER update_user_settings_updated_at
 
 CREATE TRIGGER update_subscriptions_updated_at
   BEFORE UPDATE ON subscriptions
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_prompt_templates_updated_at
+  BEFORE UPDATE ON prompt_templates
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_email_drafts_updated_at
+  BEFORE UPDATE ON email_drafts
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
 -- Function to create user profile after signup
@@ -427,6 +516,8 @@ COMMENT ON TABLE ghl_config IS 'GoHighLevel integration configuration';
 COMMENT ON TABLE user_settings IS 'Per-user preferences and settings';
 COMMENT ON TABLE subscriptions IS 'Billing subscriptions and credit limits';
 COMMENT ON TABLE usage_records IS 'Detailed usage tracking for analytics';
-COMMENT ON TABLE research_sessions IS 'Research session metadata (results in GHL)';
+COMMENT ON TABLE research_sessions IS 'Research session metadata and full results for email generation';
 COMMENT ON TABLE api_logs IS 'API request/response logging for observability';
 COMMENT ON TABLE audit_logs IS 'Security and compliance audit trail';
+COMMENT ON TABLE prompt_templates IS 'Custom prompt templates for research and email generation';
+COMMENT ON TABLE email_drafts IS 'Email drafts and sent messages for outreach';

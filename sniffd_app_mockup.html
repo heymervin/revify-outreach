@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sniffd - Research, fetched.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'sniffd': {
+              'bg': '#09090B',
+              'surface': '#18181B',
+              'border': '#27272A',
+              'muted': '#52525B',
+              'subtle': '#71717A',
+              'body': '#A1A1AA',
+              'bright': '#FAFAFA',
+              'lime': '#84CC16',
+              'lime-hover': '#A3E635',
+              'lime-dark': '#65A30D',
+              'pink': '#EC4899',
+              'pink-hover': '#F472B6',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap');
+    * { font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+    /* Custom thick font for headings - simulating Boldonse */
+    .font-display {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card-hover:hover { transform: translateY(-4px); }
+
+    .glow-lime { box-shadow: 0 0 30px rgba(132, 204, 22, 0.3); }
+    .glow-pink { box-shadow: 0 0 30px rgba(236, 72, 153, 0.3); }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .animate-in { animation: fadeIn 0.5s ease forwards; }
+    .animate-bounce-slow { animation: bounce 2s ease-in-out infinite; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-6 { animation-delay: 0.6s; }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #18181B; }
+    ::-webkit-scrollbar-thumb { background: #27272A; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+    /* Paw print SVG */
+    .paw-icon {
+      display: inline-block;
+    }
+  </style>
+</head>
+<body class="bg-sniffd-bg text-sniffd-body">
+  <div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-sniffd-surface border-r border-sniffd-border flex flex-col fixed h-screen">
+      <!-- Logo -->
+      <div class="p-6 border-b border-sniffd-border">
+        <div class="flex items-center gap-3">
+          <!-- Paw Print Logo -->
+          <div class="w-10 h-10 bg-sniffd-lime rounded-xl flex items-center justify-center glow-lime">
+            <svg width="24" height="24" viewBox="0 0 100 100" fill="#09090B">
+              <ellipse cx="50" cy="65" rx="25" ry="20"/>
+              <circle cx="25" cy="35" r="12"/>
+              <circle cx="50" cy="20" r="12"/>
+              <circle cx="75" cy="35" r="12"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="font-display text-sniffd-bright text-xl tracking-tight">sniffd</h1>
+            <p class="text-xs text-sniffd-lime -mt-0.5">Research, fetched.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex-1 p-4 space-y-1">
+        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold bg-sniffd-lime text-sniffd-bg glow-lime">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>
+          </svg>
+          Dashboard
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-sniffd-body hover:bg-sniffd-border hover:text-sniffd-bright transition-all">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          Research
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-sniffd-body hover:bg-sniffd-border hover:text-sniffd-bright transition-all">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+          </svg>
+          Bulk Research
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-sniffd-body hover:bg-sniffd-border hover:text-sniffd-bright transition-all">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          Email Outreach
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-sniffd-body hover:bg-sniffd-border hover:text-sniffd-bright transition-all">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          History
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-sniffd-body hover:bg-sniffd-border hover:text-sniffd-bright transition-all">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+          Settings
+        </a>
+      </nav>
+
+      <!-- Credits Widget -->
+      <div class="p-4 border-t border-sniffd-border">
+        <div class="bg-sniffd-bg rounded-2xl p-4 border border-sniffd-border">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-semibold text-sniffd-muted uppercase tracking-wider">Treats Left</span>
+            <span class="text-xs font-semibold text-sniffd-bg bg-sniffd-lime px-2 py-0.5 rounded-full">Good Boy</span>
+          </div>
+          <div class="flex items-end gap-1 mb-2">
+            <span class="text-3xl font-display text-sniffd-bright">453</span>
+            <span class="text-sniffd-muted text-sm mb-1">/ 500</span>
+          </div>
+          <div class="h-2 bg-sniffd-border rounded-full overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-sniffd-lime to-sniffd-lime-hover rounded-full" style="width: 90.6%;"></div>
+          </div>
+          <button class="w-full mt-3 text-xs text-sniffd-lime font-semibold hover:text-sniffd-lime-hover transition-colors">
+            Get More Treats →
+          </button>
+        </div>
+      </div>
+
+      <!-- User -->
+      <div class="p-4 border-t border-sniffd-border">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-gradient-to-br from-sniffd-lime to-sniffd-lime-dark rounded-full flex items-center justify-center text-sniffd-bg font-bold text-sm">
+            JD
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-sniffd-bright truncate">John Doe</p>
+            <p class="text-xs text-sniffd-muted truncate">john@agency.com</p>
+          </div>
+          <button class="p-2 text-sniffd-muted hover:text-sniffd-body hover:bg-sniffd-border rounded-lg transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-64 overflow-auto">
+      <!-- Header -->
+      <header class="sticky top-0 z-10 bg-sniffd-bg/80 backdrop-blur-xl border-b border-sniffd-border px-8 py-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-2xl font-display text-sniffd-bright">What are we sniffing today?</h2>
+            <p class="text-sniffd-muted text-sm mt-0.5">Pick a trail and let's fetch some intel</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button class="px-4 py-2 text-sm font-medium text-sniffd-body hover:text-sniffd-bright hover:bg-sniffd-surface rounded-xl transition-colors flex items-center gap-2">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+              Help
+            </button>
+            <button class="px-4 py-2.5 text-sm font-semibold bg-sniffd-lime text-sniffd-bg rounded-xl hover:bg-sniffd-lime-hover transition-colors flex items-center gap-2 glow-lime">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+              Quick Sniff
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="p-8">
+        <!-- Hero Section -->
+        <div class="relative mb-10 overflow-hidden rounded-3xl bg-sniffd-surface border border-sniffd-border p-8 animate-in">
+          <!-- Accent bar -->
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-sniffd-lime via-sniffd-lime to-sniffd-pink"></div>
+
+          <!-- Background Pattern -->
+          <div class="absolute inset-0 opacity-5">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/>
+                </pattern>
+              </defs>
+              <rect width="100" height="100" fill="url(#grid)"/>
+            </svg>
+          </div>
+
+          <!-- Floating paw -->
+          <div class="absolute right-8 top-8 opacity-10 animate-bounce-slow">
+            <svg width="120" height="120" viewBox="0 0 100 100" fill="#84CC16">
+              <ellipse cx="50" cy="65" rx="25" ry="20"/>
+              <circle cx="25" cy="35" r="12"/>
+              <circle cx="50" cy="20" r="12"/>
+              <circle cx="75" cy="35" r="12"/>
+            </svg>
+          </div>
+
+          <div class="relative z-10">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-sniffd-lime/20 border border-sniffd-lime/30 rounded-full text-xs font-semibold text-sniffd-lime mb-4">
+                  <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                  </svg>
+                  AI-Powered Research
+                </span>
+                <h3 class="text-3xl font-display text-sniffd-bright mb-2">Who's a good researcher?</h3>
+                <h3 class="text-3xl font-display text-sniffd-lime mb-4">You are. 🐕</h3>
+                <p class="text-sniffd-body max-w-lg text-sm leading-relaxed">
+                  Point Sniffd at any company and watch it fetch deep insights in seconds. News, financials, signals — all the good stuff, delivered right to your bowl.
+                </p>
+              </div>
+              <div class="hidden lg:block">
+                <div class="bg-sniffd-bg/50 backdrop-blur-xl rounded-2xl p-6 border border-sniffd-border">
+                  <div class="text-4xl font-display text-sniffd-lime mb-1">2,847</div>
+                  <div class="text-sniffd-muted text-sm">Companies fetched this month</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Research Options Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Quick Sniff -->
+          <button class="group relative p-6 rounded-2xl border-2 border-sniffd-border bg-sniffd-surface hover:border-sniffd-lime/50 hover:bg-sniffd-surface transition-all duration-300 text-left card-hover hover:shadow-xl opacity-0 animate-in delay-1" style="animation-fill-mode: forwards;">
+            <div class="w-12 h-12 bg-sniffd-lime text-sniffd-bg rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 glow-lime">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <h4 class="font-bold text-sniffd-bright text-lg mb-1">Quick Sniff</h4>
+            <p class="text-sniffd-body text-sm mb-4">Fast company overview with key signals</p>
+            <span class="inline-flex items-center px-3 py-1 bg-sniffd-lime/20 text-sniffd-lime rounded-full text-xs font-semibold">1 treat</span>
+          </button>
+
+          <!-- Standard Research -->
+          <button class="group relative p-6 rounded-2xl border-2 border-sniffd-border bg-sniffd-surface hover:border-sniffd-lime/50 hover:bg-sniffd-surface transition-all duration-300 text-left card-hover hover:shadow-xl opacity-0 animate-in delay-2" style="animation-fill-mode: forwards;">
+            <div class="w-12 h-12 bg-sniffd-lime text-sniffd-bg rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 glow-lime">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+            </div>
+            <h4 class="font-bold text-sniffd-bright text-lg mb-1">Deep Dig</h4>
+            <p class="text-sniffd-body text-sm mb-4">Comprehensive analysis with pain points</p>
+            <span class="inline-flex items-center px-3 py-1 bg-sniffd-lime/20 text-sniffd-lime rounded-full text-xs font-semibold">2 treats</span>
+          </button>
+
+          <!-- Deep Research -->
+          <button class="group relative p-6 rounded-2xl border-2 border-sniffd-border bg-sniffd-surface hover:border-sniffd-lime/50 hover:bg-sniffd-surface transition-all duration-300 text-left card-hover hover:shadow-xl opacity-0 animate-in delay-3" style="animation-fill-mode: forwards;">
+            <div class="w-12 h-12 bg-sniffd-lime text-sniffd-bg rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 glow-lime">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/>
+              </svg>
+            </div>
+            <h4 class="font-bold text-sniffd-bright text-lg mb-1">Full Hunt</h4>
+            <p class="text-sniffd-body text-sm mb-4">Complete competitive intel report</p>
+            <span class="inline-flex items-center px-3 py-1 bg-sniffd-lime/20 text-sniffd-lime rounded-full text-xs font-semibold">3 treats</span>
+          </button>
+
+          <!-- Bulk Research -->
+          <button class="group relative p-6 rounded-2xl border-2 border-sniffd-border bg-sniffd-surface hover:border-sniffd-pink/50 hover:bg-sniffd-surface transition-all duration-300 text-left card-hover hover:shadow-xl opacity-0 animate-in delay-4" style="animation-fill-mode: forwards;">
+            <div class="w-12 h-12 bg-sniffd-pink text-white rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 glow-pink">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+              </svg>
+            </div>
+            <h4 class="font-bold text-sniffd-bright text-lg mb-1">Pack Hunt</h4>
+            <p class="text-sniffd-body text-sm mb-4">Fetch research on 100-1,000 companies</p>
+            <span class="inline-flex items-center px-3 py-1 bg-sniffd-pink/20 text-sniffd-pink rounded-full text-xs font-semibold">bulk pricing</span>
+          </button>
+
+          <!-- Import from GHL -->
+          <button class="group relative p-6 rounded-2xl border-2 border-sniffd-border bg-sniffd-surface hover:border-sniffd-lime/50 hover:bg-sniffd-surface transition-all duration-300 text-left card-hover hover:shadow-xl opacity-0 animate-in delay-5" style="animation-fill-mode: forwards;">
+            <div class="w-12 h-12 bg-gradient-to-br from-sniffd-lime to-sniffd-lime-dark text-sniffd-bg rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m8 17 4 4 4-4"/>
+              </svg>
+            </div>
+            <h4 class="font-bold text-sniffd-bright text-lg mb-1">Fetch from GHL</h4>
+            <p class="text-sniffd-body text-sm mb-4">Pull companies from GoHighLevel</p>
+            <span class="inline-flex items-center px-3 py-1 bg-sniffd-lime/20 text-sniffd-lime rounded-full text-xs font-semibold">free</span>
+          </button>
+
+          <!-- Generate Emails -->
+          <button class="group relative p-6 rounded-2xl border-2 border-sniffd-border bg-sniffd-surface hover:border-sniffd-pink/50 hover:bg-sniffd-surface transition-all duration-300 text-left card-hover hover:shadow-xl opacity-0 animate-in delay-6" style="animation-fill-mode: forwards;">
+            <div class="w-12 h-12 bg-sniffd-pink text-white rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 glow-pink">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+            </div>
+            <h4 class="font-bold text-sniffd-bright text-lg mb-1">Draft Emails</h4>
+            <p class="text-sniffd-body text-sm mb-4">AI-personalized outreach that converts</p>
+            <span class="inline-flex items-center px-3 py-1 bg-sniffd-pink/20 text-sniffd-pink rounded-full text-xs font-semibold">included</span>
+          </button>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="mt-10">
+          <div class="flex items-center justify-between mb-5">
+            <h3 class="text-lg font-bold text-sniffd-bright">Recent Fetches</h3>
+            <button class="text-sm font-semibold text-sniffd-lime hover:text-sniffd-lime-hover transition-colors">
+              View All →
+            </button>
+          </div>
+          <div class="bg-sniffd-surface rounded-2xl border border-sniffd-border overflow-hidden">
+            <!-- Row 1 -->
+            <div class="flex items-center justify-between p-4 hover:bg-sniffd-bg/50 transition-colors border-b border-sniffd-border">
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-sniffd-bg rounded-xl flex items-center justify-center border border-sniffd-border">
+                  <svg class="w-5 h-5 text-sniffd-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-sniffd-bright">Acme Corporation</p>
+                  <p class="text-xs text-sniffd-muted">Manufacturing • 2 hours ago</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="text-right">
+                  <div class="text-sm font-semibold text-sniffd-lime">92%</div>
+                  <div class="text-xs text-sniffd-muted">Confidence</div>
+                </div>
+                <span class="px-2 py-1 text-xs font-medium bg-sniffd-lime/20 text-sniffd-lime rounded-lg">Fetched!</span>
+                <button class="p-2 text-sniffd-muted hover:text-sniffd-lime hover:bg-sniffd-lime/10 rounded-lg transition-colors">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <!-- Row 2 -->
+            <div class="flex items-center justify-between p-4 hover:bg-sniffd-bg/50 transition-colors border-b border-sniffd-border">
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-sniffd-bg rounded-xl flex items-center justify-center border border-sniffd-border">
+                  <svg class="w-5 h-5 text-sniffd-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-sniffd-bright">TechFlow Inc</p>
+                  <p class="text-xs text-sniffd-muted">SaaS • 5 hours ago</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="text-right">
+                  <div class="text-sm font-semibold text-sniffd-lime">87%</div>
+                  <div class="text-xs text-sniffd-muted">Confidence</div>
+                </div>
+                <span class="px-2 py-1 text-xs font-medium bg-sniffd-lime/20 text-sniffd-lime rounded-lg">Fetched!</span>
+                <button class="p-2 text-sniffd-muted hover:text-sniffd-lime hover:bg-sniffd-lime/10 rounded-lg transition-colors">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <!-- Row 3 -->
+            <div class="flex items-center justify-between p-4 hover:bg-sniffd-bg/50 transition-colors">
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-sniffd-bg rounded-xl flex items-center justify-center border border-sniffd-border">
+                  <svg class="w-5 h-5 text-sniffd-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-sniffd-bright">Global Logistics</p>
+                  <p class="text-xs text-sniffd-muted">Transportation • Yesterday</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="text-right">
+                  <div class="text-sm font-semibold text-sniffd-pink">78%</div>
+                  <div class="text-xs text-sniffd-muted">Confidence</div>
+                </div>
+                <span class="px-2 py-1 text-xs font-medium bg-sniffd-pink/20 text-sniffd-pink rounded-lg">Needs review</span>
+                <button class="p-2 text-sniffd-muted hover:text-sniffd-lime hover:bg-sniffd-lime/10 rounded-lg transition-colors">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Note -->
+        <div class="mt-8 text-center text-sm text-sniffd-muted">
+          <p>sniffd v1.0 • Research, fetched. • Built for GoHighLevel 🐕</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

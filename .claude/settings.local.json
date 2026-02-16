@@ -21,7 +21,19 @@
       "Bash(grep:*)",
       "Bash(git -C /Users/mervindecastro/AG/revify-outreach log --oneline -20)",
       "Bash(npx tsx:*)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Bash(tree:*)",
+      "Bash(xargs cat:*)",
+      "Bash(npm run dev)",
+      "Bash(pkill:*)",
+      "Bash(curl:*)",
+      "Bash(lsof:*)",
+      "Bash(head:*)",
+      "Bash(xargs kill:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm test:*)",
+      "Bash(npx eslint:*)",
+      "Bash(claude update:*)"
     ]
   }
 }
