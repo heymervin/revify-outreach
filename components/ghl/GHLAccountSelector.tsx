@@ -51,30 +51,17 @@ export function GHLAccountSelector() {
       return;
     }
 
-    // Check if there's unsaved research on the research page
-    const isOnResearchPage = window.location.pathname === '/research';
-    const hasUnsavedResearch = isOnResearchPage && sessionStorage.getItem('research_results_pending');
-
-    // Extra strong warning if there's unsaved research
-    let warningMessage = `Switch to "${account.account_name}"?\n\n⚠️ WARNING: This will reload the page and you will lose:\n\n` +
-      `• Any in-progress research results (not yet pushed to GHL)\n` +
-      `• Unsaved email drafts\n` +
-      `• Form data you've entered\n` +
-      `• Current page state\n\n` +
-      `Make sure to push research or save drafts before switching accounts.\n\n` +
-      `Continue with account switch?`;
+    // Only warn if there's ACTUAL unsaved research
+    const hasUnsavedResearch = sessionStorage.getItem('research_results_pending');
 
     if (hasUnsavedResearch) {
-      warningMessage = `⛔️ STOP - You have unpushed research results!\n\n` +
-        `Switching to "${account.account_name}" will PERMANENTLY DELETE your current research results.\n\n` +
-        `Please either:\n` +
-        `1. Push your research to GHL first, OR\n` +
-        `2. Copy the results somewhere safe\n\n` +
-        `Are you ABSOLUTELY SURE you want to lose your research and switch accounts?`;
+      const confirmed = window.confirm(
+        `⚠️ You have unpushed research results.\n\n` +
+        `Switching to "${account.account_name}" will lose your current research.\n\n` +
+        `Continue anyway?`
+      );
+      if (!confirmed) return;
     }
-
-    const confirmed = window.confirm(warningMessage);
-    if (!confirmed) return;
 
     setSwitching(true);
     setError(null);
@@ -91,7 +78,10 @@ export function GHLAccountSelector() {
       setSelectedAccount(account);
       setIsOpen(false);
 
-      // Reload to refetch all data for the new account
+      // Clear research pending flag
+      sessionStorage.removeItem('research_results_pending');
+
+      // Smooth transition: just reload without the scary delay
       window.location.reload();
     } catch (err) {
       setSwitching(false);
