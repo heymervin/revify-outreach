@@ -87,13 +87,14 @@ export async function POST(request: NextRequest) {
     const ghlBusiness = await response.json();
     console.log('[GHL Push] Success:', ghlBusiness);
 
-    // Update research session with GHL reference
+    // Update research session with GHL reference and pinned account
     if (session_id) {
       await supabase
         .from('research_sessions')
         .update({
           ghl_company_id: business_id,
           ghl_pushed_at: new Date().toISOString(),
+          ghl_account_id: ghlAccount.id,
         })
         .eq('id', session_id);
     }
@@ -106,6 +107,7 @@ export async function POST(request: NextRequest) {
       metadata: {
         business_id: business_id,
         company_name: research_data?.company_profile?.confirmed_name,
+        ghl_account_id: ghlAccount.id,
       },
     });
 
