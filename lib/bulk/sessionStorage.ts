@@ -80,8 +80,9 @@ export function saveBulkSession(state: BulkSessionState): boolean {
 /**
  * Load bulk session state from localStorage
  * Returns null if no valid session exists or session has expired
+ * @param currentGhlAccountId - Current active GHL account ID to validate against
  */
-export function loadBulkSession(): BulkSessionState | null {
+export function loadBulkSession(currentGhlAccountId?: string): BulkSessionState | null {
   if (typeof window === 'undefined') return null;
 
   try {
@@ -98,6 +99,13 @@ export function loadBulkSession(): BulkSessionState | null {
 
     // Validate basic structure
     if (!state.sessionId || !state.createdAt || !Array.isArray(state.companies)) {
+      clearBulkSession();
+      return null;
+    }
+
+    // Account mismatch check - clear session if account changed
+    if (isAccountMismatch(state, currentGhlAccountId)) {
+      console.warn('GHL account mismatch detected - clearing bulk session');
       clearBulkSession();
       return null;
     }

@@ -1,10 +1,24 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Space_Grotesk, IBM_Plex_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 
-const jakarta = Plus_Jakarta_Sans({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-jakarta',
+  variable: '--font-space-grotesk',
+  display: 'swap',
+});
+
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-ibm-plex-sans',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -19,7 +33,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={jakarta.variable}>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${ibmPlexSans.variable} ${jetbrainsMono.variable}`}
+    >
       <body className="font-sans antialiased bg-slate-50 text-slate-900">
         {children}
       </body>

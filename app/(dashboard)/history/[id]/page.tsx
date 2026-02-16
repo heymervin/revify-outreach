@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
@@ -21,7 +21,9 @@ import {
   Loader2,
   AlertCircle,
   ExternalLink,
+  Download,
 } from 'lucide-react';
+import { AccountBadge } from '@/components/ui';
 
 interface ResearchSession {
   id: string;
@@ -37,7 +39,9 @@ interface ResearchSession {
   duration_ms?: number;
   ghl_company_id?: string;
   ghl_pushed_at?: string;
+  ghl_account_id?: string;
   created_at: string;
+  ghl_accounts?: { account_name: string } | null;
 }
 
 export default function HistoryDetailPage() {
@@ -47,20 +51,43 @@ export default function HistoryDetailPage() {
   const [session, setSession] = useState<ResearchSession | null>(null);
   const [loading, setLoading] = useState(true);
   const [pushing, setPushing] = useState(false);
+  const [downloading, setDownloading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [activeAccountId, setActiveAccountId] = useState<string | null>(null);
+
+  // Fetch active account ID
+  const fetchActiveAccount = useCallback(async () => {
+    try {
+      const res = await fetch('/api/ghl/accounts');
+      if (!res.ok) return;
+      const data = await res.json();
+      const accounts = data.accounts || [];
+      if (!accounts.length) return;
+
+      const selected = data.selected_account_id
+        ? accounts.find((a: { id: string }) => a.id === data.selected_account_id)
+        : null;
+      const primary = accounts.find((a: { is_primary: boolean }) => a.is_primary);
+      const active = selected || primary || accounts[0];
+      setActiveAccountId(active?.id || null);
+    } catch {
+      // Silent fail
+    }
+  }, []);
 
   useEffect(() => {
     if (params.id) {
       loadSession(params.id as string);
+      fetchActiveAccount();
     }
-  }, [params.id]);
+  }, [params.id, fetchActiveAccount]);
 
   const loadSession = async (id: string) => {
     setLoading(true);
     try {
       const { data } = await supabase
         .from('research_sessions')
-        .select('*')
+        .select('*, ghl_accounts(account_name)')
         .eq('id', id)
         .single();
 
@@ -101,6 +128,28 @@ export default function HistoryDetailPage() {
       console.error('Failed to push to GHL:', error);
     } finally {
       setPushing(false);
+    }
+  };
+
+  const downloadPDF = async () => {
+    if (!session) return;
+    setDownloading(true);
+    try {
+      const response = await fetch(`/api/research/${session.id}/pdf`);
+      if (!response.ok) throw new Error('Failed to download PDF');
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${session.company_name.replace(/[^a-zA-Z0-9_-]/g, '_')}_research_report.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Failed to download PDF:', error);
+    } finally {
+      setDownloading(false);
     }
   };
 
@@ -177,6 +226,18 @@ export default function HistoryDetailPage() {
               {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
               {copied ? 'Copied!' : 'Share'}
             </button>
+            <button
+              onClick={downloadPDF}
+              disabled={downloading}
+              className="btn-secondary disabled:opacity-50"
+            >
+              {downloading ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <Download className="w-4 h-4" />
+              )}
+              Download PDF
+            </button>
             <Link href={`/email?session=${session.id}`} className="btn-secondary">
               <Mail className="w-4 h-4" />
               Generate Email
@@ -191,7 +252,11 @@ export default function HistoryDetailPage() {
               ) : (
                 <Send className="w-4 h-4" />
               )}
-              {session.ghl_pushed_at ? 'Pushed to GHL' : 'Push to GHL'}
+              {session.ghl_pushed_at
+                ? 'Pushed to GHL'
+                : session.ghl_accounts?.account_name
+                  ? `Push to GHL (${session.ghl_accounts.account_name})`
+                  : 'Push to GHL'}
             </button>
           </div>
         </div>
@@ -209,6 +274,14 @@ export default function HistoryDetailPage() {
                 <div>
                   <h3 className="text-xl font-bold text-slate-900">{session.company_name}</h3>
                   <p className="text-slate-500">{session.industry || 'Unknown industry'}</p>
+                  {session.ghl_accounts?.account_name && (
+                    <div className="mt-2">
+                      <AccountBadge
+                        account_name={session.ghl_accounts.account_name}
+                        is_active={session.ghl_account_id === activeAccountId}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
               <span

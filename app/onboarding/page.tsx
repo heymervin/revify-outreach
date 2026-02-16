@@ -25,6 +25,7 @@ export default function OnboardingPage() {
   const supabase = createClient();
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Form states
   const [ghlLocationId, setGhlLocationId] = useState('');
@@ -76,26 +77,43 @@ export default function OnboardingPage() {
     if (!ghlLocationId.trim()) return;
 
     setLoading(true);
+    setError(null);
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Not authenticated');
+      if (!user) throw new Error('Not authenticated. Please log in again.');
 
-      const { data: userData } = await supabase
+      const { data: userData, error: userError } = await supabase
         .from('users')
         .select('organization_id')
         .eq('id', user.id)
         .single();
 
-      if (!userData?.organization_id) throw new Error('No organization');
+      if (userError) {
+        console.error('User lookup error:', userError);
+        throw new Error('Unable to load user profile. Please ensure database tables are set up.');
+      }
 
-      await supabase.from('ghl_config').upsert({
-        organization_id: userData.organization_id,
-        location_id: ghlLocationId.trim(),
-      });
+      if (!userData?.organization_id) {
+        throw new Error('No organization found. Please run the database setup script in Supabase.');
+      }
+
+      const { error: upsertError } = await supabase.from('ghl_config').upsert(
+        {
+          organization_id: userData.organization_id,
+          location_id: ghlLocationId.trim(),
+        },
+        { onConflict: 'organization_id' }
+      );
+
+      if (upsertError) {
+        console.error('GHL config save error:', upsertError);
+        throw new Error(`Failed to save: ${upsertError.message}`);
+      }
 
       handleNext();
     } catch (error) {
       console.error('Error saving GHL config:', error);
+      setError(error instanceof Error ? error.message : 'An unexpected error occurred');
     } finally {
       setLoading(false);
     }
@@ -269,6 +287,12 @@ export default function OnboardingPage() {
                     </p>
                   </div>
                 </div>
+
+                {error && (
+                  <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-xl">
+                    <p className="text-sm text-red-700">{error}</p>
+                  </div>
+                )}
 
                 <div className="flex gap-3 mt-8">
                   <button onClick={handleBack} className="btn-secondary flex-1">
