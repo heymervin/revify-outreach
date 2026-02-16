@@ -439,6 +439,8 @@ export default function ResearchPage() {
     setError(null);
     setResult(null);
     setDurationMs(null);
+    // Clear pending research flag - starting new research
+    sessionStorage.removeItem('research_results_pending');
 
     // Simulate step progression while waiting for response
     const steps = RESEARCH_STEPS[researchType];
@@ -482,6 +484,9 @@ export default function ResearchPage() {
       setSessionId(data.session_id);
       // Reset push state for new research
       setPushSuccess(false);
+
+      // Mark research as pending push (for account switch warning)
+      sessionStorage.setItem('research_results_pending', 'true');
 
       // Smart auto-push logic
       if (selectedGhlCompany?.id) {
@@ -546,6 +551,8 @@ export default function ResearchPage() {
       }
 
       setPushSuccess(true);
+      // Clear pending research flag - results have been pushed
+      sessionStorage.removeItem('research_results_pending');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to push to GHL');
     } finally {
