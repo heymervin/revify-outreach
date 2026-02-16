@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
-import { getActiveGHLAccount } from '@/lib/ghl';
+import { getActiveGHLAccount, getGHLAccountById } from '@/lib/ghl';
 
 const GHL_API_BASE = 'https://services.leadconnectorhq.com';
 const API_VERSION = '2021-07-28';
@@ -26,8 +26,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Organization not found' }, { status: 400 });
     }
 
-    // Get active GHL account (user-selected or primary)
-    const ghlAccount = await getActiveGHLAccount(user.id, userData.organization_id);
+    const body = await request.json();
+    const { session_id, research_data, contact_data, business_id, ghl_account_id } = body;
+
+    // Use pinned account if provided (from research session), otherwise resolve dynamically
+    const ghlAccount = ghl_account_id
+      ? await getGHLAccountById(ghl_account_id, userData.organization_id)
+      : await getActiveGHLAccount(user.id, userData.organization_id);
 
     if (!ghlAccount?.location_id || !ghlAccount.access_token) {
       return NextResponse.json(
@@ -37,9 +42,6 @@ export async function POST(request: NextRequest) {
     }
 
     const ghlApiKey = ghlAccount.access_token;
-
-    const body = await request.json();
-    const { session_id, research_data, contact_data, business_id } = body;
 
     if (!business_id) {
       return NextResponse.json(
