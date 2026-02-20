@@ -25,3 +25,4 @@ dist-ssr
 .vercel
 .env*.local
 scripts/import_contacts_progress.json
+scripts/import_contacts_progress.failed.json

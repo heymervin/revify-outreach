@@ -21,6 +21,7 @@ from concurrent.futures import ThreadPoolExecutor
 CSV_PATH = os.path.join(os.path.dirname(__file__), '..', 'lib', 'supabase',
                         'Export_Contacts_All_Feb_2026_9_06_PM.csv')
 PROGRESS_FILE = os.path.join(os.path.dirname(__file__), 'import_contacts_progress.json')
+FAILED_FILE   = os.path.join(os.path.dirname(__file__), 'import_contacts_progress.failed.json')
 
 SUPABASE_URL     = 'https://cncrfqufgjzuijiedukn.supabase.co'
 SERVICE_ROLE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNuY3JmcXVmZ2p6dWlqaWVkdWtuIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2OTYxNDA5OCwiZXhwIjoyMDg1MTkwMDk4fQ.n_4XBtAc6kDDIcA3ntCxCq9HNeaQ9uyM6nnl9iUF7yo'
@@ -103,7 +104,8 @@ def fetch_business_id(ghl_id: str):
             data = json.loads(resp.read())
             business_id = data.get('contact', {}).get('businessId') or None
             return ghl_id, business_id
-    except Exception:
+    except Exception as e:
+        print(f'  ⚠  Failed to fetch businessId for {ghl_id}: {e}')
         return ghl_id, None
 
 
@@ -152,7 +154,7 @@ def main():
         batch = pending[batch_start:batch_start + BATCH_SIZE]
 
         # Fetch businessId for each contact concurrently
-        with ThreadPoolExecutor(max_workers=len(batch)) as ex:
+        with ThreadPoolExecutor(max_workers=3) as ex:
             results = list(ex.map(fetch_business_id, [c['ghl_id'] for c in batch]))
 
         biz_map = dict(results)
@@ -184,6 +186,14 @@ def main():
             if err:
                 print(f'  ✗ Upsert failed ({status}): {err[:300]}')
                 failed += len(chunk)
+                # Persist failed IDs for manual review
+                failed_ids = [row['ghl_id'] for row in chunk]
+                existing = []
+                if os.path.exists(FAILED_FILE):
+                    with open(FAILED_FILE) as f:
+                        existing = json.load(f)
+                with open(FAILED_FILE, 'w') as f:
+                    json.dump(existing + failed_ids, f)
             else:
                 processed += len(chunk)
                 for row in chunk:
@@ -209,6 +219,8 @@ def main():
     print(f'   Processed: {processed:,}')
     print(f'   Failed:    {failed:,}')
     print(f'   Progress file: {PROGRESS_FILE}')
+    if failed:
+        print(f'   Failed file: {FAILED_FILE}')
 
 
 if __name__ == '__main__':
