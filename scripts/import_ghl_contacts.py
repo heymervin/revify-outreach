@@ -29,7 +29,7 @@ ORGANIZATION_ID  = '61be2052-1833-4989-b5cf-4b35801177a6'
 GHL_ACCOUNT_ID   = '5bc9ac3b-0b0c-4747-8373-8e7ac49b5413'
 
 # ⚠️  Fill in your GHL Private Integration Token before running
-GHL_TOKEN = 'YOUR_GHL_PRIVATE_INTEGRATION_TOKEN'
+GHL_TOKEN = 'pit-078ce502-8037-4bcb-8fe2-d1b79e5929e6'
 
 GHL_API_BASE    = 'https://services.leadconnectorhq.com'
 GHL_API_VERSION = '2021-07-28'
@@ -48,8 +48,9 @@ SUPABASE_HEADERS = {
 
 GHL_HEADERS = {
     'Authorization': f'Bearer {GHL_TOKEN}',
-    'Content-Type':  'application/json',
+    'Accept':        'application/json',
     'Version':       GHL_API_VERSION,
+    'User-Agent':    'python-httpx/0.27',
 }
 
 
