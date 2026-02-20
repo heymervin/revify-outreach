@@ -154,9 +154,17 @@ def main():
     for batch_start in range(0, total, BATCH_SIZE):
         batch = pending[batch_start:batch_start + BATCH_SIZE]
 
-        # Fetch businessId for each contact concurrently
-        with ThreadPoolExecutor(max_workers=3) as ex:
-            results = list(ex.map(fetch_business_id, [c['ghl_id'] for c in batch]))
+        # Fetch businessId only for contacts with a company name (others have none)
+        needs_fetch = [c['ghl_id'] for c in batch if c['company_name']]
+        skipped     = [c['ghl_id'] for c in batch if not c['company_name']]
+
+        if needs_fetch:
+            with ThreadPoolExecutor(max_workers=3) as ex:
+                fetched = list(ex.map(fetch_business_id, needs_fetch))
+        else:
+            fetched = []
+
+        results = fetched + [(ghl_id, None) for ghl_id in skipped]
 
         biz_map = dict(results)
 
