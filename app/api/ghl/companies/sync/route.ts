@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient, createAdminClient } from '@/lib/supabase/server';
 import { getActiveGHLAccount } from '@/lib/ghl';
 
+export const dynamic = 'force-dynamic';
+
 const GHL_API_BASE = 'https://services.leadconnectorhq.com';
 const API_VERSION = '2021-07-28';
 const PAGE_LIMIT = 100;
