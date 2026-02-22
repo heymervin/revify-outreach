@@ -1,6 +1,6 @@
 /**
  * Bulk Research Service
- * Orchestrates research for 100-1,000 companies with filtering, progress tracking, and pause/resume
+ * Orchestrates research for companies in bulk with filtering, progress tracking, and pause/resume
  */
 
 import {
@@ -45,12 +45,12 @@ export function filterCompanies(
       }
     }
 
-    // Industry filter (match any of the specified industries)
+    // Industry filter (exact match, case-insensitive)
     if (filters.industries && filters.industries.length > 0) {
       if (!company.industry) return false;
-      const companyIndustry = company.industry.toLowerCase();
+      const companyIndustry = company.industry.toLowerCase().trim();
       const matchesIndustry = filters.industries.some(
-        ind => companyIndustry.includes(ind.toLowerCase())
+        ind => companyIndustry === ind.toLowerCase().trim()
       );
       if (!matchesIndustry) return false;
     }
@@ -104,6 +104,12 @@ export function applySelectionStrategy(
       return companies.slice(0, 50);
     case 'first_100':
       return companies.slice(0, 100);
+    case 'first_250':
+      return companies.slice(0, 250);
+    case 'first_500':
+      return companies.slice(0, 500);
+    case 'all_filtered':
+      return [...companies];
     case 'top_10_by_score':
       return [...companies]
         .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
@@ -116,6 +122,10 @@ export function applySelectionStrategy(
       return [...companies]
         .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
         .slice(0, 50);
+    case 'top_100_by_score':
+      return [...companies]
+        .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
+        .slice(0, 100);
     case 'custom':
       if (!customSelectedIds || customSelectedIds.length === 0) {
         return companies;

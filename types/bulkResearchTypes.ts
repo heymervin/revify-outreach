@@ -1,5 +1,5 @@
 // Bulk Research Types
-// For processing 100-1,000 companies at a time
+// For processing companies in bulk with filtering, progress tracking, and pause/resume
 
 import { ResearchOutputV3_1 } from './researchTypesV3_1';
 import { GeneratedEmail, GHLContactInfo } from '../types';
@@ -12,9 +12,13 @@ export type BulkSelectionStrategy =
   | 'first_25'
   | 'first_50'
   | 'first_100'
+  | 'first_250'
+  | 'first_500'
+  | 'all_filtered'
   | 'top_10_by_score'
   | 'top_25_by_score'
   | 'top_50_by_score'
+  | 'top_100_by_score'
   | 'custom';
 
 // ===== Filter Configuration =====
@@ -26,6 +30,17 @@ export interface BulkFilterConfig {
   hasWebsite?: boolean;        // Only companies with website
   hasExistingResearch?: boolean; // Only companies with saved research
   excludeCompanyIds?: string[]; // Exclude specific companies
+}
+
+// ===== GHL API Response =====
+
+export interface GHLCompaniesResponse {
+  companies: BulkCompanyItem[];
+  total: number;               // Total companies in GHL
+  count: number;               // Companies returned in this batch
+  hasMore: boolean;            // More companies available to load
+  page: number;                // Current page (1-indexed)
+  pageLimit: number;           // Batch size used
 }
 
 // ===== Company Selection Item =====
@@ -192,14 +207,18 @@ export const BULK_FILTER_PRESETS: Record<string, BulkFilterConfig> = {
 // ===== Selection Strategy Labels =====
 
 export const SELECTION_STRATEGY_LABELS: Record<BulkSelectionStrategy, string> = {
-  'first_5': 'First 5 companies',
-  'first_10': 'First 10 companies',
-  'first_25': 'First 25 companies',
-  'first_50': 'First 50 companies',
-  'first_100': 'First 100 companies',
+  'first_5': 'First 5',
+  'first_10': 'First 10',
+  'first_25': 'First 25',
+  'first_50': 'First 50',
+  'first_100': 'First 100',
+  'first_250': 'First 250',
+  'first_500': 'First 500',
+  'all_filtered': 'All filtered',
   'top_10_by_score': 'Top 10 by score',
   'top_25_by_score': 'Top 25 by score',
   'top_50_by_score': 'Top 50 by score',
+  'top_100_by_score': 'Top 100 by score',
   'custom': 'Custom selection',
 };
 
@@ -295,4 +314,139 @@ export function formatDuration(ms: number): string {
 
 export function formatCost(cost: number): string {
   return `$${cost.toFixed(2)}`;
+}
+
+// ===== Session Persistence State =====
+// Used for localStorage-based session recovery
+
+export interface BulkSessionCompany {
+  id: string;
+  name: string;
+  website?: string;
+  industry?: string;
+  score?: number;
+  selected: boolean;
+  status: 'pending' | 'processing' | 'completed' | 'failed';
+}
+
+export interface BulkSessionState {
+  sessionId: string;
+  createdAt: number;
+  lastUpdatedAt: number;
+  tabId: string;
+
+  // GHL account pinning - prevents cross-account data when switching accounts
+  ghlAccountId?: string;
+
+  // Wizard state
+  currentStep: 1 | 2 | 3;
+  researchType: 'quick' | 'standard' | 'deep';
+  importSource: 'ghl' | 'csv' | null;
+
+  // Companies (without full result - too large for localStorage)
+  companies: BulkSessionCompany[];
+
+  // Filters
+  filters: BulkFilterConfig;
+
+  // Progress tracking
+  processedCompanyIds: string[];
+
+  // Token usage tracking
+  tokenUsage?: {
+    totalInputTokens: number;
+    totalOutputTokens: number;
+    totalEstimatedCost: number;
+  };
+}
+
+// Session expiry time (24 hours in milliseconds)
+export const BULK_SESSION_EXPIRY_MS = 24 * 60 * 60 * 1000;
+
+// ===== Batch Size Limits =====
+
+export const BATCH_LIMITS = {
+  RECOMMENDED_MAX: 100,        // No warning
+  CAUTION_MAX: 250,           // Yellow warning
+  EXTENDED_MAX: 500,          // Orange warning + confirmation
+  HARD_MAX: 500,              // Cannot proceed above this
+} as const;
+
+export type BatchWarningLevel = 'none' | 'caution' | 'extended' | 'blocked';
+
+export function getBatchWarningLevel(count: number): BatchWarningLevel {
+  if (count <= BATCH_LIMITS.RECOMMENDED_MAX) return 'none';
+  if (count <= BATCH_LIMITS.CAUTION_MAX) return 'caution';
+  if (count <= BATCH_LIMITS.EXTENDED_MAX) return 'extended';
+  return 'blocked';
+}
+
+// ===== Token Usage Tracking =====
+
+export const TOKEN_ESTIMATES = {
+  // GPT-4o pricing: $2.50/1M input, $10.00/1M output
+  INPUT_PRICE_PER_MILLION: 2.50,
+  OUTPUT_PRICE_PER_MILLION: 10.00,
+
+  // Per company token estimates by research type
+  quick: {
+    inputTokens: 1500,
+    outputTokens: 800,
+    costPerCompany: 0.012,
+  },
+  standard: {
+    inputTokens: 3000,
+    outputTokens: 2000,
+    costPerCompany: 0.028,
+  },
+  deep: {
+    inputTokens: 8000,
+    outputTokens: 4000,
+    costPerCompany: 0.060,
+    tavilyCostPerSearch: 0.01,
+  },
+} as const;
+
+export interface TokenUsage {
+  inputTokens: number;
+  outputTokens: number;
+  estimatedCost: number;
+}
+
+export interface BatchTokenEstimate {
+  companyCount: number;
+  researchType: 'quick' | 'standard' | 'deep';
+  estimatedInputTokens: number;
+  estimatedOutputTokens: number;
+  minCost: number;
+  maxCost: number;
+}
+
+export function calculateTokenEstimate(
+  companyCount: number,
+  researchType: 'quick' | 'standard' | 'deep'
+): BatchTokenEstimate {
+  const estimates = TOKEN_ESTIMATES[researchType];
+  const inputTokens = companyCount * estimates.inputTokens;
+  const outputTokens = companyCount * estimates.outputTokens;
+
+  // Calculate cost range (±20% variance)
+  const baseCost = companyCount * estimates.costPerCompany;
+  const minCost = Math.round(baseCost * 0.8 * 100) / 100;
+  const maxCost = Math.round(baseCost * 1.2 * 100) / 100;
+
+  return {
+    companyCount,
+    researchType,
+    estimatedInputTokens: inputTokens,
+    estimatedOutputTokens: outputTokens,
+    minCost,
+    maxCost,
+  };
+}
+
+export function calculateCostFromTokens(inputTokens: number, outputTokens: number): number {
+  const inputCost = (inputTokens / 1_000_000) * TOKEN_ESTIMATES.INPUT_PRICE_PER_MILLION;
+  const outputCost = (outputTokens / 1_000_000) * TOKEN_ESTIMATES.OUTPUT_PRICE_PER_MILLION;
+  return Math.round((inputCost + outputCost) * 1000) / 1000; // Round to 3 decimals
 }
