@@ -1,6 +1,7 @@
 /**
  * Research Engine V3.2 - Hybrid
- * Combines Tavily (website scraping + business databases) with OpenAI web search
+ * Combines Tavily (website scraping + business databases) with AI synthesis
+ * Supports both OpenAI (with web search) and Gemini providers
  * Used for "deep" research tier
  */
 
@@ -10,6 +11,14 @@ import {
   COST_CONSTANTS_V3,
 } from '@/types/researchTypesV3';
 import { scrapeWebsite, searchBusinessDatabases } from './tavilyService';
+import { generateGeminiCompletion } from '@/lib/services/geminiService';
+
+export interface DeepResearchOptions {
+  /** AI model to use for synthesis (e.g., 'gpt-4o', 'gemini-3-pro-preview') */
+  model?: string;
+  /** AI provider: 'openai' or 'gemini' */
+  provider?: 'openai' | 'gemini';
+}
 
 // Get dynamic years
 const currentYear = new Date().getFullYear();
@@ -38,7 +47,7 @@ ${databaseContent || 'No database results available.'}
 ## YOUR ADDITIONAL SEARCHES
 
 Use your web search capabilities to find:
-1. Recent news about "${input.companyName}" from ${previousYear}-${currentYear}
+1. Recent news about "${input.companyName}" from the last 3 months only
 2. Leadership changes or executive moves
 3. Intent signals (RFPs, vendor evaluations, technology initiatives)
 4. Competitive positioning and market trends
@@ -125,7 +134,7 @@ Respond with ONLY valid JSON matching this exact structure:
       "type": "financial | strategic | pricing | leadership | technology | intent",
       "headline": "string",
       "detail": "string",
-      "date": "string - YYYY-MM or YYYY-MM-DD",
+      "date": "string - YYYY-MM or YYYY-MM-DD format ONLY, see STRICT DATE FORMAT ENFORCEMENT below",
       "source_url": "string",
       "source_name": "string",
       "relevance_to_revology": "string",
@@ -136,7 +145,7 @@ Respond with ONLY valid JSON matching this exact structure:
     {
       "signal_type": "rfp | vendor_evaluation | technology_initiative | hiring",
       "description": "string",
-      "timeframe": "string or null",
+      "timeframe": "string or null - YYYY-MM format ONLY",
       "source": "string",
       "fit_score": "perfect | good | moderate"
     }
@@ -162,29 +171,176 @@ Respond with ONLY valid JSON matching this exact structure:
   "research_gaps": ["array of missing data points"]
 }
 
+## FINANCIAL DATA MANDATORY SEARCH
+
+**CRITICAL: Execute web search if data not in provided sources**
+
+For PUBLIC companies (ownership_type: "Public"):
+- STEP 1: Search provided data for ticker symbol, stock exchange (NYSE, NASDAQ), or phrases like "publicly traded"
+- STEP 2: If public company identified, search for revenue in this order:
+  a) Look for "10-K", "10-Q", "annual report", "SEC filing" in the data sources
+  b) Look for financial data from Yahoo Finance, Bloomberg, investor relations pages
+  c) Search for earnings reports, quarterly results, or press releases mentioning revenue
+- STEP 3: If revenue found, format as: "$X.XB (FY${currentYear - 1} from 10-K)" citing specific source
+- STEP 4: If NO revenue found after thorough search, this is a CRITICAL FAILURE
+  * DO NOT proceed without flagging as: "CRITICAL ERROR: Public company revenue not found despite mandatory search of SEC filings, annual reports, and financial databases in the provided text."
+  * This likely means the data sources are incomplete, not that revenue doesn't exist
+
+For PRIVATE companies (ownership_type: "Private" or "PE-Backed"):
+- Attempt estimate using: employee count x industry revenue-per-employee, news mentions, ZoomInfo/Crunchbase estimates
+- Format: "Estimated $X-YM based on [methodology]"
+- If no estimate possible: State "Private company, no reliable revenue estimate available from public sources"
+
+For SUBSIDIARY companies:
+- Report parent company revenue AND subsidiary-specific revenue if available
+- Format: "Parent: $X.XB (source); Subsidiary: estimated $XXXM based on [methodology]"
+
+## INTENT SIGNAL SEARCH PROTOCOL (MANDATORY)
+
+**STEP 1: Extract obvious intent signals from the data you ALREADY HAVE**
+
+Before searching, scan ALL provided data (company website, LinkedIn, ZoomInfo, news) for:
+
+a) **PERFECT fit signals** (manual work Revology automates):
+   - "scraping", "manually scraping", "scraping product listings", "scraping competitor prices"
+   - "spreadsheet", "Excel-based pricing", "manual pricing", "manual analysis"
+   - "manually tracking", "manually monitoring"
+   - Job descriptions mentioning manual data collection or price monitoring
+
+b) **M&A / Capex signals** (already in your data):
+   - Acquisitions, divestitures (look for dollar amounts like "$166M acquisition")
+   - New facility openings, production line additions, equipment purchases
+   - Funding rounds, investment announcements
+
+c) **Technology initiative signals** (already in your data):
+   - New software implementations mentioned (ERP, CRM, BI tools)
+   - Digital transformation projects
+   - Job titles for analytics, pricing, or commercial roles
+
+d) **Conference/vendor evaluation signals** (already in your data):
+   - Trade show participation, conference mentions
+   - Earnings calls mentioning "pricing pressure", "vendor evaluation", or system changes
+
+**STEP 2: Check if you have 3+ signals**
+
+If you have 3+ intent signals from STEP 1, skip to STEP 3.
+
+If you have <3 intent signals from STEP 1, perform exhaustive search:
+- Job posting search (pricing analyst, BI, analytics, FP&A roles)
+- Technology search (ERP, CRM, pricing platform mentions)
+- Press release search (M&A, capex, investment announcements)
+- Conference participation search
+
+**STEP 3: Apply fit score using calibration guide**
+
+- **perfect**: Manual work Revology automates (scraping, spreadsheets), active vendor RFP
+- **good**: Hiring pricing/analytics roles, M&A integration, tech initiatives in adjacent domains
+- **moderate**: General growth signals without direct pricing/analytics nexus
+
+**STEP 4: Validate**
+
+If after STEP 1 and STEP 2 you still have <3 intent signals, state in research_gaps:
+"CRITICAL GAP: Only [N] intent signals found despite thorough search across job postings, technology initiatives, capex/investment activity, and conference participation."
+
+**IMPORTANT**: If you found M&A activity, capex investments, or manual work descriptions in the provided data but did NOT add them as intent signals, you have FAILED this protocol.
+
+## STRICT ENFORCEMENT - DATE FORMATS
+
+**YOU MUST CONVERT ALL DATES TO YYYY-MM OR YYYY-MM-DD FORMAT**
+
+PROHIBITED FORMATS (you must convert these):
+❌ "Dec 11, 2025" → ✅ CONVERT TO "2025-12-11"
+❌ "December 2025" → ✅ CONVERT TO "2025-12"
+❌ "Current (2023-2025)" → REJECT (range)
+❌ "Recent" → REJECT (relative term)
+❌ "1 week ago" → REJECT (relative term)
+❌ "Q1 2024" → REJECT (too vague)
+❌ "2024" → REJECT (year-only, too vague)
+❌ "2023-2025" → REJECT (range)
+
+REQUIRED CONVERSION TABLE:
+- "Jan" OR "January" → "01"
+- "Feb" OR "February" → "02"
+- "Mar" OR "March" → "03"
+- "Apr" OR "April" → "04"
+- "May" → "05"
+- "Jun" OR "June" → "06"
+- "Jul" OR "July" → "07"
+- "Aug" OR "August" → "08"
+- "Sep" OR "September" → "09"
+- "Oct" OR "October" → "10"
+- "Nov" OR "November" → "11"
+- "Dec" OR "December" → "12"
+
+EXAMPLES OF CORRECT CONVERSIONS:
+- "Dec 11, 2025" → "2025-12-11" ✅
+- "December 2025" → "2025-12" ✅
+- "Feb 3, 2024" → "2024-02-03" ✅
+- "Q3 2025" (if you know it's October) → "2025-10" ✅
+- "4mo" ago (if current date is Feb 2026) → "2025-10" ✅
+
+VALIDATION RULE:
+If you cannot determine a specific month and year for a signal, DO NOT include it in recent_signals or intent_signals.
+Instead, add to research_gaps: "Signal [description] found but date could not be verified to month-level precision."
+
+**FINAL CHECK BEFORE OUTPUT:**
+Scan every "date" and "timeframe" field in your JSON output. If you see ANY date that doesn't match YYYY-MM or YYYY-MM-DD format, you have FAILED this requirement. Go back and convert it.
+
+## PRE-OUTPUT VALIDATION CHECKLIST
+
+Before you output your JSON, verify ALL of these requirements:
+
+### ✅ PUBLIC COMPANY REVENUE CHECK
+- [ ] If ownership_type is "Public", did you find revenue from SEC/financial sources?
+- [ ] If not found, did you flag "CRITICAL ERROR: Public company revenue not found..." in research_gaps?
+
+### ✅ INTENT SIGNALS CHECK
+- [ ] Did you scan the provided data for M&A, capex, acquisitions, manual scraping/work?
+- [ ] If you found any of these in the data, did you add them to intent_signals array?
+- [ ] Do you have at least 3 intent signals (or flagged the gap in research_gaps)?
+- [ ] Did you apply fit_score correctly (manual work = perfect, not good)?
+
+### ✅ DATE FORMAT CHECK
+- [ ] Scan EVERY date field in recent_signals array
+- [ ] Scan EVERY timeframe field in intent_signals array
+- [ ] Are ALL dates in YYYY-MM or YYYY-MM-DD format?
+- [ ] Did you convert "Dec 11, 2025" to "2025-12-11"?
+- [ ] Did you convert "December 2025" to "2025-12"?
+
+If ANY checkbox above is unchecked, DO NOT OUTPUT YET. Go back and fix the issue.
+
 IMPORTANT:
 - Include source URLs for every data point
 - Combine data from ALL sources (website, databases, web search)
 - Be honest about confidence
-- Intent signals are the most valuable`;
+- Intent signals are the most valuable — follow the MANDATORY search protocol above
+- Every date field MUST comply with the strict date format rules above`;
 }
 
 /**
- * Execute hybrid research using Tavily + OpenAI
+ * Execute hybrid research using Tavily + AI (OpenAI or Gemini)
+ *
+ * When provider is 'openai': Uses OpenAI web search (Stage 1c) + OpenAI synthesis (Stage 2)
+ * When provider is 'gemini': Skips OpenAI web search, uses Gemini for synthesis (Stage 2)
+ *   Gemini relies more on Tavily data since it lacks built-in web search
  */
 export async function executeResearchV3_2(
   input: ResearchInputV3,
-  openaiKey: string,
+  aiKey: string,
   tavilyKey: string,
-  onProgress?: (message: string) => void
+  onProgress?: (message: string) => void,
+  customPrompt?: string | null,
+  options?: DeepResearchOptions
 ): Promise<ResearchOutputV3> {
+  const provider = options?.provider || 'openai';
+  const model = options?.model || (provider === 'gemini' ? 'gemini-3-pro-preview' : 'gpt-4o');
   const startTime = Date.now();
   let totalInputTokens = 0;
   let totalOutputTokens = 0;
   let tavilySearches = 0;
   const allSources: string[] = [];
 
-  onProgress?.('Starting hybrid research (Tavily + OpenAI)...');
+  onProgress?.(`Starting hybrid research (Tavily + ${provider === 'gemini' ? 'Gemini' : 'OpenAI'})...`);
 
   // Stage 1a: Scrape company website with Tavily
   let websiteContent = '';
@@ -206,70 +362,129 @@ export async function executeResearchV3_2(
   tavilySearches += 3; // 3 queries
   allSources.push(...dbSources);
 
-  onProgress?.(`Found ${allSources.length} sources from Tavily. Searching with OpenAI...`);
+  onProgress?.(`Found ${allSources.length} sources from Tavily.`);
 
-  // Stage 1c: OpenAI web search for news and signals
-  const hybridPrompt = buildHybridPrompt(input, websiteContent, databaseContent);
+  // Stage 1c: Web search for news and signals (OpenAI only — Gemini relies on Tavily data)
+  let searchResultsText = '';
+  let openaiSearches = 0;
 
-  const searchResponse = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${openaiKey}`,
-    },
-    body: JSON.stringify({
-      model: 'gpt-4o-search-preview',
-      messages: [{ role: 'user', content: hybridPrompt }],
-      web_search_options: {
-        search_context_size: 'high',
+  let hybridPrompt: string;
+  if (customPrompt) {
+    hybridPrompt = customPrompt
+      // Support {variable} format (single braces)
+      .replace(/\{company_name\}/g, input.companyName)
+      .replace(/\{industry\}/g, input.industry)
+      .replace(/\{website_content\}/g, websiteContent || 'No website content available.')
+      .replace(/\{database_content\}/g, databaseContent || 'No database results available.')
+      .replace(/\{current_year\}/g, String(currentYear))
+      .replace(/\{previous_year\}/g, String(previousYear))
+      // Support {{variable}} format (double braces) for legacy/custom prompts
+      .replace(/\{\{company\}\}/g, input.companyName)
+      .replace(/\{\{industry\}\}/g, input.industry)
+      .replace(/\{\{website\}\}/g, input.website || 'Not provided')
+      .replace(/\{\{website_content\}\}/g, websiteContent || 'No website content available.')
+      .replace(/\{\{database_content\}\}/g, databaseContent || 'No database results available.')
+      .replace(/\{\{serp_news\}\}/g, 'SERP news is merged post-synthesis in Deep research')
+      .replace(/\{\{search_queries\}\}/g, 'Search queries tracked in metadata');
+    onProgress?.('Using custom research prompt...');
+  } else {
+    hybridPrompt = buildHybridPrompt(input, websiteContent, databaseContent);
+  }
+
+  // Store hybrid prompt for metadata
+  const storedHybridPrompt = hybridPrompt;
+
+  if (provider === 'openai') {
+    // OpenAI web search for additional news and signals
+    onProgress?.('Searching with OpenAI web search...');
+
+    const searchResponse = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${aiKey}`,
       },
-    }),
-  });
+      body: JSON.stringify({
+        model: 'gpt-4o-search-preview',
+        messages: [{ role: 'user', content: hybridPrompt }],
+        web_search_options: {
+          search_context_size: 'high',
+        },
+      }),
+    });
 
-  if (!searchResponse.ok) {
-    const error = await searchResponse.json().catch(() => ({}));
-    throw new Error(`OpenAI Search API error: ${error.error?.message || searchResponse.statusText}`);
+    if (!searchResponse.ok) {
+      const error = await searchResponse.json().catch(() => ({}));
+      throw new Error(`OpenAI Search API error: ${error.error?.message || searchResponse.statusText}`);
+    }
+
+    const searchData = await searchResponse.json();
+    searchResultsText = searchData.choices?.[0]?.message?.content || '';
+
+    const annotations = searchData.choices?.[0]?.message?.annotations || [];
+    openaiSearches = annotations.length > 0 ? Math.ceil(annotations.length / 3) : 3;
+
+    totalInputTokens += searchData.usage?.prompt_tokens || 0;
+    totalOutputTokens += searchData.usage?.completion_tokens || 0;
+
+    onProgress?.(`Found ${annotations.length} additional sources from OpenAI.`);
+  } else {
+    // Gemini: no web search stage — use Tavily data directly as "search results"
+    onProgress?.('Using Tavily data for research context (Gemini mode)...');
+    searchResultsText = hybridPrompt; // Pass the full context as search results for synthesis
   }
 
-  const searchData = await searchResponse.json();
-  const searchResultsText = searchData.choices?.[0]?.message?.content || '';
-
-  const annotations = searchData.choices?.[0]?.message?.annotations || [];
-  const openaiSearches = annotations.length > 0 ? Math.ceil(annotations.length / 3) : 3;
-
-  totalInputTokens += searchData.usage?.prompt_tokens || 0;
-  totalOutputTokens += searchData.usage?.completion_tokens || 0;
-
-  onProgress?.(`Found ${annotations.length} additional sources. Synthesizing with ${input.researchDepth === 'deep' ? 'o1' : 'gpt-4o'}...`);
-
-  // Stage 2: Synthesis
+  // Stage 2: Synthesis — provider-aware
   const synthesisPrompt = buildSynthesisPrompt(searchResultsText, input);
-  const synthesisModel = input.researchDepth === 'deep' ? 'o1' : 'gpt-4o';
 
-  const synthesisResponse = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${openaiKey}`,
-    },
-    body: JSON.stringify({
-      model: synthesisModel,
-      messages: [{ role: 'user', content: synthesisPrompt }],
-      ...(synthesisModel === 'gpt-4o' ? { response_format: { type: 'json_object' } } : {}),
-    }),
-  });
+  // Store synthesis prompt for metadata
+  const storedSynthesisPrompt = synthesisPrompt;
 
-  if (!synthesisResponse.ok) {
-    const error = await synthesisResponse.json().catch(() => ({}));
-    throw new Error(`OpenAI Synthesis API error: ${error.error?.message || synthesisResponse.statusText}`);
+  let content: string;
+  let synthesisModelUsed: string;
+
+  onProgress?.(`Synthesizing with ${model}...`);
+
+  if (provider === 'gemini') {
+    // Gemini synthesis
+    synthesisModelUsed = model;
+    const geminiResult = await generateGeminiCompletion(aiKey, model, synthesisPrompt, {
+      temperature: 0.2,
+      maxOutputTokens: 8192,
+    });
+
+    content = geminiResult.content;
+    totalInputTokens += geminiResult.inputTokens;
+    totalOutputTokens += geminiResult.outputTokens;
+  } else {
+    // OpenAI synthesis — use o1 for deep, otherwise use configured model
+    synthesisModelUsed = model === 'gpt-4o' ? 'o1' : model;
+
+    const synthesisResponse = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${aiKey}`,
+      },
+      body: JSON.stringify({
+        model: synthesisModelUsed,
+        messages: [{ role: 'user', content: synthesisPrompt }],
+        ...(synthesisModelUsed !== 'o1' ? { response_format: { type: 'json_object' } } : {}),
+      }),
+    });
+
+    if (!synthesisResponse.ok) {
+      const error = await synthesisResponse.json().catch(() => ({}));
+      throw new Error(`OpenAI Synthesis API error: ${error.error?.message || synthesisResponse.statusText}`);
+    }
+
+    const synthesisData = await synthesisResponse.json();
+
+    totalInputTokens += synthesisData.usage?.prompt_tokens || 0;
+    totalOutputTokens += synthesisData.usage?.completion_tokens || 0;
+
+    content = synthesisData.choices?.[0]?.message?.content || '';
   }
-
-  const synthesisData = await synthesisResponse.json();
-
-  totalInputTokens += synthesisData.usage?.prompt_tokens || 0;
-  totalOutputTokens += synthesisData.usage?.completion_tokens || 0;
-
-  let content = synthesisData.choices?.[0]?.message?.content || '';
 
   // Clean up markdown code blocks if present
   if (content.includes('```json')) {
@@ -286,28 +501,39 @@ export async function executeResearchV3_2(
     throw new Error(`Failed to parse synthesis result: ${e}`);
   }
 
-  // Calculate cost
+  // Calculate cost based on provider
   const executionTime = Date.now() - startTime;
-  const tokenCost = input.researchDepth === 'deep'
-    ? (totalInputTokens / 1000) * COST_CONSTANTS_V3.O1_INPUT_PER_1K +
-      (totalOutputTokens / 1000) * COST_CONSTANTS_V3.O1_OUTPUT_PER_1K
-    : (totalInputTokens / 1000) * COST_CONSTANTS_V3.GPT4O_INPUT_PER_1K +
-      (totalOutputTokens / 1000) * COST_CONSTANTS_V3.GPT4O_OUTPUT_PER_1K;
+  let tokenCost: number;
+  if (provider === 'gemini') {
+    // Gemini pricing
+    tokenCost = (totalInputTokens / 1_000_000) * 0.075 +
+      (totalOutputTokens / 1_000_000) * 0.30;
+  } else {
+    tokenCost = synthesisModelUsed === 'o1'
+      ? (totalInputTokens / 1000) * COST_CONSTANTS_V3.O1_INPUT_PER_1K +
+        (totalOutputTokens / 1000) * COST_CONSTANTS_V3.O1_OUTPUT_PER_1K
+      : (totalInputTokens / 1000) * COST_CONSTANTS_V3.GPT4O_INPUT_PER_1K +
+        (totalOutputTokens / 1000) * COST_CONSTANTS_V3.GPT4O_OUTPUT_PER_1K;
+  }
 
   const tavilyCost = tavilySearches * COST_CONSTANTS_V3.TAVILY_PER_CALL;
   const openaiSearchCost = openaiSearches * COST_CONSTANTS_V3.WEB_SEARCH_PER_CALL;
   const estimatedCost = tokenCost + tavilyCost + openaiSearchCost;
 
   // Ensure all required fields exist
+  const searchLabel = provider === 'gemini' ? 'Tavily' : 'gpt-4o-search-preview + Tavily';
   result.metadata = {
     searches_performed: tavilySearches + openaiSearches,
     sources_cited: (result.company_profile?.citations?.length || 0) + allSources.length,
     models_used: {
-      search: 'gpt-4o-search-preview + Tavily',
-      synthesis: synthesisModel,
+      search: searchLabel,
+      synthesis: synthesisModelUsed,
     },
     execution_time_ms: executionTime,
     estimated_cost: estimatedCost,
+    raw_prompt: storedSynthesisPrompt,  // Main prompt that generates the output
+    hybrid_prompt: storedHybridPrompt,  // First stage prompt (search context)
+    synthesis_prompt: storedSynthesisPrompt,  // Second stage prompt (same as raw_prompt)
   };
 
   // Merge Tavily sources into citations
