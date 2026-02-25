@@ -12,6 +12,8 @@ import {
 } from '@/types/researchTypesV3';
 import { scrapeWebsite, searchBusinessDatabases } from './tavilyService';
 import { generateGeminiCompletion } from '@/lib/services/geminiService';
+import { autoFixResearchDates } from '@/lib/validation/dateAutoFixer';
+import { validateResearch, stripInvalidSignals, extractDateErrors } from '@/lib/validation/researchSchemas';
 
 export interface DeepResearchOptions {
   /** AI model to use for synthesis (e.g., 'gpt-4o', 'gemini-3-pro-preview') */
@@ -181,15 +183,48 @@ For PUBLIC companies (ownership_type: "Public"):
   a) Look for "10-K", "10-Q", "annual report", "SEC filing" in the data sources
   b) Look for financial data from Yahoo Finance, Bloomberg, investor relations pages
   c) Search for earnings reports, quarterly results, or press releases mentioning revenue
-- STEP 3: If revenue found, format as: "$X.XB (FY${currentYear - 1} from 10-K)" citing specific source
-- STEP 4: If NO revenue found after thorough search, this is a CRITICAL FAILURE
+- STEP 3: **USE THESE EXACT SEARCH PATTERNS** (search the provided text for these phrases):
+  * "revenue of $"
+  * "annual revenue"
+  * "total revenue"
+  * "net sales"
+  * "consolidated revenue"
+  * Company ticker symbol + "revenue" (e.g., "ALG revenue")
+- STEP 4: If revenue found, format as: "$X.XB (FY${currentYear - 1} from 10-K)" citing specific source
+- STEP 5: If NO revenue found after thorough search, this is a CRITICAL FAILURE
   * DO NOT proceed without flagging as: "CRITICAL ERROR: Public company revenue not found despite mandatory search of SEC filings, annual reports, and financial databases in the provided text."
   * This likely means the data sources are incomplete, not that revenue doesn't exist
 
 For PRIVATE companies (ownership_type: "Private" or "PE-Backed"):
-- Attempt estimate using: employee count x industry revenue-per-employee, news mentions, ZoomInfo/Crunchbase estimates
-- Format: "Estimated $X-YM based on [methodology]"
-- If no estimate possible: State "Private company, no reliable revenue estimate available from public sources"
+- **MANDATORY ESTIMATION PROTOCOL** (follow in order):
+
+  STEP 1: Search for explicit revenue mentions
+  - Look for phrases: "revenue of $", "annual sales of $", "reported revenue"
+  - Check ZoomInfo, Crunchbase, PitchBook estimates
+  - Check news articles mentioning company size
+
+  STEP 2: If no explicit revenue, calculate estimate using employee count
+  - **REQUIRED FORMULA:** Revenue = Employee Count × Industry Revenue-per-Employee
+  - **Industry Benchmarks** (use these if industry known):
+    * Manufacturing: $200K-300K per employee
+    * Software/Technology: $300K-500K per employee
+    * Distribution/Wholesale: $500K-800K per employee
+    * Professional Services: $150K-250K per employee
+    * Retail: $100K-200K per employee
+    * Healthcare: $200K-300K per employee
+  - Example: 450 employees in plastics manufacturing → Estimated $90M-135M ($200K-300K per employee)
+
+  STEP 3: Format estimate with methodology
+  - Format: "Estimated $X-YM based on [employee count] employees × [industry benchmark] revenue-per-employee"
+  - Example: "Estimated $90M-135M based on 450 employees × $200K-300K per employee (manufacturing benchmark)"
+
+  STEP 4: If NO employee count available, state:
+  - "Private company, no reliable revenue estimate available (employee count not found)"
+
+  **CONSISTENCY CHECK:** If one private company received an estimate and another did not, ask yourself:
+  - Did I search equally hard for both?
+  - Did I apply the same methodology?
+  - If not, apply estimation to both or document why one is impossible.
 
 For SUBSIDIARY companies:
 - Report parent company revenue AND subsidiary-specific revenue if available
@@ -237,6 +272,35 @@ If you have <3 intent signals from STEP 1, perform exhaustive search:
 - **good**: Hiring pricing/analytics roles, M&A integration, tech initiatives in adjacent domains
 - **moderate**: General growth signals without direct pricing/analytics nexus
 
+**SOURCE VALIDATION RULES (MANDATORY):**
+
+**VALID SOURCES** for intent signals:
+- ✅ Company career page job postings
+- ✅ LinkedIn job postings (official company posts)
+- ✅ Company press releases
+- ✅ Company blog posts or LinkedIn company page updates
+- ✅ News articles quoting company executives
+- ✅ Conference speaker lists (company-sponsored)
+- ✅ Earnings call transcripts
+- ✅ SEC filings (for public companies)
+
+**INVALID SOURCES** (reject these):
+- ❌ ZoomInfo individual employee profiles
+- ❌ LinkedIn individual employee profiles (unless confirming a public company announcement)
+- ❌ Third-party speculation without company confirmation
+- ❌ Recruiter job postings (not official company postings)
+- ❌ Anonymous forum discussions (Reddit, Blind, Glassdoor)
+
+**EXCEPTION: Employee profile data CAN be used IF:**
+- The employee profile confirms a publicly announced initiative
+- Multiple employees (3+) independently confirm the same signal
+- The profile links to an official company source
+
+**VALIDATION CHECK:**
+For each intent signal, ask: "Is this from a company-level source, or an individual employee's profile?"
+- If individual profile ONLY → Reject or downgrade to research_gaps
+- If company-level source → Include with proper source attribution
+
 **STEP 4: Validate**
 
 If after STEP 1 and STEP 2 you still have <3 intent signals, state in research_gaps:
@@ -283,8 +347,47 @@ VALIDATION RULE:
 If you cannot determine a specific month and year for a signal, DO NOT include it in recent_signals or intent_signals.
 Instead, add to research_gaps: "Signal [description] found but date could not be verified to month-level precision."
 
+**FALLBACK FOR IMPRECISE DATES:**
+If a signal is valuable but lacks month-level precision, you have THREE OPTIONS (in priority order):
+
+1. **Cross-reference with recent_signals**: If the same event appears in recent_signals with a date, use that date for the intent_signal timeframe
+2. **Use approximate date**: If source says "recent" or "current", use current month (2026-02)
+3. **Use signal without date**: Set timeframe to null and add to research_gaps: "Date not available for [signal description]"
+
+**CRITICAL: Do NOT discard valuable signals due to date imprecision alone.**
+
+EXAMPLE CORRECT BEHAVIOR:
+- ❌ WRONG: "Hiring for pricing analyst found but date unclear, signal excluded"
+- ✅ RIGHT: Add signal with timeframe: null, note in research_gaps: "Date not available for pricing analyst hiring signal from LinkedIn"
+
+**VALIDATION CHECK:**
+If you found M&A activity, capex, job postings, or technology initiatives in recent_signals but did NOT add them to intent_signals, you have violated this protocol. Signals are MORE important than date precision.
+
 **FINAL CHECK BEFORE OUTPUT:**
 Scan every "date" and "timeframe" field in your JSON output. If you see ANY date that doesn't match YYYY-MM or YYYY-MM-DD format, you have FAILED this requirement. Go back and convert it.
+
+## SERP RESULT VALIDATION (CRITICAL)
+
+**Company Name Exact Match Requirement:**
+When processing SERP news results, you MUST validate that each result is actually about the target company:
+
+**REJECT these patterns:**
+- ❌ "Polyplastics Corporation" when target is "All American Poly"
+- ❌ "Alamo Rent-A-Car" when target is "Alamo Group Inc."
+- ❌ "Almo Real Estate" when target is "Almo Corporation"
+
+**ACCEPT only:**
+- ✅ Exact company name match (case-insensitive)
+- ✅ Subsidiary name mentioned alongside parent company
+- ✅ Company ticker symbol mentioned (e.g., "ALG" for Alamo Group)
+
+**VALIDATION RULE:**
+For each SERP result you include in recent_signals, verify the company name appears in the headline or detail. If uncertain, check:
+1. Does the article mention the exact company name?
+2. Does it mention the company's location/headquarters?
+3. Does it mention company-specific products/brands?
+
+If none of these match, REJECT the result as likely referring to a different company.
 
 ## PRE-OUTPUT VALIDATION CHECKLIST
 
@@ -499,6 +602,37 @@ export async function executeResearchV3_2(
     result = JSON.parse(content);
   } catch (e) {
     throw new Error(`Failed to parse synthesis result: ${e}`);
+  }
+
+  // Validate and auto-fix dates (NEW VALIDATION LAYER)
+  const { fixed, rejected } = autoFixResearchDates(result);
+  if (fixed > 0) {
+    console.log(`[Deep Research] Auto-fixed ${fixed} date format issues for ${input.companyName}`);
+  }
+  if (rejected > 0) {
+    console.warn(`[Deep Research] Rejected ${rejected} unparseable dates for ${input.companyName}`);
+  }
+
+  // Validate with strict Zod schema
+  const validation = validateResearch(result, 'deep');
+  if (!validation.success) {
+    const dateErrors = extractDateErrors(result);
+    if (dateErrors.length > 0) {
+      console.error(`[Deep Research] Date validation errors for ${input.companyName}:`, dateErrors);
+    }
+
+    // Attempt to salvage by stripping invalid signals
+    console.log(`[Deep Research] Attempting to salvage valid data...`);
+    result = stripInvalidSignals(result, 'deep') as ResearchOutputV3;
+
+    const revalidation = validateResearch(result, 'deep');
+    if (revalidation.success) {
+      console.log(`[Deep Research] Successfully salvaged research data`);
+    } else {
+      console.warn(`[Deep Research] Partial validation failure - proceeding with cleaned data`);
+    }
+  } else {
+    console.log(`[Deep Research] All dates validated successfully for ${input.companyName}`);
   }
 
   // Calculate cost based on provider

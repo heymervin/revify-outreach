@@ -1,6 +1,8 @@
 // lib/services/serpApiService.ts
 // SERP API integration for recent news and signals
 
+import { normalizeExternalDate } from '@/lib/utils/dateNormalizer';
+
 interface SerpApiNewsResult {
   title: string;
   link: string;
@@ -48,7 +50,7 @@ export async function searchNewsSignals(
   options: {
     num?: number; // Number of results (default: 10)
     location?: string; // Location for localized results
-    timeRange?: 'hour' | 'day' | 'week' | 'month'; // Time range for news
+    timeRange?: 'hour' | 'day' | 'week' | 'month' | '3months'; // Time range for news
   } = {}
 ): Promise<NewsSignalsResult[]> {
   const { num = 10, location = 'United States', timeRange = 'week' } = options;
@@ -67,13 +69,22 @@ export async function searchNewsSignals(
 
     // Add time range filter
     if (timeRange) {
-      const timeFilters = {
-        hour: 'qdr:h',
-        day: 'qdr:d',
-        week: 'qdr:w',
-        month: 'qdr:m',
-      };
-      params.append('tbs', timeFilters[timeRange]);
+      if (timeRange === '3months') {
+        // Custom 3-month date range
+        const now = new Date();
+        const threeMonthsAgo = new Date();
+        threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+        const formatDate = (d: Date) => `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+        params.append('tbs', `cdr:1,cd_min:${formatDate(threeMonthsAgo)},cd_max:${formatDate(now)}`);
+      } else {
+        const timeFilters = {
+          hour: 'qdr:h',
+          day: 'qdr:d',
+          week: 'qdr:w',
+          month: 'qdr:m',
+        };
+        params.append('tbs', timeFilters[timeRange]);
+      }
     }
 
     const response = await fetch(
@@ -102,7 +113,7 @@ export async function searchNewsSignals(
           title: result.title,
           url: result.link,
           snippet: result.snippet || '',
-          date: result.date,
+          date: normalizeExternalDate(result.date) || undefined, // Normalize dates before AI sees them
           source: result.source,
           thumbnail: result.thumbnail,
         }))
@@ -116,7 +127,7 @@ export async function searchNewsSignals(
           title: result.title,
           url: result.link,
           snippet: result.snippet || '',
-          date: result.date,
+          date: normalizeExternalDate(result.date) || undefined, // Normalize dates before AI sees them
           source: result.source?.name,
         }))
       );
@@ -139,11 +150,11 @@ export async function searchCompanyNews(
   apiKey: string,
   options: {
     includeIndustry?: string;
-    timeRange?: 'hour' | 'day' | 'week' | 'month';
+    timeRange?: 'hour' | 'day' | 'week' | 'month' | '3months';
     num?: number;
   } = {}
 ): Promise<NewsSignalsResult[]> {
-  const { includeIndustry, timeRange = 'week', num = 10 } = options;
+  const { includeIndustry, timeRange = '3months', num = 10 } = options;
 
   // Build query with company name and optional industry context
   let query = `"${companyName}"`;
@@ -154,7 +165,18 @@ export async function searchCompanyNews(
   // Add news-related keywords to improve relevance
   query += ' (news OR announcement OR launch OR funding OR partnership OR acquisition)';
 
-  return searchNewsSignals(query, apiKey, { timeRange, num });
+  const results = await searchNewsSignals(query, apiKey, { timeRange, num });
+
+  // Filter results to exact company name match (Fix #3 Part A)
+  return results.filter(result => {
+    const title = result.title?.toLowerCase() || '';
+    const snippet = result.snippet?.toLowerCase() || '';
+    const targetCompany = companyName.toLowerCase();
+
+    // Exact match required (word boundary)
+    const exactMatch = new RegExp(`\\b${targetCompany.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+    return exactMatch.test(title) || exactMatch.test(snippet);
+  });
 }
 
 /**
