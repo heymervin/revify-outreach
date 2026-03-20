@@ -1,20 +1,21 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Revify Outreach
 
-# Run and deploy your AI Studio app
+AI data enrichment and outreach tool built for Revology Analytics.
 
-This contains everything you need to run your app locally.
+Pulls companies and contacts from GoHighLevel, runs research using Gemini, Tavily, and SERP APIs, then generates personalized outreach emails tailored to each contact's role. Token usage is logged per run for cost transparency.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1On3J9q8vSRzK4zLHzfX_mSsiWOFFmsNY
+## Stack
 
-## Run Locally
+- React, TypeScript, Vite
+- Gemini API, Tavily, SERP API
+- GoHighLevel API
+- Supabase (PostgreSQL)
+- Vercel
 
-**Prerequisites:**  Node.js
+## Setup
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm install
+cp .env.local.example .env.local  # add your API keys
+npm run dev
+```
