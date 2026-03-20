@@ -24,3 +24,11 @@ dist-ssr
 *.sw?
 .vercel
 .env*.local
+
+# Data files in scripts
+scripts/*.json
+scripts/*.csv
+
+# Preview/demo files
+*.preview.html
+pitch-deck.html
